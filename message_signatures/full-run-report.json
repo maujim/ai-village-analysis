@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T08:35:29.482186+00:00",
+  "generatedAt": "2026-09-30T08:51:38.588828+00:00",
   "notice": "Exploratory classifier output only. The act categories and hypotheses are author-defined; scores and review thresholds are not validated against human annotations. A label is not task extraction, source verification, or evidence that a reported action succeeded.",
   "state": "running",
   "stateExplanation": null,
@@ -169,162 +169,216 @@
         "unique_remaining_before_epoch": 170708,
         "resume_of_epoch_id": "legacy-d64365bb56121748c722",
         "predictions_missing_epoch_at_start": 7344
+      },
+      {
+        "id": "75a9e2157a3bd14d8501",
+        "run_id": "d64365bb56121748c722",
+        "epoch_number": 3,
+        "started_at": "2026-09-30T08:50:58.127993+00:00",
+        "runner_sha256": "78b72e909159e99b08debaa8f5e0c86fbd4ee67a91137d3bc3ec47fcf959fd8e",
+        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+        "dependencies": {
+          "torch": "2.14.0",
+          "transformers": "5.17.0",
+          "tokenizers": "0.23.2",
+          "safetensors": "0.8.0",
+          "dspy": "3.4.0",
+          "mlx": "0.30.6"
+        },
+        "runtime_settings": {
+          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
+          "model_type": "deberta-v2",
+          "backend": "mlx",
+          "backend_version": "0.30.6",
+          "device": "mps",
+          "dtype": "torch.float16",
+          "batch_size": 16,
+          "pair_batch_size": 16,
+          "length_bucketing": true,
+          "max_length": 512,
+          "label_mapping": {
+            "0": "entailment",
+            "1": "not_entailment"
+          },
+          "entailment_label": "entailment",
+          "score_semantics": "independent_entailment",
+          "calibrated": false,
+          "transformers_version": "5.17.0",
+          "torch_version": "2.14.0",
+          "local_files_only": true,
+          "trust_remote_code": false,
+          "tokenization_strategy": "cache distinct premise tokens and taxonomy hypothesis tokens; sort pairs by encoded length before padded batches"
+        },
+        "device": "mps",
+        "dtype": "torch.float16",
+        "backend": "mlx",
+        "backend_source_sha256": "a2895ac4967be954d4e69969595238ddf8a5beff741b5338619fdfe8da778780",
+        "backend_version": "0.30.6",
+        "outer_batch_size": 64,
+        "pair_batch_size": 16,
+        "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+        "predictions_before_epoch": 10352,
+        "unique_remaining_before_epoch": 167700,
+        "resume_of_epoch_id": "caab4b8d9a6f07449276",
+        "predictions_missing_epoch_at_start": 7344
       }
     ],
-    "latest_execution_epoch_id": "caab4b8d9a6f07449276",
-    "last_resumed_at": "2026-09-30T08:31:33.309260+00:00"
+    "latest_execution_epoch_id": "75a9e2157a3bd14d8501",
+    "last_resumed_at": "2026-09-30T08:50:58.127993+00:00"
   },
   "coverage": {
     "sourceRecords": {
-      "classified": 9165,
+      "classified": 11610,
       "total": 183485,
-      "remaining": 174320,
-      "fraction": 0.04994958715971333
+      "remaining": 171875,
+      "fraction": 0.06327492710575797
     },
     "uniqueTexts": {
-      "classified": 8240,
+      "classified": 10480,
       "total": 178052,
-      "remaining": 169812,
-      "fraction": 0.04627861523599847
+      "remaining": 167572,
+      "fraction": 0.058859209669085436
     },
     "labelsBySourceRecord": [
       {
         "label": "qualification",
-        "sourceRecords": 2019,
-        "needsReview": 1069,
-        "truncated": 0
+        "sourceRecords": 2425,
+        "needsReview": 1249,
+        "truncated": 3
       },
       {
         "label": "assertion",
-        "sourceRecords": 1784,
-        "needsReview": 590,
-        "truncated": 1
-      },
-      {
-        "label": "question",
-        "sourceRecords": 1118,
-        "needsReview": 606,
-        "truncated": 0
-      },
-      {
-        "label": "instruction_request",
-        "sourceRecords": 993,
-        "needsReview": 421,
-        "truncated": 2
-      },
-      {
-        "label": "status_report",
-        "sourceRecords": 948,
-        "needsReview": 447,
-        "truncated": 1
-      },
-      {
-        "label": "endorsement",
-        "sourceRecords": 524,
-        "needsReview": 244,
+        "sourceRecords": 2354,
+        "needsReview": 779,
         "truncated": 5
       },
       {
+        "label": "status_report",
+        "sourceRecords": 1296,
+        "needsReview": 601,
+        "truncated": 2
+      },
+      {
+        "label": "question",
+        "sourceRecords": 1248,
+        "needsReview": 663,
+        "truncated": 6
+      },
+      {
+        "label": "instruction_request",
+        "sourceRecords": 1113,
+        "needsReview": 476,
+        "truncated": 3
+      },
+      {
+        "label": "endorsement",
+        "sourceRecords": 688,
+        "needsReview": 320,
+        "truncated": 7
+      },
+      {
         "label": "acknowledgment",
-        "sourceRecords": 449,
-        "needsReview": 179,
+        "sourceRecords": 582,
+        "needsReview": 248,
+        "truncated": 1
+      },
+      {
+        "label": "challenge_correction",
+        "sourceRecords": 479,
+        "needsReview": 293,
         "truncated": 0
       },
       {
         "label": "offer_help",
-        "sourceRecords": 400,
-        "needsReview": 214,
-        "truncated": 0
-      },
-      {
-        "label": "challenge_correction",
-        "sourceRecords": 339,
-        "needsReview": 223,
+        "sourceRecords": 475,
+        "needsReview": 260,
         "truncated": 0
       },
       {
         "label": "proposal_plan",
-        "sourceRecords": 294,
-        "needsReview": 157,
-        "truncated": 1
+        "sourceRecords": 412,
+        "needsReview": 211,
+        "truncated": 4
       },
       {
         "label": "commitment_assignment",
-        "sourceRecords": 177,
-        "needsReview": 100,
+        "sourceRecords": 298,
+        "needsReview": 170,
         "truncated": 0
       },
       {
         "label": "check_report",
-        "sourceRecords": 120,
-        "needsReview": 72,
+        "sourceRecords": 240,
+        "needsReview": 143,
         "truncated": 0
       }
     ],
     "labelsByUniqueText": [
       {
         "label": "qualification",
-        "uniqueTexts": 1636
+        "uniqueTexts": 1988
       },
       {
         "label": "assertion",
-        "uniqueTexts": 1416
-      },
-      {
-        "label": "question",
-        "uniqueTexts": 1056
-      },
-      {
-        "label": "instruction_request",
-        "uniqueTexts": 964
+        "uniqueTexts": 1948
       },
       {
         "label": "status_report",
-        "uniqueTexts": 937
+        "uniqueTexts": 1284
+      },
+      {
+        "label": "question",
+        "uniqueTexts": 1180
+      },
+      {
+        "label": "instruction_request",
+        "uniqueTexts": 1078
       },
       {
         "label": "endorsement",
-        "uniqueTexts": 519
+        "uniqueTexts": 683
       },
       {
         "label": "acknowledgment",
-        "uniqueTexts": 399
+        "uniqueTexts": 531
       },
       {
         "label": "offer_help",
-        "uniqueTexts": 399
+        "uniqueTexts": 472
       },
       {
         "label": "challenge_correction",
-        "uniqueTexts": 331
+        "uniqueTexts": 414
       },
       {
         "label": "proposal_plan",
-        "uniqueTexts": 293
+        "uniqueTexts": 407
       },
       {
         "label": "commitment_assignment",
-        "uniqueTexts": 176
+        "uniqueTexts": 296
       },
       {
         "label": "check_report",
-        "uniqueTexts": 114
+        "uniqueTexts": 199
       }
     ]
   },
   "progress": {
     "state": "running",
-    "pid": 82166,
+    "pid": 83800,
     "run_id": "d64365bb56121748c722",
-    "execution_epoch_id": "caab4b8d9a6f07449276",
-    "execution_epoch_number": 2,
-    "completed_this_session": 896,
-    "completed_this_epoch": 896,
-    "cumulative_unique_predictions": 8240,
-    "predictions_before_epoch": 7344,
-    "unique_texts_per_second": 3.911,
-    "elapsed_seconds": 229.12,
-    "updated_at": "2026-09-30T08:35:22.472524+00:00",
+    "execution_epoch_id": "75a9e2157a3bd14d8501",
+    "execution_epoch_number": 3,
+    "completed_this_session": 128,
+    "completed_this_epoch": 128,
+    "cumulative_unique_predictions": 10480,
+    "predictions_before_epoch": 10352,
+    "unique_texts_per_second": 3.362,
+    "elapsed_seconds": 38.07,
+    "updated_at": "2026-09-30T08:51:36.250587+00:00",
     "day_scope": null,
     "limit": 0,
     "error": null,
