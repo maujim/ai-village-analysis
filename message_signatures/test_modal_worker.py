@@ -6,6 +6,8 @@ import hashlib
 import json
 import tempfile
 import unittest
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -86,6 +88,22 @@ class FakeMap:
 
 
 class ModalWorkerTests(unittest.TestCase):
+    def test_cloud_execution_uses_exact_h100_identity(self):
+        self.assertEqual(worker.GPU_TYPE, "H100!")
+
+    def test_worker_helpers_import_without_optional_modal_sdk(self):
+        code = (
+            "from message_signatures import modal_worker; "
+            "assert modal_worker.modal is None; "
+            "assert modal_worker.select_shards is not None; "
+            "print('optional Modal import fallback ok')"
+        )
+        result = subprocess.run(
+            [sys.executable, "-S", "-c", code], cwd=Path(__file__).resolve().parents[1],
+            text=True, capture_output=True, check=True,
+        )
+        self.assertIn("optional Modal import fallback ok", result.stdout)
+
     def test_default_pilot_selects_uploaded_68_superset_and_never_pending(self):
         with tempfile.TemporaryDirectory() as temp:
             manifest, _ = make_manifest(Path(temp))

@@ -97,6 +97,12 @@ Silicon. `requirements.lock` pins `mlx==0.30.6` and `mlx-metal==0.30.6` with
 Darwin/arm64 environment markers, so other platforms do not select them; Torch
 remains the available backend there.
 
+The optional Modal CUDA worker has a separate client dependency and does not
+change the local scoring environment. Install it only when using the cloud
+workflow:
+  .venv-signatures/bin/python -m pip install -r message_signatures/requirements-modal.txt
+See `MODAL.md` for the bounded parity pilot and explicit pending-shard command.
+
 The twelve conversational acts and their reusable DSPy-style signature
 skeletons were authored before classification; they were not discovered from
 the transcript. `adapter.py` provides a DSPy routing module, and `signatures.py`

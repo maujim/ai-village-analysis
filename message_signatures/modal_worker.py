@@ -20,7 +20,10 @@ import uuid
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Mapping, Sequence
 
-import modal
+try:
+    import modal
+except ModuleNotFoundError:  # Optional: tokenizer/helper tests need no cloud SDK.
+    modal = None  # type: ignore[assignment]
 
 ROOT = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
@@ -35,6 +38,7 @@ DEFAULT_PAIR_BATCH_SIZE = 256
 MESSAGE_BATCH_SIZE = 32
 MAX_WALL_SECONDS = 600
 MAX_CONTAINERS = 8
+GPU_TYPE = "H100!"  # Exact H100 request; `!` disables automatic upgrades.
 REVIEW_TOP_BELOW = 0.55
 REVIEW_MARGIN_BELOW = 0.15
 
@@ -434,7 +438,8 @@ if modal is not None:
 
     @app.function(
         image=image,
-        gpu="H100",
+        # A stable device identity is required in the shared cloudExecution manifest.
+        gpu=GPU_TYPE,
         cpu=4,
         memory=16_384,
         max_containers=MAX_CONTAINERS,
