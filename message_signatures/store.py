@@ -5,6 +5,7 @@ import os
 import sqlite3
 import sys
 from pathlib import Path
+from datetime import datetime
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -42,6 +43,50 @@ def meta(conn, key, value=None):
         return value
     row = conn.execute('SELECT value FROM metadata WHERE key=?',(key,)).fetchone()
     return json.loads(row[0]) if row else None
+
+
+def set_cloud_progress(progress, conn=None):
+    """Persist separate Modal-output progress; never changes local run/prediction state.
+
+    The caller should count only complete, verified output shards. This helper
+    stores a compact status snapshot, not per-message results.
+    """
+    if not isinstance(progress, dict):
+        raise ValueError('cloud progress must be an object')
+    state = progress.get('state')
+    if state not in ('running', 'complete'):
+        raise ValueError("cloud progress state must be 'running' or 'complete'")
+    clean = {'state': state}
+    for key in ('processed_cloud_outputs', 'queued_unique_at_start', 'total_unique'):
+        value = progress.get(key)
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            raise ValueError(f'{key} must be a nonnegative integer')
+        clean[key] = value
+    updated = progress.get('updated_at')
+    if not isinstance(updated, str) or len(updated) > 64:
+        raise ValueError('updated_at must be an ISO timestamp')
+    try:
+        datetime.fromisoformat(updated.replace('Z', '+00:00'))
+    except ValueError as exc:
+        raise ValueError('updated_at must be an ISO timestamp') from exc
+    clean['updated_at'] = updated
+    backend = progress.get('backend', 'Modal L4')
+    if not isinstance(backend, str) or not backend.strip() or len(backend) > 80:
+        raise ValueError('backend must be a short nonempty label')
+    clean['backend'] = backend.strip()
+    eta = progress.get('eta_estimate_seconds')
+    if eta is not None:
+        if isinstance(eta, bool) or not isinstance(eta, int) or eta < 0:
+            raise ValueError('eta_estimate_seconds must be a nonnegative integer')
+        clean['eta_estimate_seconds'] = eta
+    owned = conn is None
+    conn = conn or connect()
+    try:
+        meta(conn, 'cloud_progress', clean)
+    finally:
+        if owned:
+            conn.close()
+    return clean
 
 
 def import_source():
@@ -100,7 +145,7 @@ def status(conn):
     return {'total':total,'classified':done,'remaining':total-done,'counts':counts,
             'unique_total':unique_total,'unique_classified':unique_done,
             'source_sha256':meta(conn,'source_sha256'),'run':run,
-            'progress':progress}
+            'progress':progress,'cloud_progress':meta(conn,'cloud_progress') or None}
 
 
 def query(params):

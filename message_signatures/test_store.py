@@ -81,6 +81,32 @@ class StoreTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             store.query({'offset': 'not-a-number'})
 
+    def test_cloud_progress_is_separate_from_local_predictions(self):
+        self.activate('r1')
+        self.add_prediction('r1', self.digest)
+        cloud = store.set_cloud_progress({
+            'state': 'running', 'processed_cloud_outputs': 500,
+            'queued_unique_at_start': 5000, 'total_unique': 9000,
+            'updated_at': '2026-09-30T12:00:00+00:00',
+            'backend': 'Modal L4', 'eta_estimate_seconds': 60,
+        }, self.conn)
+        status = store.status(self.conn)
+        self.assertEqual(status['cloud_progress'], cloud)
+        self.assertEqual(status['unique_classified'], 1)
+        self.assertEqual(status['classified'], 2)
+        self.assertEqual(status['remaining'], 1)
+        self.assertEqual(status['progress'], {})
+
+    def test_cloud_progress_rejects_bad_counts_and_timestamp(self):
+        with self.assertRaisesRegex(ValueError, 'nonnegative integer'):
+            store.set_cloud_progress({'state': 'running', 'processed_cloud_outputs': -1,
+                                      'queued_unique_at_start': 1, 'total_unique': 2,
+                                      'updated_at': '2026-09-30T12:00:00Z'}, self.conn)
+        with self.assertRaisesRegex(ValueError, 'ISO timestamp'):
+            store.set_cloud_progress({'state': 'running', 'processed_cloud_outputs': 0,
+                                      'queued_unique_at_start': 1, 'total_unique': 2,
+                                      'updated_at': 'yesterday'}, self.conn)
+
 
 if __name__ == '__main__':
     unittest.main()

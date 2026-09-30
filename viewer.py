@@ -370,6 +370,10 @@ class Handler(BaseHTTPRequestHandler):
                             store.meta(conn,'progress',current)
                             self.send_json({'state':'stopping'})
                             return
+                        cloud_progress=store.meta(conn,'cloud_progress') or {}
+                        if cloud_progress.get('state') == 'running':
+                            self.send_json({'error':'Cloud scoring is running; wait for its outputs or stop that job before resuming local inference'},409)
+                            return
                         if active:
                             self.send_json({'state':'already-running'})
                             return
