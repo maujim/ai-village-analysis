@@ -3,11 +3,14 @@ from __future__ import annotations
 
 import gzip
 import hashlib
+import importlib.metadata
 import json
 import tempfile
 import unittest
 import subprocess
 import sys
+from types import SimpleNamespace
+from unittest.mock import patch
 from pathlib import Path
 from typing import Any
 
@@ -86,6 +89,10 @@ class FakeMap:
         self.kwargs = kwargs
         return iter(self.results)
 
+    def with_options(self, **kwargs):
+        self.options = kwargs
+        return self
+
 
 class ModalWorkerTests(unittest.TestCase):
     def test_taxonomy_uses_explicit_packaged_container_path(self):
@@ -94,6 +101,14 @@ class ModalWorkerTests(unittest.TestCase):
 
     def test_cloud_execution_uses_exact_h100_identity(self):
         self.assertEqual(worker.GPU_TYPE, "H100!")
+
+    def test_modal_version_metadata_can_be_missing_in_injected_runtime(self):
+        with patch.object(worker, "modal", SimpleNamespace()):
+            with patch("importlib.metadata.version", side_effect=importlib.metadata.PackageNotFoundError("modal")):
+                self.assertEqual(
+                    worker.modal_sdk_version(),
+                    "platform-injected; distribution metadata unavailable",
+                )
 
     def test_worker_helpers_import_without_optional_modal_sdk(self):
         code = (
@@ -157,14 +172,24 @@ class ModalWorkerTests(unittest.TestCase):
                         "shardId": "pending-00000", "inputFile": "pending-00000.jsonl.gz",
                         "inputSha256": manifest["pendingShards"][0]["sha256"],
                         "count": len(rows), "rows": result_rows,
+                        "performance": {"inputReadSeconds": .2, "modelLoadSeconds": 1.5,
+                                        "inferenceSeconds": 2.0, "elapsedSeconds": 4.0,
+                                        "messagesScored": 2, "pairsScored": 24,
+                                        "messagesPerInferenceSecond": 1.0},
                         "cloudExecution": fake_execution(manifest)}
+            fake_map = FakeMap([response])
             result = worker.run_local(export_dir, output_dir, mode="pending", all_pending=True,
-                                      wall_seconds=600, map_function=FakeMap([response]))
+                                      wall_seconds=600, gpu_type="L4", map_function=fake_map)
             self.assertTrue(result["complete"])
             self.assertEqual(result["manifestSha256"], manifest["manifestSha256"])
             self.assertEqual(result["shards"][0]["id"], "pending-00000")
             self.assertEqual(result["shards"][0]["count"], len(rows))
             self.assertTrue((output_dir / "result-pending-00000.jsonl.gz").is_file())
+            self.assertEqual(result["gpuTypeRequested"], "L4")
+            self.assertEqual(fake_map.options, {"gpu": "L4"})
+            self.assertEqual(result["performance"]["messagesScored"], 2)
+            self.assertEqual(result["performance"]["pairsScored"], 24)
+            self.assertEqual(result["performance"]["messagesPerInferenceSecond"], 1.0)
             self.assertEqual(result["resultsManifestSha256"], canonical_hash(result, "resultsManifestSha256"))
 
     def test_partial_shard_is_separately_checkpointed_and_manifest_incomplete(self):

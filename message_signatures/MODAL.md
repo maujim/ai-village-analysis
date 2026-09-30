@@ -7,7 +7,7 @@ This is an operator guide for continuing the existing local message-signature ru
 - Logical run and source snapshot stay fixed. The export manifest pins the run ID, source SHA-256, model weights/assets, taxonomy, tokenizer inputs, score semantics, and 512-token truncation policy.
 - Model: `MoritzLaurer/deberta-v3-base-zeroshot-v2.0-c`, 184,423,682 parameters, CUDA FP16. The class hypothesis set and order come from the frozen 12-act taxonomy.
 - Scores remain independent entailment scores (they do not sum to one), uncalibrated, and subject to the existing review thresholds. Per-hypothesis truncation detail is retained.
-- Modal workers use the private Volume `ai-village-classification-20260930`; the configured worker requests `H100!` (fixed H100 selection, no automatic upgrade), a maximum of 8 containers, a 600-second function timeout, and zero automatic retries. Workers mount the Volume read-only, use local files only, and do not read or write the local SQLite database.
+- Modal workers use the private Volume `ai-village-classification-20260930`; the configured default requests `H100!` (fixed H100 selection, no automatic upgrade). Pass `--gpu-type L4` to select an L4 explicitly. Both devices passed the 68-text parity pilot; the L4 pilot is the lower-cost choice for the pending run. Worker limits are a maximum of 8 containers, a 600-second function timeout, and zero automatic retries. Workers mount the Volume read-only, use local files only, and do not read or write the local SQLite database.
 - Pending corpus shards and parity-only pilot shards are separate. Pilot shards must never be imported as predictions. Import is append-only: a shard is rejected if any of its text hashes already has a prediction in the run.
 
 ## Operator sequence
@@ -19,7 +19,7 @@ This is an operator guide for continuing the existing local message-signature ru
    modal setup
    ```
 
-   Modal requires a valid payment method for GPU execution. **The current workspace is blocked at this prerequisite: no payment method is configured, so no H100 inference has been launched and no GPU spend has occurred.** Stop here until the account owner has completed billing setup; then resume the already-authorized pilot. Modal documents the payment requirement in its [GPU guide](https://modal.com/docs/guide/gpu) and [billing guide](https://modal.com/docs/guide/billing).
+   Modal requires a valid payment method for GPU execution. Billing is configured for this workspace, and bounded H100 and L4 parity pilots have completed. Modal documents GPU and billing behavior in its [GPU guide](https://modal.com/docs/guide/gpu) and [billing guide](https://modal.com/docs/guide/billing).
 
 1. Pause the local classifier from the signatures page and verify its state is `paused`, `interrupted`, or otherwise idle. Do not export while the local process is still scoring; this avoids wasting a frozen shard on text that the local run classifies before cloud import.
 
@@ -51,10 +51,10 @@ This is an operator guide for continuing the existing local message-signature ru
    RESULTS="message_signatures/cloud-results/${EXPORT_ID}-pilot"
    modal run message_signatures/modal_worker.py \
      --export-dir "$BUNDLE" --output-dir "$RESULTS" \
-     --mode pilot --max-shards 1 --wall-seconds 600
+     --mode pilot --max-shards 1 --wall-seconds 600 --gpu-type L4
    ```
 
-   Inspect `results-manifest.json`, every output shard checksum/count, CUDA device and FP16 metadata, model/tokenizer/taxonomy hashes, and all pilot scores. Produce the read-only comparison report:
+   Inspect `results-manifest.json`, per-shard timing and message/pair counts, every output shard checksum/count, requested and actual GPU, CUDA and FP16 metadata, model/tokenizer/taxonomy hashes, and all pilot scores. The L4 choice is based on the successful parity pilot and lower projected cost; check actual runtime and cost against the recorded performance and billing data. Produce the read-only comparison report:
 
    ```sh
    .venv-signatures/bin/python -m message_signatures.modal_parity \
@@ -65,7 +65,7 @@ This is an operator guide for continuing the existing local message-signature ru
 
    A report marked `pass` requires maximum absolute score delta ≤ 0.02 plus exact top-label, review-status, and truncation agreement for every message. It is a comparison report, **not an approval artifact**. The pilot is not a quality evaluation; do not infer classification accuracy from it. Do not process or import pending corpus shards before the root reviewer records a passing numeric comparison.
 
-5. Only after explicit parity approval, run bounded pending batches. Upload their pending shard files to the corresponding Volume directory, then use an explicit shard cap and 600-second budget. Increase the cap only from observed complete-shard throughput; each Modal invocation has its own dispatch and timeout risk. `--all-pending` is an explicit opt-in for uncapped pending work and should not be used for the initial run.
+5. Only after explicit parity approval, run bounded pending batches. Upload their pending shard files to the corresponding Volume directory, then use an explicit shard cap and 600-second budget. Select the lower-cost GPU with `--gpu-type L4`. Increase the cap only from observed complete-shard throughput; each Modal invocation has its own dispatch and timeout risk. `--all-pending` is an explicit opt-in for uncapped pending work and should not be used for the initial run.
 
 6. Pause the local classifier before each import. The importer verifies that the frozen source, active run, model assets, taxonomy, truncation/scoring semantics, parity approval, input hashes, result hashes, and row counts still match. Import one `pending-xxxxx` shard at a time:
 
@@ -76,13 +76,13 @@ This is an operator guide for continuing the existing local message-signature ru
      --parity-approval '<root-approved parity approval JSON>'
    ```
 
-   The importer records the CUDA execution as a separate provenance epoch. It never overwrites existing predictions. A conflict, hash mismatch, missing shard, active local runner, or unapproved result must stop the import.
+The importer records the CUDA execution as a separate provenance epoch. It never overwrites existing predictions. A conflict, hash mismatch, missing shard, active local runner, or unapproved result must stop the import.
 
 7. Refresh the run report and signatures UI after imports. Confirm unique prediction totals and remaining unique texts, then resume local scoring only if that is the chosen next step. Do not describe the corpus as complete unless every unique source text is classified and the report confirms completion.
 
 ## Interface gate
 
-The frozen bundle contains `pendingShards` and `pilotShards`; pilot entries are marked `kind: parity_only` and `importable: false`. Result entries preserve the source shard ID, count, input filename/hash, output filename/hash, and CUDA execution metadata required by `cloud_transfer.import_shard`. Run the local contract tests before a paid pilot:
+The frozen bundle contains `pendingShards` and `pilotShards`; pilot entries are marked `kind: parity_only` and `importable: false`. Result entries preserve the source shard ID, count, input filename/hash, output filename/hash, requested and actual GPU, timing, and CUDA execution metadata required by `cloud_transfer.import_shard`. Run the local contract tests before dispatch:
 
 ```sh
 .venv-signatures/bin/python -m unittest \
@@ -90,6 +90,6 @@ The frozen bundle contains `pendingShards` and `pilotShards`; pilot entries are 
   message_signatures.test_cloud_transfer
 ```
 
-The cloud pilot is already authorized. Launch remains blocked only by the missing Modal payment method described above; after billing setup, continue with the pilot sequence.
+The bounded H100 and L4 pilots passed numeric parity. Continue with a fresh export and the lower-cost L4 configuration, then have the root reviewer record parity approval before importing pending predictions.
 
 The Modal worker currently sets the resource limits above in `modal_worker.py`. Modal CLI [volume upload](https://modal.com/docs/cli/latest/volume) and [`modal run`](https://modal.com/docs/cli/latest/run) references describe the commands used here. See [Modal Volume guidance](https://modal.com/docs/guide/volumes) for Volume persistence and read-only mount behavior.

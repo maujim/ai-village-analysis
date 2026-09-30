@@ -56,6 +56,17 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def modal_sdk_version() -> str:
+    """Return Modal's optional local/client version without blocking inference."""
+    import importlib.metadata
+    try:
+        return importlib.metadata.version("modal")
+    except importlib.metadata.PackageNotFoundError:
+        if modal is None:
+            return "not-installed"
+        return str(getattr(modal, "__version__", "platform-injected; distribution metadata unavailable"))
+
+
 def _safe_name(value: str) -> str:
     path = PurePosixPath(value)
     if path.is_absolute() or len(path.parts) != 1 or path.name in ("", ".", ".."):
@@ -282,7 +293,7 @@ class CudaNliRuntime:
                 "tokenizers": importlib.metadata.version("tokenizers"),
                 "safetensors": importlib.metadata.version("safetensors"),
                 "numpy": importlib.metadata.version("numpy"),
-                "modal": importlib.metadata.version("modal"),
+                "modal": modal_sdk_version(),
             },
             "sourceSha256": getattr(self, "source_sha256", None),
             "taxonomySha256": getattr(self, "taxonomy_sha256", None),
@@ -360,11 +371,30 @@ def _score_one_shard(spec: Mapping[str, Any]) -> dict[str, Any]:
     filename = _safe_name(str(shard["file"]))
     output_rows: list[dict[str, Any]] = []
     runtime_meta: dict[str, Any] = {}
+    shard_started = time.perf_counter()
+    input_read_seconds = 0.0
+    model_load_seconds = 0.0
+    inference_seconds = 0.0
+
+    def performance() -> dict[str, Any]:
+        elapsed = time.perf_counter() - shard_started
+        scored = len(output_rows)
+        return {
+            "inputReadSeconds": round(input_read_seconds, 4),
+            "modelLoadSeconds": round(model_load_seconds, 4),
+            "inferenceSeconds": round(inference_seconds, 4),
+            "elapsedSeconds": round(elapsed, 4),
+            "messagesScored": scored,
+            "pairsScored": scored * len(spec.get("act_specs", [])),
+            "messagesPerInferenceSecond": round(scored / inference_seconds, 4) if inference_seconds else None,
+        }
     try:
         if spec["score_semantics"] != "independent_entailment" or int(spec["max_length"]) != MAX_LENGTH:
             raise ValueError("Shard semantics/length do not match this worker")
         input_path = Path(VOLUME_MOUNT) / spec["volume_input_path"]
+        phase_start = time.perf_counter()
         records = read_gzip_jsonl(input_path, int(shard["count"]), str(shard["sha256"]))
+        input_read_seconds += time.perf_counter() - phase_start
         # Modal runs this module at /root/modal_worker.py; package assets are
         # explicitly mounted under /root/message_signatures by the Image.
         taxonomy_path = TAXONOMY_CONTAINER_PATH
@@ -382,7 +412,9 @@ def _score_one_shard(spec: Mapping[str, Any]) -> dict[str, Any]:
             raise ValueError("Mounted model/tokenizer assets do not match frozen export")
         key = (str(model_path), actual_model_sha, int(spec["pair_batch_size"]))
         if _RUNTIME is None or _RUNTIME_KEY != key:
+            phase_start = time.perf_counter()
             _RUNTIME = CudaNliRuntime(str(model_path), str(taxonomy_path), int(spec["pair_batch_size"]))
+            model_load_seconds += time.perf_counter() - phase_start
             _RUNTIME_KEY = key
         runtime = _RUNTIME
         if runtime.hypotheses != {str(a["id"]): str(a["hypothesis"]).strip() for a in spec["act_specs"]}:
@@ -398,7 +430,9 @@ def _score_one_shard(spec: Mapping[str, Any]) -> dict[str, Any]:
             if time.time() >= float(spec["deadline_unix"]):
                 raise TimeoutError("Wall deadline reached while processing this shard")
             batch = texts[offset:offset + int(spec.get("message_batch_size", MESSAGE_BATCH_SIZE))]
+            phase_start = time.perf_counter()
             predictions = runtime.predict(batch, float(spec["deadline_unix"]))
+            inference_seconds += time.perf_counter() - phase_start
             for source, prediction in zip(records[offset:offset + len(batch)], predictions):
                 if set(prediction["scores"]) != set(runtime.act_ids):
                     raise ValueError("Runtime did not score every taxonomy act")
@@ -415,12 +449,13 @@ def _score_one_shard(spec: Mapping[str, Any]) -> dict[str, Any]:
         return {"ok": True, "complete": True, "kind": shard["kind"], "shardId": shard["id"],
                 "inputFile": filename,
                 "inputSha256": shard["sha256"], "count": len(records), "rows": output_rows,
-                "cloudExecution": runtime_meta}
+                "cloudExecution": runtime_meta, "performance": performance()}
     except Exception as exc:
         return {"ok": False, "complete": False, "kind": shard.get("kind"),
                 "shardId": shard.get("id"), "inputFile": filename,
                 "inputSha256": shard.get("sha256"), "count": int(shard.get("count", 0)),
                 "rows": output_rows, "cloudExecution": runtime_meta,
+                "performance": performance(),
                 "error": f"{type(exc).__name__}: {exc}"}
 
 
@@ -464,9 +499,10 @@ if modal is not None:
         wall_seconds: int = MAX_WALL_SECONDS,
         pair_batch_size: int = DEFAULT_PAIR_BATCH_SIZE,
         volume_prefix: str = "jobpayloads",
+        gpu_type: str = GPU_TYPE,
     ) -> None:
         run_local(export_dir, output_dir, mode, max_shards, all_pending,
-                  wall_seconds, pair_batch_size, volume_prefix)
+                  wall_seconds, pair_batch_size, volume_prefix, gpu_type)
 else:  # pragma: no cover - makes pure utility functions importable without SDK.
     app = None
     score_shard = None
@@ -491,12 +527,15 @@ def run_local(
     wall_seconds: int = MAX_WALL_SECONDS,
     pair_batch_size: int = DEFAULT_PAIR_BATCH_SIZE,
     volume_prefix: str = "jobpayloads",
+    gpu_type: str = GPU_TYPE,
     *,
     map_function: Any = None,
 ) -> dict[str, Any]:
     """Run already-uploaded shard files and checkpoint each completed result locally."""
     if wall_seconds < 1 or wall_seconds > MAX_WALL_SECONDS:
         raise ValueError(f"wall_seconds must be 1..{MAX_WALL_SECONDS}")
+    if gpu_type not in ("H100!", "L4"):
+        raise ValueError("gpu_type must be H100! or L4")
     export_path = Path(export_dir).expanduser().resolve()
     out_path = Path(output_dir).expanduser().resolve()
     manifest_path = export_path / "manifest.json"
@@ -509,6 +548,8 @@ def run_local(
         if score_shard is None:
             raise RuntimeError("Modal SDK is unavailable; install the pinned Modal CLI first")
         map_function = score_shard
+    if hasattr(map_function, "with_options"):
+        map_function = map_function.with_options(gpu=gpu_type)
 
     # Verify each local export artifact before dispatch, then workers verify the
     # same digest again against the private Volume copy.
@@ -545,6 +586,7 @@ def run_local(
                     "inputSha256": result.get("inputSha256"),
                     "outputFile": target.name, "outputSha256": partial_sha,
                     "count": len(result["rows"]), "kind": result.get("kind"),
+                    "performance": result.get("performance", {}),
                     "cloudExecution": result.get("cloudExecution", {}),
                 })
             errors.append({"inputFile": result.get("inputFile"), "error": result.get("error")})
@@ -564,11 +606,18 @@ def run_local(
             "id": result["shardId"], "inputFile": result["inputFile"],
             "inputSha256": result["inputSha256"], "count": result["count"],
             "outputFile": target.name, "outputSha256": result_sha,
-            "kind": result["kind"], "cloudExecution": result["cloudExecution"],
+            "kind": result["kind"], "performance": result.get("performance", {}),
+            "cloudExecution": result["cloudExecution"],
         })
 
     all_selected_done = len(completed) == len(selected) and not errors
     all_pending_selected = mode == "pending" and len(selected) == len(manifest["pendingShards"])
+    perf_items = [item.get("performance", {}) for item in (*completed, *partial)]
+    def perf_sum(name: str) -> float:
+        return round(sum(float(item.get(name, 0.0) or 0.0) for item in perf_items), 4)
+    messages_scored = sum(int(item.get("messagesScored", 0) or 0) for item in perf_items)
+    pairs_scored = sum(int(item.get("pairsScored", 0) or 0) for item in perf_items)
+    inference_seconds = perf_sum("inferenceSeconds")
     result_manifest = {
         "schemaVersion": 1,
         "exportId": manifest["exportId"], "runId": manifest["runId"],
@@ -582,6 +631,15 @@ def run_local(
         "selectedShardCount": len(selected), "completedShardCount": len(completed),
         "elapsedSeconds": round(time.monotonic() - start, 3),
         "wallBudgetSeconds": wall_seconds, "pairBatchSize": pair_batch_size,
+        "gpuTypeRequested": gpu_type,
+        "performance": {
+            "inputReadSeconds": perf_sum("inputReadSeconds"),
+            "modelLoadSeconds": perf_sum("modelLoadSeconds"),
+            "inferenceSeconds": inference_seconds,
+            "workerElapsedSeconds": perf_sum("elapsedSeconds"),
+            "messagesScored": messages_scored, "pairsScored": pairs_scored,
+            "messagesPerInferenceSecond": round(messages_scored / inference_seconds, 4) if inference_seconds else None,
+        },
         "shards": completed, "partialShards": partial, "errors": errors,
         "cloudExecution": _common_execution_metadata(completed),
     }
