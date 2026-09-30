@@ -77,10 +77,11 @@ backend is optional Apple-Silicon acceleration; Torch remains the default. It
 uses the same local model, tokenizer, source snapshot, taxonomy, and hypotheses.
 Backend identity/version and batching settings are recorded by execution epoch.
 Speed/parity checks are engineering diagnostics, not evidence of classification
-accuracy or calibrated scores. Predictions resume only when source snapshot,
-model assets, tokenizer/config, taxonomy, runner/runtime code, device, and
-dependency provenance match. A changed configuration requires an explicit
-continuation of the active run and is recorded in a new epoch. Progress and
+accuracy or calibrated scores. Continuation requires matching source snapshot,
+model assets, tokenizer/config, taxonomy, scoring rules, device, dtype and token
+limit. Changes to code, dependencies, backend or batch sizes require explicit
+continuation and are recorded in a new epoch; old prediction provenance remains
+intact. Progress and
 predictions are committed by batch; a process lock prevents concurrent scoring
 writers. Ctrl-C or the viewer's Pause control requests a stop after the current
 batch. The viewer Resume control starts the configured full run. Closing the
