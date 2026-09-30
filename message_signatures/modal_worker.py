@@ -32,6 +32,7 @@ MODEL_VOLUME_NAME = "ai-village-classification-20260930"
 VOLUME_MOUNT = "/mnt/village"
 MODEL_DIR = f"{VOLUME_MOUNT}/model"
 PAYLOAD_ROOT = f"{VOLUME_MOUNT}/jobpayloads"
+TAXONOMY_CONTAINER_PATH = Path("/root/message_signatures/taxonomy.json")
 MAX_LENGTH = 512
 QUESTION = "What is the primary communicative function of this message? Choose the best matching act."
 DEFAULT_PAIR_BATCH_SIZE = 256
@@ -364,7 +365,9 @@ def _score_one_shard(spec: Mapping[str, Any]) -> dict[str, Any]:
             raise ValueError("Shard semantics/length do not match this worker")
         input_path = Path(VOLUME_MOUNT) / spec["volume_input_path"]
         records = read_gzip_jsonl(input_path, int(shard["count"]), str(shard["sha256"]))
-        taxonomy_path = HERE / "taxonomy.json"
+        # Modal runs this module at /root/modal_worker.py; package assets are
+        # explicitly mounted under /root/message_signatures by the Image.
+        taxonomy_path = TAXONOMY_CONTAINER_PATH
         if sha256_file(taxonomy_path) != spec["taxonomy_sha256"]:
             raise ValueError("Bundled taxonomy hash differs from frozen export")
         model_path = Path(MODEL_DIR)
@@ -433,7 +436,7 @@ if modal is not None:
         .env({"HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
               "HF_HUB_DISABLE_TELEMETRY": "1", "TOKENIZERS_PARALLELISM": "false"})
         .add_local_python_source("message_signatures")
-        .add_local_file(str(HERE / "taxonomy.json"), "/root/message_signatures/taxonomy.json")
+        .add_local_file(str(HERE / "taxonomy.json"), str(TAXONOMY_CONTAINER_PATH))
     )
 
     @app.function(

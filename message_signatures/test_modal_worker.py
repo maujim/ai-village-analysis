@@ -88,6 +88,10 @@ class FakeMap:
 
 
 class ModalWorkerTests(unittest.TestCase):
+    def test_taxonomy_uses_explicit_packaged_container_path(self):
+        self.assertEqual(str(worker.TAXONOMY_CONTAINER_PATH), "/root/message_signatures/taxonomy.json")
+        self.assertEqual(worker.TAXONOMY_CONTAINER_PATH.name, "taxonomy.json")
+
     def test_cloud_execution_uses_exact_h100_identity(self):
         self.assertEqual(worker.GPU_TYPE, "H100!")
 
