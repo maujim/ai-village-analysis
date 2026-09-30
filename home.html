@@ -105,25 +105,28 @@
 (()=>{
   const statusNode=document.getElementById('signatureLive');
   const liveLink=document.getElementById('signatureLiveLink');
-  let busy=false;
+  let busy=false,lastStatus='';
   async function refreshSignatureStatus(){
     if(busy||document.visibilityState!=='visible')return;
     busy=true;
+    const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);
     try{
-      const response=await fetch('/api/signatures/status',{cache:'no-store',headers:{Accept:'application/json'}});
+      const response=await fetch('/api/signatures/status',{signal:controller.signal,cache:'no-store',headers:{Accept:'application/json'}});
       if(!response.ok)throw new Error(`HTTP ${response.status}`);
       const data=await response.json();
       const progress=data.progress||{};
       const state=progress.state||'state unavailable';
-      statusNode.textContent=`${state} · ${Number(data.classified||0).toLocaleString()} / ${Number(data.total||0).toLocaleString()} source records classified · ${Number(data.remaining||0).toLocaleString()} remaining`;
+      lastStatus=`${state} · ${Number(data.classified||0).toLocaleString()} / ${Number(data.total||0).toLocaleString()} source records classified · ${Number(data.remaining||0).toLocaleString()} remaining`;
+      statusNode.textContent=lastStatus;
+      statusNode.title='Updates automatically every 15 seconds';
       liveLink.hidden=true;
     }catch(_){
-      statusNode.textContent='Live classification status unavailable.';
+      statusNode.textContent=lastStatus?`${lastStatus} · reconnecting…`:'Live classification status unavailable. Retrying automatically…';
       liveLink.hidden=false;
-    }finally{busy=false;}
+    }finally{clearTimeout(timeout);busy=false;}
   }
   refreshSignatureStatus();
-  window.setInterval(refreshSignatureStatus,60000);
+  window.setInterval(refreshSignatureStatus,15000);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshSignatureStatus();});
 })();
 </script>

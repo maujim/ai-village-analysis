@@ -26,12 +26,21 @@ is correct. No task arguments are extracted and no action is verified.
 
 Current run state and limits
 ----------------------------
-As of this note, the base-model pilot has scored 64 unique texts, corresponding
-to 394 source-message records after exact-text reuse, in 133.51 seconds (about
-0.479 unique texts/second). A straight-line estimate for the remaining unique
-texts is roughly 104 hours of model time. This is a small pilot measurement,
-not a reliable completion forecast; it excludes review and other overhead. No
-full-corpus run has started.
+The full-corpus run started on 30 September 2026, resuming the base-model pilot
+under run ID d64365bb56121748c722. Check the live page for current completion
+and throughput; early short messages run much faster than long messages, so
+the remaining-time estimate changes. The original 64-unique-text pilot covered
+394 source records in 133.51 seconds. Its 104-hour extrapolation is retained
+as historical diagnostic evidence, not the live completion forecast.
+
+The worker is independent of the web server and commits each batch. An idle-
+sleep guard stays active until the worker exits. Closing the laptop or shutting
+down can still interrupt computation; resume from the UI or command line.
+The read-only export_report.py --wait process writes full-run-report.json on
+completion or an explicit terminal failure/partial state, with provenance,
+both count denominators, and up to 24 exact-message examples. It does not
+classify anything itself. This file remains a compact summary of experimental
+outputs; the SQLite database retains every per-message score and template.
 
 The pilot already exposes a material failure: a “village” resume was assigned
 assertion with an entailment score of 0.903 and was not flagged for review.
