@@ -7,6 +7,8 @@ import threading
 import hashlib
 import signal
 import subprocess
+import gzip
+from functools import lru_cache
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -18,6 +20,16 @@ INDEX = ROOT / ".viewer-index.json"
 PAGE_SIZE = 100
 REVIEW_LOCK = threading.Lock()
 SOURCE_HASH_CACHE = {}
+
+
+@lru_cache(maxsize=8)
+def _json_file(path, version):
+    return json.loads(Path(path).read_text(encoding='utf-8'))
+
+
+def cached_json(path):
+    stat = path.stat()
+    return _json_file(str(path), (stat.st_mtime_ns, stat.st_size))
 
 
 def matches_snapshot(expected):
@@ -34,7 +46,7 @@ def matches_snapshot(expected):
 
 
 def fieldnotes_bundle():
-    return json.loads((ROOT / 'fieldnotes/bundle.json').read_text())
+    return cached_json(ROOT / 'fieldnotes/bundle.json')
 
 
 def review_records():
@@ -59,6 +71,8 @@ def load_days():
             if buffer.startswith(","):
                 buffer = buffer[1:]
                 buffer_start += 1
+                # JSON permits arbitrary whitespace after an array separator.
+                continue
             if buffer.startswith("]"):
                 break
             if not buffer:
@@ -81,7 +95,7 @@ def load_days():
 
 def day_index():
     if INDEX.exists() and INDEX.stat().st_mtime >= TRANSCRIPT.stat().st_mtime:
-        cached = json.loads(INDEX.read_text(encoding="utf-8"))
+        cached = cached_json(INDEX)
         if isinstance(cached, dict) and "days" in cached and "types" in cached:
             return cached
     entries = []
@@ -95,31 +109,84 @@ def day_index():
 
 
 def read_day(entry):
-    with TRANSCRIPT.open("rb") as f:
-        f.seek(entry["start"])
-        return json.loads(f.read(entry["end"] - entry["start"]))
+    stat = TRANSCRIPT.stat()
+    return _read_day(str(TRANSCRIPT), (stat.st_mtime_ns, stat.st_size), entry['start'], entry['end'])
+
+
+@lru_cache(maxsize=8)
+def _read_day(path, version, start, end):
+    with open(path, 'rb') as f:
+        f.seek(start)
+        return json.loads(f.read(end - start))
 
 
 class Handler(BaseHTTPRequestHandler):
-    def send_json(self, value, status=200):
-        body = json.dumps(value, ensure_ascii=False).encode("utf-8")
+    def send_bytes(self, body, content_type, status=200, cache='no-store', etag=None):
         self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Cache-Control", "no-store")
+        self.send_header('Content-Type', content_type)
+        self.send_header('Cache-Control', cache)
+        self.send_header('Vary', 'Accept-Encoding')
+        if etag:
+            self.send_header('ETag', etag)
+        accepts_gzip = False
+        for part in self.headers.get('Accept-Encoding', '').split(','):
+            name, *parameters = part.strip().lower().split(';')
+            if name != 'gzip':
+                continue
+            try:
+                quality = next((float(p.strip()[2:]) for p in parameters if p.strip().startswith('q=')), 1)
+                accepts_gzip = quality > 0
+            except ValueError:
+                pass
+        if accepts_gzip and len(body) > 2048:
+            body = gzip.compress(body, compresslevel=3)
+            self.send_header('Content-Encoding', 'gzip')
+        self.send_header('Content-Length', str(len(body)))
         self.end_headers()
         self.wfile.write(body)
 
-    def do_GET(self):
-        parsed = urlparse(self.path)
-        if parsed.path in ('/signatures', '/signatures/'):
-            body = (ROOT / 'message_signatures/index.html').read_bytes()
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html; charset=utf-8')
-            self.send_header('Content-Length', str(len(body)))
+    def send_file(self, path, content_type):
+        body = path.read_bytes()
+        if content_type.startswith('text/html'):
+            # A failed shell/check command must never turn diagnostic output
+            # containing source HTML into an executable browser document.
+            valid_document = body.lstrip().lower().startswith(b'<!doctype html>')
+            bounded_home = path.name != 'home.html' or len(body) <= 128 * 1024
+            if not valid_document or not bounded_home:
+                self.send_bytes(b'This page failed its document integrity check. Please restore the page source.',
+                                'text/plain; charset=utf-8', status=503)
+                return
+        etag = '"' + hashlib.sha256(body).hexdigest()[:24] + '"'
+        if self.headers.get('If-None-Match') == etag:
+            self.send_response(304)
+            self.send_header('ETag', etag)
             self.send_header('Cache-Control', 'no-cache')
             self.end_headers()
-            self.wfile.write(body)
+            return
+        self.send_bytes(body, content_type, cache='no-cache', etag=etag)
+
+    def send_json(self, value, status=200):
+        body = json.dumps(value, ensure_ascii=False).encode("utf-8")
+        self.send_bytes(body, 'application/json; charset=utf-8', status)
+
+    def do_GET(self):
+        parsed = urlparse(self.path)
+        if parsed.path in ('/', '/index.html') and {'day', 'event'} & parse_qs(parsed.query).keys():
+            self.send_response(302)
+            self.send_header('Location', '/village/?' + parsed.query)
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return
+        pages = {'/': 'home.html', '/index.html': 'home.html',
+                 '/village': 'index.html', '/village/': 'index.html',
+                 '/analysis.html': 'analysis.html',
+                 '/signatures': 'message_signatures/index.html', '/signatures/': 'message_signatures/index.html',
+                 '/fieldnotes': 'fieldnotes/index.html', '/fieldnotes/': 'fieldnotes/index.html'}
+        if parsed.path in pages:
+            self.send_file(ROOT / pages[parsed.path], 'text/html; charset=utf-8')
+            return
+        if parsed.path == '/shared/site.css':
+            self.send_file(ROOT / 'shared/site.css', 'text/css; charset=utf-8')
             return
         if parsed.path.startswith('/api/signatures/'):
             from message_signatures import store
@@ -146,15 +213,6 @@ class Handler(BaseHTTPRequestHandler):
                     self.send_json({'error':'Not found'},404)
             except (ValueError, TypeError) as exc:
                 self.send_json({'error':str(exc)},400)
-            return
-        if parsed.path in ('/fieldnotes', '/fieldnotes/'):
-            body = (ROOT / 'fieldnotes/index.html').read_bytes()
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html; charset=utf-8')
-            self.send_header('Content-Length', str(len(body)))
-            self.send_header('Cache-Control', 'no-cache')
-            self.end_headers()
-            self.wfile.write(body)
             return
         if parsed.path == '/api/fieldnotes/reviews':
             self.send_json({'reviews': review_records()})
@@ -198,15 +256,6 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json({'error': 'Not built'}, 404)
                 return
             self.send_json(json.loads(path.read_text()))
-            return
-        if parsed.path in ("/", "/index.html", "/analysis.html"):
-            body = (ROOT / ("analysis.html" if parsed.path == "/analysis.html" else "index.html")).read_bytes()
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Content-Length", str(len(body)))
-            self.send_header("Cache-Control", "no-cache")
-            self.end_headers()
-            self.wfile.write(body)
             return
         if parsed.path == "/api/days":
             self.send_json(day_index())
