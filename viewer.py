@@ -45,6 +45,46 @@ def matches_snapshot(expected):
     return SOURCE_HASH_CACHE[key] == expected
 
 
+def local_resume_settings(run):
+    """Choose a compatible local epoch, never a cloud CUDA import epoch."""
+    supported_devices = {'mps', 'cpu', 'auto'}
+    epochs = run.get('execution_epochs') or []
+    for epoch in reversed(epochs):
+        if not isinstance(epoch, dict):
+            continue
+        backend = epoch.get('backend')
+        runtime = epoch.get('runtime_settings') or {}
+        device = epoch.get('device') or runtime.get('device') or 'auto'
+        if backend not in ('mlx', 'torch') or device not in supported_devices:
+            continue
+        if backend == 'mlx' and device != 'mps':
+            continue
+        outer_batch = epoch.get('outer_batch_size')
+        pair_batch = epoch.get('pair_batch_size') or runtime.get('pair_batch_size') or runtime.get('batch_size')
+        return {
+            'backend': backend, 'device': device,
+            'outer_batch_size': outer_batch if isinstance(outer_batch, int) and outer_batch > 0 else 128,
+            'pair_batch_size': pair_batch if isinstance(pair_batch, int) and pair_batch > 0 else 32,
+            'epoch_id': epoch.get('id'),
+        }
+
+    runtime = run.get('runtime_settings') or {}
+    backend = run.get('backend')
+    device = run.get('device') or runtime.get('device') or 'auto'
+    if backend not in ('mlx', 'torch') or device not in supported_devices:
+        backend, device = 'torch', 'auto'
+    elif backend == 'mlx' and device != 'mps':
+        backend, device = 'torch', 'auto'
+    outer_batch = (run.get('execution_settings') or {}).get('outer_batch_size', 128)
+    pair_batch = runtime.get('pair_batch_size') or runtime.get('batch_size') or 32
+    return {
+        'backend': backend, 'device': device,
+        'outer_batch_size': outer_batch if isinstance(outer_batch, int) and outer_batch > 0 else 128,
+        'pair_batch_size': pair_batch if isinstance(pair_batch, int) and pair_batch > 0 else 32,
+        'epoch_id': None,
+    }
+
+
 def fieldnotes_bundle():
     return cached_json(ROOT / 'fieldnotes/bundle.json')
 
@@ -333,20 +373,19 @@ class Handler(BaseHTTPRequestHandler):
                         if active:
                             self.send_json({'state':'already-running'})
                             return
+                        if current.get('state') == 'complete':
+                            self.send_json({'state':'already-complete'})
+                            return
                         executable=ROOT/'.venv-signatures/bin/python'
                         if not executable.exists(): raise ValueError('Local model environment is not installed')
                         env=os.environ.copy()
                         env.update(HF_HUB_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',TOKENIZERS_PARALLELISM='false')
                         run = store.meta(conn,'active_run') or {}
-                        epochs = run.get('execution_epochs') or []
-                        latest_id = run.get('latest_execution_epoch_id')
-                        latest = next((item for item in reversed(epochs) if item.get('id') == latest_id),
-                                      epochs[-1] if epochs else {})
-                        runtime_settings = latest.get('runtime_settings') or run.get('runtime_settings') or {}
-                        backend = latest.get('backend') or run.get('backend') or 'torch'
-                        device = latest.get('device') or run.get('device') or 'auto'
-                        outer_batch = latest.get('outer_batch_size') or 128
-                        pair_batch = latest.get('pair_batch_size') or runtime_settings.get('pair_batch_size') or runtime_settings.get('batch_size') or 32
+                        resume = local_resume_settings(run)
+                        backend = resume['backend']
+                        device = resume['device']
+                        outer_batch = resume['outer_batch_size']
+                        pair_batch = resume['pair_batch_size']
                         command=[str(executable),str(ROOT/'message_signatures/run.py'),
                                  '--engine','nli','--device',str(device),'--batch',str(outer_batch),
                                  '--pair-batch',str(pair_batch),'--backend',str(backend)]
@@ -358,6 +397,7 @@ class Handler(BaseHTTPRequestHandler):
                         store.meta(conn,'progress',{'state':'starting','pid':process.pid,
                                    'run_id':run.get('id'),'requested_outer_batch_size':outer_batch,
                                    'requested_pair_batch_size':pair_batch,'backend':backend,
+                                   'resume_from_epoch_id':resume['epoch_id'],
                                    'updated_at':datetime.now(timezone.utc).isoformat()})
                         self.send_json({'state':'starting','pid':process.pid},202)
                     finally:

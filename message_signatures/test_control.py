@@ -113,6 +113,68 @@ class ControlEndpointTests(unittest.TestCase):
         self.assertEqual((status2, body2['state']), (200, 'already-running'))
         self.mock_popen.assert_called_once()
 
+    def test_cuda_import_epoch_falls_back_to_latest_local_mlx_epoch(self):
+        conn = store.connect()
+        try:
+            run = store.meta(conn, 'active_run')
+            run['execution_epochs'].append({
+                'id': 'epoch-cuda-import', 'backend': 'cuda', 'device': 'cuda:0 (H100)',
+                'outer_batch_size': None, 'pair_batch_size': 256,
+                'runtime_settings': {'backend': 'cuda', 'device': 'cuda:0 (H100)'},
+            })
+            run['latest_execution_epoch_id'] = 'epoch-cuda-import'
+            store.meta(conn, 'active_run', run)
+        finally:
+            conn.close()
+
+        status, body = self.post({'action': 'resume'})
+        self.assertEqual((status, body['state']), (202, 'starting'))
+        command = self.mock_popen.call_args.args[0]
+        self.assertEqual(command[command.index('--device') + 1], 'mps')
+        self.assertEqual(command[command.index('--backend') + 1], 'mlx')
+        self.assertNotIn('cuda', command)
+        self.assertEqual(command[command.index('--batch') + 1], '64')
+        self.assertEqual(command[command.index('--pair-batch') + 1], '16')
+        conn = store.connect()
+        try:
+            progress = store.meta(conn, 'progress')
+            self.assertEqual(progress['resume_from_epoch_id'], 'epoch-mlX')
+            self.assertEqual(progress['backend'], 'mlx')
+        finally:
+            conn.close()
+
+    def test_cloud_only_run_never_launches_invalid_cuda_cli_options(self):
+        conn = store.connect()
+        try:
+            store.meta(conn, 'active_run', {
+                'id': 'cloud-only', 'backend': 'cuda', 'device': 'cuda:0',
+                'runtime_settings': {'backend': 'cuda', 'device': 'cuda:0'},
+                'latest_execution_epoch_id': 'epoch-cuda',
+                'execution_epochs': [{
+                    'id': 'epoch-cuda', 'backend': 'cuda', 'device': 'cuda:0',
+                    'runtime_settings': {'backend': 'cuda', 'device': 'cuda:0'},
+                }],
+            })
+            store.meta(conn, 'progress', {'state': 'paused', 'run_id': 'cloud-only'})
+        finally:
+            conn.close()
+        status, body = self.post({'action': 'resume'})
+        self.assertEqual((status, body['state']), (202, 'starting'))
+        command = self.mock_popen.call_args.args[0]
+        self.assertEqual(command[command.index('--device') + 1], 'auto')
+        self.assertEqual(command[command.index('--backend') + 1], 'torch')
+        self.assertNotIn('cuda', command)
+
+    def test_complete_run_does_not_start_an_empty_resume_epoch(self):
+        conn = store.connect()
+        try:
+            store.meta(conn, 'progress', {'state': 'complete', 'run_id': 'legacy-run'})
+        finally:
+            conn.close()
+        status, body = self.post({'action': 'resume'})
+        self.assertEqual((status, body['state']), (200, 'already-complete'))
+        self.mock_popen.assert_not_called()
+
     def test_pause_signals_only_the_recorded_active_pid(self):
         conn = store.connect()
         try:
