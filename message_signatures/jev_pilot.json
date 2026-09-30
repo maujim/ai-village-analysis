@@ -1,0 +1,1501 @@
+{
+  "title": "Qwen3 logits-only custom message-act diagnostic",
+  "createdAt": "2026-09-30T04:11:26.215517+00:00",
+  "model": "Qwen/Qwen3-0.6B local causal LM",
+  "modelPath": "/Users/mukund/Documents/Codex/ai-village/models/qwen3-0.6b",
+  "method": "Next-token logits at the final prompt position, restricted to verified single-token A-L IDs; no generation.",
+  "scoring": {
+    "temperature": 1.0,
+    "calibrated": false,
+    "warning": "Softmax scores over twelve selected answer-token logits are custom, uncalibrated diagnostics, not validated act probabilities.",
+    "messageHandling": "Message is JSON-encoded inside a quoted data block; system instructions explicitly prohibit following embedded instructions.",
+    "truncation": "Only source message text is bounded to the configured token cap, keeping opening and ending portions; full instructions/options are preserved. Dropped token count is returned per message."
+  },
+  "diagnosticSet": {
+    "kind": "same synthetic authored examples as message_signatures/pilot.py",
+    "expectedLabels": "Manually authored diagnostic expectations, not gold labels.",
+    "count": 12,
+    "candidateActs": [
+      "instruction_request",
+      "question",
+      "proposal_plan",
+      "commitment_assignment",
+      "offer_help",
+      "status_report",
+      "check_report",
+      "assertion",
+      "endorsement",
+      "qualification",
+      "challenge_correction",
+      "acknowledgment"
+    ]
+  },
+  "orderSensitivity": {
+    "method": "Compare canonical answer-choice order against a cyclically shifted A-L order for each of the same 12 messages.",
+    "topActAgreement": 0,
+    "messagesCompared": 12,
+    "agreementFraction": 0.0,
+    "note": "Descriptive prompt-order stability only; not accuracy or calibration."
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-15.6-arm64-arm-64bit"
+  },
+  "runtime": {
+    "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/qwen3-0.6b",
+    "model_type": "qwen3",
+    "device": "mps",
+    "dtype": "torch.float16",
+    "batch_size": 4,
+    "max_message_tokens": 768,
+    "answer_token_ids": {
+      "A": 32,
+      "B": 33,
+      "C": 34,
+      "D": 35,
+      "E": 36,
+      "F": 37,
+      "G": 38,
+      "H": 39,
+      "I": 40,
+      "J": 41,
+      "K": 42,
+      "L": 43
+    },
+    "temperature": 1.0,
+    "calibrated": false,
+    "transformers_version": "5.17.0",
+    "torch_version": "2.14.0",
+    "trust_remote_code": false,
+    "local_files_only": true,
+    "generation_used": false,
+    "logits_to_keep_supported": true,
+    "use_cache_disabled": true
+  },
+  "benchmark": {
+    "syntheticMessages": 12,
+    "loadSeconds": 4.090394957922399,
+    "canonicalPassSeconds": 4.225627833977342,
+    "rotatedPassSeconds": 3.918124250136316,
+    "batchSize": 4,
+    "maxMessageTokens": 768
+  },
+  "predictions": [
+    {
+      "id": "request-01",
+      "message": "Mira, please review the README and tell me whether the setup steps are complete.",
+      "diagnosticExpectedAct_notGold": "instruction_request",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9624204635620117
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.03293221443891525
+        },
+        {
+          "act": "assertion",
+          "score": 0.004058045335114002
+        },
+        {
+          "act": "qualification",
+          "score": 0.00016234222857747227
+        },
+        {
+          "act": "question",
+          "score": 0.00013249987387098372
+        },
+        {
+          "act": "check_report",
+          "score": 0.00010159117664443329
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 8.55483376653865e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 4.57907299278304e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 3.679388464661315e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 1.2518488802015781e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 9.598258657206316e-06
+        },
+        {
+          "act": "status_report",
+          "score": 2.583336254247115e-06
+        }
+      ],
+      "rotatedChoiceOrder": 1,
+      "rotatedTopAct": "question",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "question",
+          "score": 0.9540026187896729
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.02243598736822605
+        },
+        {
+          "act": "assertion",
+          "score": 0.021745705977082253
+        },
+        {
+          "act": "endorsement",
+          "score": 0.0010330765508115292
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.00031507055973634124
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.00021654460579156876
+        },
+        {
+          "act": "proposal_plan",
+          "score": 0.00010228843166260049
+        },
+        {
+          "act": "status_report",
+          "score": 6.401046994142234e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 4.5390221202978864e-05
+        },
+        {
+          "act": "qualification",
+          "score": 2.0781155399163254e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 1.2408994734869339e-05
+        },
+        {
+          "act": "check_report",
+          "score": 6.047660917829489e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 17,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 478
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "question-01",
+      "message": "Did you inspect the latest test output?",
+      "diagnosticExpectedAct_notGold": "question",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9448431730270386
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.04023627191781998
+        },
+        {
+          "act": "assertion",
+          "score": 0.013905283063650131
+        },
+        {
+          "act": "question",
+          "score": 0.00025869483943097293
+        },
+        {
+          "act": "qualification",
+          "score": 0.00022475798323284835
+        },
+        {
+          "act": "check_report",
+          "score": 0.00019224568677600473
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.00018059810099657625
+        },
+        {
+          "act": "offer_help",
+          "score": 6.643833330599591e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 4.785373675986193e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 2.4826191292959265e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 1.3710324310522992e-05
+        },
+        {
+          "act": "status_report",
+          "score": 6.179727279231884e-06
+        }
+      ],
+      "rotatedChoiceOrder": 2,
+      "rotatedTopAct": "proposal_plan",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "proposal_plan",
+          "score": 0.6986789107322693
+        },
+        {
+          "act": "question",
+          "score": 0.29125267267227173
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.006957471836358309
+        },
+        {
+          "act": "qualification",
+          "score": 0.0016525444807484746
+        },
+        {
+          "act": "endorsement",
+          "score": 0.0007565899286419153
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.00018541036115493625
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.00017417689377907664
+        },
+        {
+          "act": "status_report",
+          "score": 0.00017417689377907664
+        },
+        {
+          "act": "check_report",
+          "score": 8.48870404297486e-05
+        },
+        {
+          "act": "assertion",
+          "score": 3.7084402720211074e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 2.933617724920623e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 1.671525023994036e-05
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 8,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 469
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "proposal-01",
+      "message": "We could run the same check on the second branch before merging.",
+      "diagnosticExpectedAct_notGold": "proposal_plan",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9628716111183167
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.030951451510190964
+        },
+        {
+          "act": "assertion",
+          "score": 0.0052130757831037045
+        },
+        {
+          "act": "question",
+          "score": 0.00022199953673407435
+        },
+        {
+          "act": "qualification",
+          "score": 0.00021516931883525103
+        },
+        {
+          "act": "check_report",
+          "score": 0.0002053159987553954
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.0001502123923273757
+        },
+        {
+          "act": "offer_help",
+          "score": 7.792917313054204e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 5.272950875223614e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 1.7940310499398038e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 1.7118765754275955e-05
+        },
+        {
+          "act": "status_report",
+          "score": 5.471486474561971e-06
+        }
+      ],
+      "rotatedChoiceOrder": 3,
+      "rotatedTopAct": "commitment_assignment",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "commitment_assignment",
+          "score": 0.9760053753852844
+        },
+        {
+          "act": "proposal_plan",
+          "score": 0.01679310016334057
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.003465451765805483
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.00135709042660892
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.0008103557047434151
+        },
+        {
+          "act": "assertion",
+          "score": 0.0005836773198097944
+        },
+        {
+          "act": "question",
+          "score": 0.0003827849286608398
+        },
+        {
+          "act": "check_report",
+          "score": 0.00019247634918428957
+        },
+        {
+          "act": "qualification",
+          "score": 0.0001865544618340209
+        },
+        {
+          "act": "offer_help",
+          "score": 0.0001725346955936402
+        },
+        {
+          "act": "status_report",
+          "score": 4.4310567318461835e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 6.28457564744167e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 13,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 474
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "commitment-01",
+      "message": "I will rerun the unit tests and post the failing case here.",
+      "diagnosticExpectedAct_notGold": "commitment_assignment",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9551867842674255
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.039425261318683624
+        },
+        {
+          "act": "assertion",
+          "score": 0.004782827105373144
+        },
+        {
+          "act": "qualification",
+          "score": 0.0001662366121308878
+        },
+        {
+          "act": "question",
+          "score": 0.00012745802814606577
+        },
+        {
+          "act": "check_report",
+          "score": 9.180456981994212e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 8.358901686733589e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 4.203119533485733e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 4.137956420890987e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 4.010644624941051e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 9.378427421324886e-06
+        },
+        {
+          "act": "status_report",
+          "score": 3.141379693261115e-06
+        }
+      ],
+      "rotatedChoiceOrder": 4,
+      "rotatedTopAct": "offer_help",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "offer_help",
+          "score": 0.9596179723739624
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.017576012760400772
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.011171995662152767
+        },
+        {
+          "act": "question",
+          "score": 0.010495117865502834
+        },
+        {
+          "act": "assertion",
+          "score": 0.0002710804110392928
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.00025866672513075173
+        },
+        {
+          "act": "proposal_plan",
+          "score": 0.00020144986046943814
+        },
+        {
+          "act": "status_report",
+          "score": 0.00016186949505936354
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.00012410966155584902
+        },
+        {
+          "act": "endorsement",
+          "score": 9.817881800699979e-05
+        },
+        {
+          "act": "check_report",
+          "score": 1.7329590264125727e-05
+        },
+        {
+          "act": "qualification",
+          "score": 6.179055617394624e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 14,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 475
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "offer-01",
+      "message": "I can help compare the two drafts if that would be useful.",
+      "diagnosticExpectedAct_notGold": "offer_help",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9612874984741211
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.036126382648944855
+        },
+        {
+          "act": "assertion",
+          "score": 0.0022384270559996367
+        },
+        {
+          "act": "question",
+          "score": 9.239091741619632e-05
+        },
+        {
+          "act": "qualification",
+          "score": 8.954835357144475e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 4.793177868123166e-05
+        },
+        {
+          "act": "check_report",
+          "score": 4.09982239943929e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 2.5258272216888145e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 2.264136855956167e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 2.0295590729801916e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 6.589013992197579e-06
+        },
+        {
+          "act": "status_report",
+          "score": 2.0411812329257373e-06
+        }
+      ],
+      "rotatedChoiceOrder": 5,
+      "rotatedTopAct": "status_report",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "status_report",
+          "score": 0.9894191026687622
+        },
+        {
+          "act": "offer_help",
+          "score": 0.006878275889903307
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.0012332068290561438
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.0010548175778239965
+        },
+        {
+          "act": "proposal_plan",
+          "score": 0.0005303956568241119
+        },
+        {
+          "act": "question",
+          "score": 0.0003267672727815807
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.00031671367469243705
+        },
+        {
+          "act": "check_report",
+          "score": 9.811331983655691e-05
+        },
+        {
+          "act": "qualification",
+          "score": 7.522609666921198e-05
+        },
+        {
+          "act": "assertion",
+          "score": 3.782605563174002e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 2.559439053584356e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 3.986837327829562e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 13,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 474
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "status-01",
+      "message": "The export is still blocked because the archive has not finished downloading.",
+      "diagnosticExpectedAct_notGold": "status_report",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9469199180603027
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.040324706584215164
+        },
+        {
+          "act": "assertion",
+          "score": 0.011374106630682945
+        },
+        {
+          "act": "check_report",
+          "score": 0.00032265856862068176
+        },
+        {
+          "act": "question",
+          "score": 0.00030310964211821556
+        },
+        {
+          "act": "qualification",
+          "score": 0.0002892292686738074
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.00021493693930096924
+        },
+        {
+          "act": "offer_help",
+          "score": 0.00010807708167703822
+        },
+        {
+          "act": "challenge_correction",
+          "score": 8.417051139986143e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 2.8637574359891005e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 2.2302967408904806e-05
+        },
+        {
+          "act": "status_report",
+          "score": 8.204802725231275e-06
+        }
+      ],
+      "rotatedChoiceOrder": 6,
+      "rotatedTopAct": "check_report",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "check_report",
+          "score": 0.7558006644248962
+        },
+        {
+          "act": "question",
+          "score": 0.13550756871700287
+        },
+        {
+          "act": "status_report",
+          "score": 0.10228648036718369
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.0032879936043173075
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.0014820147771388292
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.0006275245686993003
+        },
+        {
+          "act": "assertion",
+          "score": 0.00039269484113901854
+        },
+        {
+          "act": "offer_help",
+          "score": 0.00034655199851840734
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.00014001966337673366
+        },
+        {
+          "act": "qualification",
+          "score": 6.511518586194143e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 4.6900706365704536e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 1.6463698557345197e-05
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 13,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 474
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "check-01",
+      "message": "I ran the parser on the sample file; it returned 12 rows and no errors.",
+      "diagnosticExpectedAct_notGold": "check_report",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9752609133720398
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.020883409306406975
+        },
+        {
+          "act": "assertion",
+          "score": 0.003304234705865383
+        },
+        {
+          "act": "qualification",
+          "score": 0.00014746417582500726
+        },
+        {
+          "act": "question",
+          "score": 0.00010456774907652289
+        },
+        {
+          "act": "check_report",
+          "score": 9.670935833128169e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 8.805486868368462e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 3.502580875647254e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 3.4482785849832e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 3.394817758817226e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 8.450369932688773e-06
+        },
+        {
+          "act": "status_report",
+          "score": 2.659026904439088e-06
+        }
+      ],
+      "rotatedChoiceOrder": 7,
+      "rotatedTopAct": "assertion",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "assertion",
+          "score": 0.9684759974479675
+        },
+        {
+          "act": "check_report",
+          "score": 0.021733364090323448
+        },
+        {
+          "act": "question",
+          "score": 0.005495055112987757
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.0016243353020399809
+        },
+        {
+          "act": "offer_help",
+          "score": 0.0012261125957593322
+        },
+        {
+          "act": "proposal_plan",
+          "score": 0.00088313571177423
+        },
+        {
+          "act": "endorsement",
+          "score": 0.00019099148630630225
+        },
+        {
+          "act": "status_report",
+          "score": 0.00017389973800163716
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.00010384027700638399
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 5.387162309489213e-05
+        },
+        {
+          "act": "qualification",
+          "score": 2.5847886718111113e-05
+        },
+        {
+          "act": "instruction_request",
+          "score": 1.3620879144582432e-05
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 19,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 480
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "assertion-01",
+      "message": "The configuration file lists three supported event types.",
+      "diagnosticExpectedAct_notGold": "assertion",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9705958962440491
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.025865502655506134
+        },
+        {
+          "act": "assertion",
+          "score": 0.003041299991309643
+        },
+        {
+          "act": "question",
+          "score": 0.0001490699069108814
+        },
+        {
+          "act": "qualification",
+          "score": 0.00011978104885201901
+        },
+        {
+          "act": "check_report",
+          "score": 7.855432340875268e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 6.93239489919506e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 2.9815857487847097e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 2.5107468900387175e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 1.2429099115252029e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 1.0631170880515128e-05
+        },
+        {
+          "act": "status_report",
+          "score": 2.5648894279584056e-06
+        }
+      ],
+      "rotatedChoiceOrder": 8,
+      "rotatedTopAct": "endorsement",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "endorsement",
+          "score": 0.8615388870239258
+        },
+        {
+          "act": "assertion",
+          "score": 0.1363152414560318
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.001562395365908742
+        },
+        {
+          "act": "status_report",
+          "score": 0.0002510997874196619
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.0001365205826004967
+        },
+        {
+          "act": "qualification",
+          "score": 6.65348197799176e-05
+        },
+        {
+          "act": "instruction_request",
+          "score": 4.644878936232999e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 3.732265395228751e-05
+        },
+        {
+          "act": "check_report",
+          "score": 2.26373322220752e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 9.585250154486857e-06
+        },
+        {
+          "act": "offer_help",
+          "score": 9.585250154486857e-06
+        },
+        {
+          "act": "question",
+          "score": 3.812748900600127e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 9,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 470
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "endorsement-01",
+      "message": "I agree with your proposal to keep the source links in the evidence bundle.",
+      "diagnosticExpectedAct_notGold": "endorsement",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9636338353157043
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.03510035574436188
+        },
+        {
+          "act": "assertion",
+          "score": 0.0009208908886648715
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.00011171674123033881
+        },
+        {
+          "act": "qualification",
+          "score": 7.1011483669281e-05
+        },
+        {
+          "act": "question",
+          "score": 6.775963265681639e-05
+        },
+        {
+          "act": "check_report",
+          "score": 3.4071683330694214e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 2.26966330956202e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 1.9112480003968813e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 1.177485773951048e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 5.064303422841476e-06
+        },
+        {
+          "act": "status_report",
+          "score": 1.6441385923826601e-06
+        }
+      ],
+      "rotatedChoiceOrder": 9,
+      "rotatedTopAct": "qualification",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "qualification",
+          "score": 0.9482935070991516
+        },
+        {
+          "act": "endorsement",
+          "score": 0.044352270662784576
+        },
+        {
+          "act": "assertion",
+          "score": 0.003367056604474783
+        },
+        {
+          "act": "question",
+          "score": 0.0012581771006807685
+        },
+        {
+          "act": "check_report",
+          "score": 0.0007512919255532324
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.0007168877637013793
+        },
+        {
+          "act": "offer_help",
+          "score": 0.0005083495052531362
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.0003035493427887559
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.00023640446306671947
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.00010823385673575103
+        },
+        {
+          "act": "status_report",
+          "score": 9.854805102804676e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 5.736184448323911e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 15,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 476
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "qualification-01",
+      "message": "This appears to work for the sample export, although we have not checked the full archive.",
+      "diagnosticExpectedAct_notGold": "qualification",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9689187407493591
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.026640448719263077
+        },
+        {
+          "act": "assertion",
+          "score": 0.003959749359637499
+        },
+        {
+          "act": "qualification",
+          "score": 0.0001292903907597065
+        },
+        {
+          "act": "question",
+          "score": 0.0001071854931069538
+        },
+        {
+          "act": "check_report",
+          "score": 8.88598951860331e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 6.707497232127935e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 3.821816426352598e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 2.7961008527199738e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 1.1297268429188989e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 9.22056187846465e-06
+        },
+        {
+          "act": "status_report",
+          "score": 1.9631709164968925e-06
+        }
+      ],
+      "rotatedChoiceOrder": 10,
+      "rotatedTopAct": "challenge_correction",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "challenge_correction",
+          "score": 0.9798622727394104
+        },
+        {
+          "act": "assertion",
+          "score": 0.011056704446673393
+        },
+        {
+          "act": "qualification",
+          "score": 0.007138744927942753
+        },
+        {
+          "act": "status_report",
+          "score": 0.0010777893476188183
+        },
+        {
+          "act": "offer_help",
+          "score": 0.0002442744153086096
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.00023675888951402158
+        },
+        {
+          "act": "endorsement",
+          "score": 0.0001552702597109601
+        },
+        {
+          "act": "question",
+          "score": 0.0001267279003513977
+        },
+        {
+          "act": "proposal_plan",
+          "score": 5.04088748130016e-05
+        },
+        {
+          "act": "check_report",
+          "score": 3.105600262642838e-05
+        },
+        {
+          "act": "instruction_request",
+          "score": 1.7420839867554605e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 2.3947818590386305e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 18,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 479
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "challenge-01",
+      "message": "That count is incorrect: the log shows 14 entries, not 12.",
+      "diagnosticExpectedAct_notGold": "challenge_correction",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9578281044960022
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.03226694464683533
+        },
+        {
+          "act": "assertion",
+          "score": 0.008821290917694569
+        },
+        {
+          "act": "qualification",
+          "score": 0.0003018480201717466
+        },
+        {
+          "act": "question",
+          "score": 0.00022784681641496718
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.0001802416518330574
+        },
+        {
+          "act": "check_report",
+          "score": 0.00017469620797783136
+        },
+        {
+          "act": "offer_help",
+          "score": 8.252064435509965e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 6.841202412033454e-05
+        },
+        {
+          "act": "endorsement",
+          "score": 2.63751826423686e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 1.599735696800053e-05
+        },
+        {
+          "act": "status_report",
+          "score": 5.704033355868887e-06
+        }
+      ],
+      "rotatedChoiceOrder": 11,
+      "rotatedTopAct": "acknowledgment",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "acknowledgment",
+          "score": 0.9920608997344971
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.005455691367387772
+        },
+        {
+          "act": "endorsement",
+          "score": 0.0009333587950095534
+        },
+        {
+          "act": "check_report",
+          "score": 0.0006936133722774684
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 0.00025516608729958534
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.0001987235591514036
+        },
+        {
+          "act": "qualification",
+          "score": 0.00013237842358648777
+        },
+        {
+          "act": "status_report",
+          "score": 0.00012053192767780274
+        },
+        {
+          "act": "assertion",
+          "score": 9.387035970576108e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 2.7317830245010555e-05
+        },
+        {
+          "act": "question",
+          "score": 2.195049455622211e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 6.4885539359238464e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 18,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 479
+      },
+      "probabilitiesUncalibrated": true
+    },
+    {
+      "id": "acknowledgment-01",
+      "message": "Thanks for checking that and sharing the result.",
+      "diagnosticExpectedAct_notGold": "acknowledgment",
+      "topAct": "instruction_request",
+      "rankedActs": [
+        {
+          "act": "instruction_request",
+          "score": 0.9710249900817871
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.027545856311917305
+        },
+        {
+          "act": "assertion",
+          "score": 0.001173043972812593
+        },
+        {
+          "act": "question",
+          "score": 8.23606169433333e-05
+        },
+        {
+          "act": "qualification",
+          "score": 5.6605571444379166e-05
+        },
+        {
+          "act": "check_report",
+          "score": 3.7122837966308e-05
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 3.654730608104728e-05
+        },
+        {
+          "act": "challenge_correction",
+          "score": 1.6217765733017586e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 1.5966332284733653e-05
+        },
+        {
+          "act": "proposal_plan",
+          "score": 5.782623247796437e-06
+        },
+        {
+          "act": "endorsement",
+          "score": 4.036921382066794e-06
+        },
+        {
+          "act": "status_report",
+          "score": 1.4394087202163064e-06
+        }
+      ],
+      "rotatedChoiceOrder": 1,
+      "rotatedTopAct": "question",
+      "rotationStableTopAct": false,
+      "rotatedRankedActs": [
+        {
+          "act": "question",
+          "score": 0.9699506163597107
+        },
+        {
+          "act": "instruction_request",
+          "score": 0.018911022692918777
+        },
+        {
+          "act": "assertion",
+          "score": 0.010122341103851795
+        },
+        {
+          "act": "endorsement",
+          "score": 0.0006271905149333179
+        },
+        {
+          "act": "acknowledgment",
+          "score": 0.0001356394641334191
+        },
+        {
+          "act": "challenge_correction",
+          "score": 0.00011421987437643111
+        },
+        {
+          "act": "proposal_plan",
+          "score": 6.610538548557088e-05
+        },
+        {
+          "act": "status_report",
+          "score": 2.843157562892884e-05
+        },
+        {
+          "act": "offer_help",
+          "score": 2.5090776034630835e-05
+        },
+        {
+          "act": "qualification",
+          "score": 8.404357686231378e-06
+        },
+        {
+          "act": "commitment_assignment",
+          "score": 7.416820153594017e-06
+        },
+        {
+          "act": "check_report",
+          "score": 3.558629032340832e-06
+        }
+      ],
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens": 9,
+        "message_tokens_dropped": 0,
+        "prompt": false,
+        "prompt_tokens": 470
+      },
+      "probabilitiesUncalibrated": true
+    }
+  ]
+}

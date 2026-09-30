@@ -1,0 +1,153 @@
+{
+  "version": "1.0",
+  "scope": "Conversational act labels and reusable message/task signature templates for local AI Village chat analysis. This is a design artifact; no corpus-wide labels are assigned here.",
+  "scoring": {
+    "method": "For each message segment and act, score whether the act hypothesis is entailed by the source text and its local context. Retain the source span supporting each positive decision.",
+    "probabilityNote": "Any model probability or confidence is advisory and uncalibrated; do not treat it as a validated likelihood.",
+    "uncertainHandling": "When context is insufficient, return primary_act=uncertain, abstain=true, and a short reason. Do not force a closest act.",
+    "multiActHandling": "Segment messages at clause or sentence boundaries when communicative functions differ. Return one primary act per segment and optional secondary acts only when both functions are independently expressed. A long recap may contain reports, check reports, plans, and requests; do not flatten it to one label."
+  },
+  "acts": [
+    {
+      "id": "instruction_request",
+      "definition": "Directs another actor to do something or asks that actor to do it.",
+      "positiveCues": ["imperative or explicit request", "named assignee or addressee", "requested deliverable or action"],
+      "exclude": ["speaker only states their own future intention", "rhetorical question with no requested action"],
+      "hypothesis": "The speaker is asking or directing another actor to perform a specified action.",
+      "signature": "requester, assignee, action, target, constraints -> requested_action_contract",
+      "multiActNotes": "Split an explicit request from the status report or rationale surrounding it."
+    },
+    {
+      "id": "question",
+      "definition": "Seeks information or confirmation from another actor, without itself specifying an executable task beyond answering.",
+      "positiveCues": ["interrogative form", "explicit asks whether/what/how", "request for confirmation"],
+      "exclude": ["rhetorical question", "question embedded only as a quoted artifact"],
+      "hypothesis": "The speaker is seeking an answer or clarification from another participant.",
+      "signature": "questioner, information_needed, context -> answer_request",
+      "multiActNotes": "If the question also requests an action, add instruction_request as a secondary act or separate segment."
+    },
+    {
+      "id": "proposal_plan",
+      "definition": "Presents a possible future course of action or ordered plan without claiming it has been accepted or completed.",
+      "positiveCues": ["could/should/might", "proposed next steps", "conditional plan", "candidate approach"],
+      "exclude": ["completed action report", "unconditional commitment by the speaker", "assignment to another actor"],
+      "hypothesis": "The speaker is proposing a possible course of action for a goal.",
+      "signature": "goal, options, constraints, selection_criteria -> proposed_plan",
+      "multiActNotes": "A proposal followed by 'I will do it' contains both proposal_plan and commitment_assignment."
+    },
+    {
+      "id": "commitment_assignment",
+      "definition": "Commits the speaker to an action, or assigns a concrete action to a named or identifiable actor.",
+      "positiveCues": ["I will/I'll", "assigned owner", "deadline or completion obligation", "accepted responsibility"],
+      "exclude": ["speculative proposal", "action already completed", "generic aspiration without action"],
+      "hypothesis": "The speaker or named assignee has undertaken responsibility for a future action.",
+      "signature": "actor, action, target, deadline, constraints, completion_evidence -> commitment",
+      "multiActNotes": "Represent the assignment as a commitment contract; keep its supporting proposal or rationale in separate segments."
+    },
+    {
+      "id": "offer_help",
+      "definition": "Offers the speaker's assistance, resources, or availability without assigning another actor's task.",
+      "positiveCues": ["I can help", "happy to review", "offer to draft/format", "availability to assist"],
+      "exclude": ["direct instruction", "claim that help was already delivered"],
+      "hypothesis": "The speaker is offering their own assistance for a task or goal.",
+      "signature": "helper, offered_support, target_task, conditions -> help_offer",
+      "multiActNotes": "If the speaker also commits to a specific next action, add commitment_assignment."
+    },
+    {
+      "id": "status_report",
+      "definition": "Reports a current or past state, activity, blocker, or next step without a specific claim that a verification procedure was performed.",
+      "positiveCues": ["session recap", "current progress/state", "blocker description", "next-step summary"],
+      "exclude": ["explicit check method or evidence result is the central act", "plan with no claim of current state"],
+      "hypothesis": "The speaker is reporting the current or past state of a task, project, or situation.",
+      "signature": "task, reported_state, blocker, next_step -> status_update",
+      "multiActNotes": "Split check reports and new commitments from a mixed status recap."
+    },
+    {
+      "id": "check_report",
+      "definition": "Reports performing a check or test and states what was observed, including a failed or inconclusive check.",
+      "positiveCues": ["searched/fetched/tested/ran/inspected", "named method or source", "reported result", "explicit scope of inspection"],
+      "exclude": ["repeats someone else's check without claiming own inspection; label status_report or endorsement", "asserts a fact without describing a check"],
+      "hypothesis": "The speaker reports that a check was performed and gives its observed result within a stated scope.",
+      "signature": "checker, subject, method, scope, observed_result, evidence_span, limitation -> reported_check",
+      "multiActNotes": "Keep 'reported check' distinct from independently evidenced outcome. A recap of an earlier check is not a new check action."
+    },
+    {
+      "id": "assertion",
+      "definition": "States a proposition as true or false without explicitly framing it as another speaker's report or a check result.",
+      "positiveCues": ["declarative factual statement", "categorical causal claim", "unqualified conclusion"],
+      "exclude": ["explicitly attributed report", "hedged or conditional wording", "agreement with another speaker"],
+      "hypothesis": "The speaker presents a proposition as fact in their own voice.",
+      "signature": "claim, scope, subject, qualifiers -> assertion",
+      "multiActNotes": "Preserve wording strength; do not upgrade a reported or tentative claim into an assertion."
+    },
+    {
+      "id": "endorsement",
+      "definition": "Explicitly agrees with, adopts, or supports another actor's claim, proposal, or interpretation.",
+      "positiveCues": ["I agree", "confirmed by named source", "explicit adoption", "praise tied to accepting a claim"],
+      "exclude": ["mere mention or repetition", "independent check without agreement", "social praise without claim uptake"],
+      "hypothesis": "The speaker explicitly supports or adopts a claim, proposal, or interpretation.",
+      "signature": "endorsing_actor, cited_claim, attributed_source, support_basis -> endorsement",
+      "multiActNotes": "Record cited source and claim variant; shared wording or URL alone does not establish lineage."
+    },
+    {
+      "id": "qualification",
+      "definition": "Limits, hedges, conditions, or narrows the scope or certainty of a proposition.",
+      "positiveCues": ["if", "may/might/suggests", "in this scope", "as far as I can tell", "reported but not verified"],
+      "exclude": ["categorical assertion", "unrelated caveat"],
+      "hypothesis": "The speaker makes a proposition conditional, tentative, or limited in scope.",
+      "signature": "claim, condition, uncertainty_marker, scope_limit -> qualified_claim",
+      "multiActNotes": "Keep qualifying language attached to the relevant proposition; do not let later confidence rewrite an earlier hedge."
+    },
+    {
+      "id": "challenge_correction",
+      "definition": "Disputes a claim, identifies a conflict or error, or provides an explicit correction with supporting basis.",
+      "positiveCues": ["incorrect/does not exist", "contradictory reports", "counterevidence", "retraction or correction"],
+      "exclude": ["mere uncertainty without disagreement", "new independent fact without reference to a contested claim"],
+      "hypothesis": "The speaker challenges or corrects a prior or competing proposition.",
+      "signature": "challenged_claim, counterevidence, source_scope, correction -> challenge",
+      "multiActNotes": "Link to the precise challenged occurrence. Preserve competing reports if time or access context could differ."
+    },
+    {
+      "id": "acknowledgment",
+      "definition": "Socially acknowledges, thanks, welcomes, or reacts without clearly adopting a substantive claim.",
+      "positiveCues": ["thanks", "welcome", "congratulations", "brief social response"],
+      "exclude": ["claim adoption supported by additional language", "task commitment", "substantive agreement"],
+      "hypothesis": "The speaker is primarily acknowledging another participant socially.",
+      "signature": "speaker, addressee, social_act, context -> acknowledgment",
+      "multiActNotes": "Use a second act when the message also assigns, endorses, or reports substantive work."
+    }
+  ],
+  "uncertainFallback": {
+    "id": "uncertain",
+    "definition": "No listed act is sufficiently supported, the speaker/addressee context is missing, or the segment is too ambiguous to classify.",
+    "outputs": {"primaryAct": "uncertain", "secondaryActs": [], "abstain": true, "evidenceSpan": null, "reason": "required"},
+    "policy": "Do not force a nearest label. Advisory probabilities are uncalibrated."
+  },
+  "taskContractFields": [
+    {"name":"actor","meaning":"Explicit assignee or speaker undertaking the action","nullable":true},
+    {"name":"action","meaning":"Explicit executable verb phrase","nullable":true},
+    {"name":"target","meaning":"Explicit artifact, system, person, or object acted on","nullable":true},
+    {"name":"preconditions","meaning":"Explicit prerequisites or trigger conditions","nullable":true},
+    {"name":"constraints","meaning":"Explicit restrictions, scope, or permitted methods","nullable":true},
+    {"name":"success_condition","meaning":"Explicit observable condition for completion","nullable":true},
+    {"name":"deadline","meaning":"Explicit time or date constraint","nullable":true},
+    {"name":"required_evidence","meaning":"Explicit requested proof or report required on completion","nullable":true},
+    {"name":"status","meaning":"Requested, accepted, proposed, reported_complete, blocked, or unknown","nullable":false},
+    {"name":"source_span","meaning":"Verbatim source substring supporting each populated slot","nullable":false}
+  ],
+  "extractionRules": [
+    "Utterance classification and executable task-contract extraction are separate decisions.",
+    "Populate a task contract only for an explicit request, assignment, accepted commitment, or clearly executable proposal. Otherwise return executable=false and empty/null slots.",
+    "Never infer that an action occurred from a plan, intention, report, or status statement.",
+    "Leave unspecified slots null; do not fill them from memory, world knowledge, or nearby messages without an explicit linked source.",
+    "For every populated slot, retain the exact source span. An agent report is not independent evidence of the reported outcome."
+  ],
+  "signatureTemplates": [
+    {"id":"classify_act","class":"ClassifyMessageAct","purpose":"Classify one utterance or already segmented clause; return evidence and an abstention path.","inputs":["message","local_context"],"outputs":["primary_act","secondary_acts","evidence_spans","abstain","uncertainty_reason"]},
+    {"id":"segment_multi_act","class":"SegmentMultiActMessage","purpose":"Split a message only where communicative act changes, then classify each segment.","inputs":["message","local_context"],"outputs":["segments","act_labels","evidence_spans","uncertain_segments"]},
+    {"id":"extract_task_contract","class":"ExtractExecutableTaskContract","purpose":"Separate executable task requests/commitments from ordinary conversational content; preserve unknown slots.","inputs":["message","act_labels"],"outputs":["executable","contract_status","actor","action","target","preconditions","constraints","success_condition","deadline","required_evidence","source_spans"]},
+    {"id":"check_artifact","class":"CheckArtifactSignature","purpose":"Reusable contract for a requested artifact or external-state check.","inputs":["artifact_or_subject","check_criteria","scope","constraints"],"outputs":["check_method","reported_result","evidence_span","coverage_limit"]},
+    {"id":"submit_review_artifact","class":"SubmitReviewArtifactSignature","purpose":"Reusable contract for contributing, submitting, or reviewing a versioned artifact.","inputs":["artifact","target_repository_or_location","required_components","review_criteria"],"outputs":["action","status","version_or_reference","evidence_span","limitations"]},
+    {"id":"coordinate_action","class":"CoordinateActionSignature","purpose":"Reusable contract for assigning coordinated work among participants.","inputs":["goal","participants","constraints","deadline"],"outputs":["assignments","dependencies","completion_conditions","evidence_requirements"]}
+  ]
+}

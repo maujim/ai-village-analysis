@@ -1,0 +1,1415 @@
+{
+  "title": "Nano-Jev custom message-act synthetic pilot",
+  "createdAt": "2026-09-30T04:05:22.388361+00:00",
+  "model": "Nano-Jev 1.0 local 33.4M-parameter sequence classifier",
+  "modelPath": "models/nano-jev",
+  "modelCard": "models/nano-jev/README.md",
+  "inputFormat": "question: <question> option: <taxonomy act> paired with the message as sequence two",
+  "scoring": {
+    "method": "One scalar logit per paired message-option; softmax across act options at temperature 1.0.",
+    "temperature": 1.0,
+    "calibrated": false,
+    "probabilityWarning": "These custom taxonomy options differ from Nano-Jev's trained relevance/sufficiency/groundedness decisions. Scores are uncalibrated advisory rankings, not validated probabilities or act labels.",
+    "truncation": "The paired message is tokenized with only_second truncation at the configured max length; an overlong question is shortened only as needed to preserve the option text. Both flags are reported per message and option."
+  },
+  "diagnosticSet": {
+    "kind": "synthetic authored examples",
+    "expectedLabels": "Manually authored diagnostic expectations, not gold labels; no accuracy metric is computed.",
+    "count": 12,
+    "taxonomyVersion": "1.0",
+    "acts": [
+      "instruction_request",
+      "question",
+      "proposal_plan",
+      "commitment_assignment",
+      "offer_help",
+      "status_report",
+      "check_report",
+      "assertion",
+      "endorsement",
+      "qualification",
+      "challenge_correction",
+      "acknowledgment"
+    ]
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-15.6-arm64-arm-64bit",
+    "cpuThreads": 4
+  },
+  "runs": {
+    "cpu": {
+      "runtime": {
+        "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/nano-jev",
+        "device": "cpu",
+        "max_length": 512,
+        "batch_size": 8,
+        "temperature": 1.0,
+        "calibrated": false,
+        "transformers_version": "5.17.0",
+        "torch_version": "2.14.0"
+      },
+      "benchmark": {
+        "syntheticMessages": 12,
+        "candidateActs": 12,
+        "crossEncoderPairs": 144,
+        "loadSeconds": 1.67293233377859,
+        "firstPassSeconds": 1.743057332932949,
+        "steadySecondPassSeconds": 1.6800552089698613,
+        "steadyMillisecondsPerMessage": 140.00460074748844
+      },
+      "predictions": [
+        {
+          "id": "request-01",
+          "message": "Mira, please review the README and tell me whether the setup steps are complete.",
+          "diagnosticExpectedAct_notGold": "instruction_request",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.14547394216060638
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.13766400516033173
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.10017739236354828
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.09977538138628006
+            },
+            {
+              "act": "question",
+              "probability": 0.09496885538101196
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09325368702411652
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.07587437331676483
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06584838777780533
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.05578870698809624
+            },
+            {
+              "act": "qualification",
+              "probability": 0.05565254017710686
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.05390441045165062
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.021618390455842018
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "question-01",
+          "message": "Did you inspect the latest test output?",
+          "diagnosticExpectedAct_notGold": "question",
+          "topAct": "challenge_correction",
+          "rankedActs": [
+            {
+              "act": "challenge_correction",
+              "probability": 0.14247281849384308
+            },
+            {
+              "act": "status_report",
+              "probability": 0.13748253881931305
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.09621822834014893
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.0960780531167984
+            },
+            {
+              "act": "assertion",
+              "probability": 0.0953378677368164
+            },
+            {
+              "act": "question",
+              "probability": 0.09269238263368607
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08041739463806152
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06806597113609314
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.06346750259399414
+            },
+            {
+              "act": "qualification",
+              "probability": 0.05421585217118263
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.04917242005467415
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.024379001930356026
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "proposal-01",
+          "message": "We could run the same check on the second branch before merging.",
+          "diagnosticExpectedAct_notGold": "proposal_plan",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.15747393667697906
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.14046764373779297
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09693433344364166
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.0966242328286171
+            },
+            {
+              "act": "question",
+              "probability": 0.0941750705242157
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.0911121740937233
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08371378481388092
+            },
+            {
+              "act": "check_report",
+              "probability": 0.05785421282052994
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.05636114627122879
+            },
+            {
+              "act": "qualification",
+              "probability": 0.05379020422697067
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.05015186965465546
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.021341435611248016
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "commitment-01",
+          "message": "I will rerun the unit tests and post the failing case here.",
+          "diagnosticExpectedAct_notGold": "commitment_assignment",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.14067579805850983
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.13793081045150757
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.10102995485067368
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09867110848426819
+            },
+            {
+              "act": "question",
+              "probability": 0.0939726009964943
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09357775002717972
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.07865362614393234
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.06111466884613037
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06020570918917656
+            },
+            {
+              "act": "qualification",
+              "probability": 0.0589744932949543
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.05294279754161835
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.022250667214393616
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "offer-01",
+          "message": "I can help compare the two drafts if that would be useful.",
+          "diagnosticExpectedAct_notGold": "offer_help",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.13947835564613342
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.1352849155664444
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.11991704255342484
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09643182903528214
+            },
+            {
+              "act": "question",
+              "probability": 0.09296511858701706
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09080802649259567
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08283014595508575
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06380237638950348
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.05709771439433098
+            },
+            {
+              "act": "qualification",
+              "probability": 0.0509365051984787
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.050137970596551895
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.020310034975409508
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "status-01",
+          "message": "The export is still blocked because the archive has not finished downloading.",
+          "diagnosticExpectedAct_notGold": "status_report",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.15274207293987274
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.14098261296749115
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09964852780103683
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.09336645156145096
+            },
+            {
+              "act": "question",
+              "probability": 0.089706651866436
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.08896609395742416
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08522414416074753
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06640206277370453
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.059822265058755875
+            },
+            {
+              "act": "qualification",
+              "probability": 0.05560101941227913
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.04691373556852341
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.02062436006963253
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "check-01",
+          "message": "I ran the parser on the sample file; it returned 12 rows and no errors.",
+          "diagnosticExpectedAct_notGold": "check_report",
+          "topAct": "challenge_correction",
+          "rankedActs": [
+            {
+              "act": "challenge_correction",
+              "probability": 0.15593630075454712
+            },
+            {
+              "act": "status_report",
+              "probability": 0.14927765727043152
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09726502746343613
+            },
+            {
+              "act": "question",
+              "probability": 0.09494302421808243
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.09358815103769302
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09000887721776962
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.07244934141635895
+            },
+            {
+              "act": "check_report",
+              "probability": 0.061353910714387894
+            },
+            {
+              "act": "qualification",
+              "probability": 0.058191973716020584
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.05640779808163643
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.0475936196744442
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.02298436313867569
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "assertion-01",
+          "message": "The configuration file lists three supported event types.",
+          "diagnosticExpectedAct_notGold": "assertion",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.15446938574314117
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.15038436651229858
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09284090250730515
+            },
+            {
+              "act": "question",
+              "probability": 0.09162421524524689
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09147293120622635
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.08884970843791962
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08467577397823334
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06514909118413925
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.058314159512519836
+            },
+            {
+              "act": "qualification",
+              "probability": 0.050124574452638626
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.04852263256907463
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.02357233315706253
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "endorsement-01",
+          "message": "I agree with your proposal to keep the source links in the evidence bundle.",
+          "diagnosticExpectedAct_notGold": "endorsement",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.14420923590660095
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.1388663798570633
+            },
+            {
+              "act": "assertion",
+              "probability": 0.10282737761735916
+            },
+            {
+              "act": "question",
+              "probability": 0.10088801383972168
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.09661709517240524
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09306296706199646
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.07857498526573181
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06207587197422981
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.056871891021728516
+            },
+            {
+              "act": "qualification",
+              "probability": 0.055604323744773865
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.04746853560209274
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.022933311760425568
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "qualification-01",
+          "message": "This appears to work for the sample export, although we have not checked the full archive.",
+          "diagnosticExpectedAct_notGold": "qualification",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.1498425304889679
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.14355726540088654
+            },
+            {
+              "act": "question",
+              "probability": 0.09546683728694916
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.09485805034637451
+            },
+            {
+              "act": "assertion",
+              "probability": 0.09322840720415115
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09155265241861343
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08227451890707016
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.06080850958824158
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06030704081058502
+            },
+            {
+              "act": "qualification",
+              "probability": 0.056600332260131836
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.04779008775949478
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.023713737726211548
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "challenge-01",
+          "message": "That count is incorrect: the log shows 14 entries, not 12.",
+          "diagnosticExpectedAct_notGold": "challenge_correction",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.14807699620723724
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.13929542899131775
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.10339021682739258
+            },
+            {
+              "act": "assertion",
+              "probability": 0.10121230781078339
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.09645046293735504
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08867344260215759
+            },
+            {
+              "act": "question",
+              "probability": 0.07563486695289612
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06515219807624817
+            },
+            {
+              "act": "qualification",
+              "probability": 0.05479452759027481
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.05371267348527908
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.053006406873464584
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.020600518211722374
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        },
+        {
+          "id": "acknowledgment-01",
+          "message": "Thanks for checking that and sharing the result.",
+          "diagnosticExpectedAct_notGold": "acknowledgment",
+          "topAct": "status_report",
+          "rankedActs": [
+            {
+              "act": "status_report",
+              "probability": 0.15808475017547607
+            },
+            {
+              "act": "challenge_correction",
+              "probability": 0.12166348099708557
+            },
+            {
+              "act": "offer_help",
+              "probability": 0.10043485462665558
+            },
+            {
+              "act": "proposal_plan",
+              "probability": 0.0977056547999382
+            },
+            {
+              "act": "question",
+              "probability": 0.09631337970495224
+            },
+            {
+              "act": "assertion",
+              "probability": 0.08939258754253387
+            },
+            {
+              "act": "commitment_assignment",
+              "probability": 0.08412757515907288
+            },
+            {
+              "act": "check_report",
+              "probability": 0.06094428524374962
+            },
+            {
+              "act": "acknowledgment",
+              "probability": 0.05876678228378296
+            },
+            {
+              "act": "qualification",
+              "probability": 0.058378271758556366
+            },
+            {
+              "act": "instruction_request",
+              "probability": 0.05197206884622574
+            },
+            {
+              "act": "endorsement",
+              "probability": 0.022216346114873886
+            }
+          ],
+          "truncated": false,
+          "truncation": {
+            "question": false,
+            "message": false
+          },
+          "truncationByOption": {
+            "instruction_request": {
+              "question": false,
+              "message": false
+            },
+            "question": {
+              "question": false,
+              "message": false
+            },
+            "proposal_plan": {
+              "question": false,
+              "message": false
+            },
+            "commitment_assignment": {
+              "question": false,
+              "message": false
+            },
+            "offer_help": {
+              "question": false,
+              "message": false
+            },
+            "status_report": {
+              "question": false,
+              "message": false
+            },
+            "check_report": {
+              "question": false,
+              "message": false
+            },
+            "assertion": {
+              "question": false,
+              "message": false
+            },
+            "endorsement": {
+              "question": false,
+              "message": false
+            },
+            "qualification": {
+              "question": false,
+              "message": false
+            },
+            "challenge_correction": {
+              "question": false,
+              "message": false
+            },
+            "acknowledgment": {
+              "question": false,
+              "message": false
+            }
+          },
+          "probabilitiesUncalibrated": true
+        }
+      ]
+    },
+    "mps": {
+      "available": false,
+      "error": "torch.backends.mps.is_available() returned false in this restricted pilot execution.",
+      "note": "No MPS inference was measured here. This restricted-process result does not establish that host hardware lacks MPS; the host has reported MPS available outside this sandbox."
+    }
+  },
+  "inspectionNote": "The model ranked status_report first for 10 of these 12 synthetic prompts. This is a small diagnostic observation, not a gold accuracy estimate; it indicates custom-act rankings need stronger validation and likely should not be treated as act labels."
+}

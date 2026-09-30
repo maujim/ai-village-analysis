@@ -1,0 +1,1290 @@
+{
+  "hypotheses": {
+    "instruction_request": "This text is a request for someone to do a task.",
+    "question": "This text is a question asking for information.",
+    "proposal_plan": "This text is a suggested plan for future work.",
+    "commitment_assignment": "This text is a promise to do a task in the future.",
+    "offer_help": "This text is an offer to help someone.",
+    "status_report": "This text is a progress update about current or completed work.",
+    "check_report": "This text reports the results of a test that was already performed.",
+    "assertion": "This text is a factual statement.",
+    "endorsement": "This text agrees with a previous opinion or proposal.",
+    "qualification": "This text expresses uncertainty or a limitation.",
+    "challenge_correction": "This text disagrees with or corrects a previous statement.",
+    "acknowledgment": "This text is a greeting or expression of thanks."
+  },
+  "results": [
+    {
+      "probabilities": {
+        "instruction_request": 0.9060729146003723,
+        "question": 0.8566924333572388,
+        "proposal_plan": 0.18587328493595123,
+        "commitment_assignment": 0.07049556821584702,
+        "offer_help": 0.8290773034095764,
+        "status_report": 0.8959786295890808,
+        "check_report": 0.006265533622354269,
+        "assertion": 0.06650852411985397,
+        "endorsement": 0.011755130253732204,
+        "qualification": 0.6496341824531555,
+        "challenge_correction": 0.11848706007003784,
+        "acknowledgment": 0.005630961619317532
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 16,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.5655649900436401,
+        "question": 0.8943288922309875,
+        "proposal_plan": 0.01448962651193142,
+        "commitment_assignment": 0.01595231518149376,
+        "offer_help": 0.04773564636707306,
+        "status_report": 0.5535731911659241,
+        "check_report": 0.5908234715461731,
+        "assertion": 0.0844927430152893,
+        "endorsement": 0.008933402597904205,
+        "qualification": 0.30357688665390015,
+        "challenge_correction": 0.027066174894571304,
+        "acknowledgment": 0.028544150292873383
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 8,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.8391416668891907,
+        "question": 0.03656250238418579,
+        "proposal_plan": 0.19140322506427765,
+        "commitment_assignment": 0.16337868571281433,
+        "offer_help": 0.08254930377006531,
+        "status_report": 0.11476477235555649,
+        "check_report": 0.3381863832473755,
+        "assertion": 0.10150033980607986,
+        "endorsement": 0.013121269643306732,
+        "qualification": 0.04200905188918114,
+        "challenge_correction": 0.019493868574500084,
+        "acknowledgment": 0.0014550627674907446
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.783326268196106,
+        "question": 0.007621429860591888,
+        "proposal_plan": 0.25945019721984863,
+        "commitment_assignment": 0.8761053681373596,
+        "offer_help": 0.1837400197982788,
+        "status_report": 0.5461141467094421,
+        "check_report": 0.5112743377685547,
+        "assertion": 0.1866874098777771,
+        "endorsement": 0.023353027179837227,
+        "qualification": 0.22824248671531677,
+        "challenge_correction": 0.0833665132522583,
+        "acknowledgment": 0.0011902250116690993
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.04054073616862297,
+        "question": 0.061932697892189026,
+        "proposal_plan": 0.04288223385810852,
+        "commitment_assignment": 0.02568713389337063,
+        "offer_help": 0.839799702167511,
+        "status_report": 0.235723614692688,
+        "check_report": 0.01304561272263527,
+        "assertion": 0.038610927760601044,
+        "endorsement": 0.014503578655421734,
+        "qualification": 0.029675617814064026,
+        "challenge_correction": 0.006277705542743206,
+        "acknowledgment": 0.0015639358898624778
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.189671128988266,
+        "question": 0.02494025230407715,
+        "proposal_plan": 0.0017614696407690644,
+        "commitment_assignment": 0.005730245728045702,
+        "offer_help": 0.0008328333497047424,
+        "status_report": 0.4154471457004547,
+        "check_report": 0.001588525134138763,
+        "assertion": 0.39836251735687256,
+        "endorsement": 0.0014186346670612693,
+        "qualification": 0.5822387337684631,
+        "challenge_correction": 0.10079007595777512,
+        "acknowledgment": 0.000977350166067481
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 13,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.13189834356307983,
+        "question": 0.0033309143036603928,
+        "proposal_plan": 0.0010838275775313377,
+        "commitment_assignment": 0.0025758808478713036,
+        "offer_help": 0.0005162724992260337,
+        "status_report": 0.027848446741700172,
+        "check_report": 0.380442351102829,
+        "assertion": 0.12934772670269012,
+        "endorsement": 0.005511933472007513,
+        "qualification": 0.02830144390463829,
+        "challenge_correction": 0.011244559660553932,
+        "acknowledgment": 0.0009659748757258058
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 17,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.029731906950473785,
+        "question": 0.08874128758907318,
+        "proposal_plan": 0.018743112683296204,
+        "commitment_assignment": 0.005343256052583456,
+        "offer_help": 0.00272558256983757,
+        "status_report": 0.006679878570139408,
+        "check_report": 0.002867158269509673,
+        "assertion": 0.04616272449493408,
+        "endorsement": 0.005332885310053825,
+        "qualification": 0.07024005055427551,
+        "challenge_correction": 0.004022909794002771,
+        "acknowledgment": 0.000586116046179086
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.20930799841880798,
+        "question": 0.5428500175476074,
+        "proposal_plan": 0.14384789764881134,
+        "commitment_assignment": 0.0637732669711113,
+        "offer_help": 0.18293583393096924,
+        "status_report": 0.06681232154369354,
+        "check_report": 0.006003595422953367,
+        "assertion": 0.1116279810667038,
+        "endorsement": 0.7495458126068115,
+        "qualification": 0.0017856741324067116,
+        "challenge_correction": 0.002472622785717249,
+        "acknowledgment": 0.00409395806491375
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 15,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.17300857603549957,
+        "question": 0.05997643247246742,
+        "proposal_plan": 0.006654009222984314,
+        "commitment_assignment": 0.008077625185251236,
+        "offer_help": 0.015029195696115494,
+        "status_report": 0.3839877247810364,
+        "check_report": 0.11299099773168564,
+        "assertion": 0.14547917246818542,
+        "endorsement": 0.10275400429964066,
+        "qualification": 0.2093888223171234,
+        "challenge_correction": 0.007289076689630747,
+        "acknowledgment": 0.000847589923068881
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 18,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.008046386763453484,
+        "question": 0.07178615778684616,
+        "proposal_plan": 0.0014693208504468203,
+        "commitment_assignment": 0.0014924249844625592,
+        "offer_help": 0.0006525406497530639,
+        "status_report": 0.026683088392019272,
+        "check_report": 0.0033309143036603928,
+        "assertion": 0.06125534698367119,
+        "endorsement": 0.0022872271947562695,
+        "qualification": 0.1446918398141861,
+        "challenge_correction": 0.47988879680633545,
+        "acknowledgment": 0.000762812967877835
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 14,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    },
+    {
+      "probabilities": {
+        "instruction_request": 0.07416428625583649,
+        "question": 0.0075187175534665585,
+        "proposal_plan": 0.0011925491271540523,
+        "commitment_assignment": 0.0022256707306951284,
+        "offer_help": 0.030415531247854233,
+        "status_report": 0.32007697224617004,
+        "check_report": 0.5029296278953552,
+        "assertion": 0.05151045322418213,
+        "endorsement": 0.003953089471906424,
+        "qualification": 0.001987774157896638,
+        "challenge_correction": 0.0025509123224765062,
+        "acknowledgment": 0.5133482813835144
+      },
+      "score_semantics": "independent_entailment",
+      "probabilities_sum_to_one": false,
+      "truncated": false,
+      "truncation": {
+        "message": false,
+        "message_tokens_dropped_max": 0,
+        "per_hypothesis": {
+          "instruction_request": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "question": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "proposal_plan": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "commitment_assignment": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "offer_help": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "status_report": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "check_report": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "assertion": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "endorsement": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "qualification": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "challenge_correction": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          },
+          "acknowledgment": {
+            "message": false,
+            "message_tokens": 9,
+            "message_tokens_dropped": 0,
+            "hypothesis": false
+          }
+        },
+        "hypothesis": false,
+        "question": false
+      },
+      "device": "mps",
+      "calibrated": false,
+      "label_mapping": {
+        "0": "entailment",
+        "1": "not_entailment"
+      },
+      "entailment_label": "entailment"
+    }
+  ]
+}
