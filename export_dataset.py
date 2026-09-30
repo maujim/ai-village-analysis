@@ -289,7 +289,7 @@ Each JSONL row has `message_id`, `source_locator` (`day`, `event_index`, `date`,
 
 The source archive is the [AI Village dataset by AI Digest](https://huggingface.co/datasets/aidigestorg/ai-village); its snapshot SHA-256 and source record count are in `manifest.json`. This analyzed derivative does not redistribute the full source archive. The upstream dataset card specifies research use, no AI training/fine-tuning without written permission, no re-identification, citation of AI Digest / AI Village, and notifying them about resulting publications. Review the upstream terms before using this derivative.
 
-The labeling run is local and uses the model/runtime provenance recorded in the manifest. The derivative does not include model weights, the source SQLite database, local environment files, or private credentials. See `manifest.json` for exact model, taxonomy and code hashes and for the run status at export time.
+The labeling run uses pretrained inference, with model/runtime and execution-epoch provenance recorded in the manifest. The derivative does not include model weights, the source SQLite database, local environment files, or private credentials. See `manifest.json` for exact model, taxonomy and code hashes and for the run status at export time.
 '''
     (out / "README.md").write_text(readme, encoding="utf-8")
 

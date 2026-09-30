@@ -1,0 +1,68 @@
+{
+  "targetCount": 128,
+  "scoredInputs": 768,
+  "seed": 20260930,
+  "gpu": "L4",
+  "method": "128 short exact texts; two preceding same-day messages versus approximately length-matched earlier messages from different days; second trial uses identical empty-context wrapper for the isolated baseline.",
+  "labelChanges": {
+    "rawBaseline": {
+      "real_context": 82,
+      "shuffled_context": 91
+    },
+    "matchedFraming": {
+      "real_context": 70,
+      "shuffled_context": 85
+    }
+  },
+  "wrapperOnlyLabelChanges": 27,
+  "truncatedInputs": 0,
+  "interpretation": "Naively prepending context strongly changes proposed acts, including shuffled context. Evaluate a target-aware method before using conversation windows.",
+  "limitations": [
+    "Sensitivity, not accuracy: no human ground truth.",
+    "One model, fixed seed, short-message sample; not a corpus-wide finding.",
+    "The NLI model scores the entire premise, so surrounding messages can dominate.",
+    "Context length matching is approximate."
+  ],
+  "experiments": [
+    {
+      "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+      "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+      "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+      "experimentId": "74b47fa7a8c15e1678421b42",
+      "inputManifestSha256": "21af90ec63dfaec5ed5c47014fbce1fd526e6f853420b7d9773851310deedd80",
+      "resultSha256": "f988bc1dbeaca681e3e51abd6fcd4eb8661191eaf855cad8fc2d080a162cc6c5",
+      "performance": {
+        "inputReadSeconds": 0.1883,
+        "modelLoadSeconds": 16.2898,
+        "inferenceSeconds": 22.8426,
+        "elapsedSeconds": 42.2072,
+        "messagesScored": 384,
+        "pairsScored": 4608,
+        "messagesPerInferenceSecond": 16.8107,
+        "gpuHourlyRateUsd": 0.7992,
+        "estimatedGpuCostUsd": 0.00937,
+        "costEstimateBasis": "worker scoring-body duration \u00d7 supplied L4 hourly rate; excludes startup, platform overhead, and storage; not an invoice"
+      }
+    },
+    {
+      "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+      "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+      "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+      "experimentId": "80208ac38dfa169f2ba799e4",
+      "inputManifestSha256": "9eb1fa019acaeeea5d0babc6fbb32baa57dff6e12a56b81a9a9932d9ce624199",
+      "resultSha256": "2b7973bbae8fd5d066a1a754486b5a9aa6036ca18e33149d07a02efef45eaa52",
+      "performance": {
+        "inputReadSeconds": 0.2017,
+        "modelLoadSeconds": 15.8479,
+        "inferenceSeconds": 23.1808,
+        "elapsedSeconds": 42.2393,
+        "messagesScored": 384,
+        "pairsScored": 4608,
+        "messagesPerInferenceSecond": 16.5654,
+        "gpuHourlyRateUsd": 0.7992,
+        "estimatedGpuCostUsd": 0.009377,
+        "costEstimateBasis": "worker scoring-body duration \u00d7 supplied L4 hourly rate; excludes startup, platform overhead, and storage; not an invoice"
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T10:42:00.801699+00:00",
+  "generatedAt": "2026-09-30T11:04:16.213422+00:00",
   "runId": "d64365bb56121748c722",
   "state": "complete",
   "sourceMessages": 183485,
@@ -106,6 +106,185 @@
       "resultsManifestSha256": "9cb41fb975f07913b32eccb1733f041506ca32927f47abd8483b1eb07334a181"
     }
   ],
+  "experiment": {
+    "targetCount": 128,
+    "scoredInputs": 768,
+    "seed": 20260930,
+    "gpu": "L4",
+    "method": "128 short exact texts; two preceding same-day messages versus approximately length-matched earlier messages from different days; second trial uses identical empty-context wrapper for the isolated baseline.",
+    "labelChanges": {
+      "rawBaseline": {
+        "real_context": 82,
+        "shuffled_context": 91
+      },
+      "matchedFraming": {
+        "real_context": 70,
+        "shuffled_context": 85
+      }
+    },
+    "wrapperOnlyLabelChanges": 27,
+    "truncatedInputs": 0,
+    "interpretation": "Naively prepending context strongly changes proposed acts, including shuffled context. Evaluate a target-aware method before using conversation windows.",
+    "limitations": [
+      "Sensitivity, not accuracy: no human ground truth.",
+      "One model, fixed seed, short-message sample; not a corpus-wide finding.",
+      "The NLI model scores the entire premise, so surrounding messages can dominate.",
+      "Context length matching is approximate."
+    ],
+    "experiments": [
+      {
+        "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+        "experimentId": "74b47fa7a8c15e1678421b42",
+        "inputManifestSha256": "21af90ec63dfaec5ed5c47014fbce1fd526e6f853420b7d9773851310deedd80",
+        "resultSha256": "f988bc1dbeaca681e3e51abd6fcd4eb8661191eaf855cad8fc2d080a162cc6c5",
+        "performance": {
+          "inputReadSeconds": 0.1883,
+          "modelLoadSeconds": 16.2898,
+          "inferenceSeconds": 22.8426,
+          "elapsedSeconds": 42.2072,
+          "messagesScored": 384,
+          "pairsScored": 4608,
+          "messagesPerInferenceSecond": 16.8107,
+          "gpuHourlyRateUsd": 0.7992,
+          "estimatedGpuCostUsd": 0.00937,
+          "costEstimateBasis": "worker scoring-body duration \u00d7 supplied L4 hourly rate; excludes startup, platform overhead, and storage; not an invoice"
+        }
+      },
+      {
+        "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+        "experimentId": "80208ac38dfa169f2ba799e4",
+        "inputManifestSha256": "9eb1fa019acaeeea5d0babc6fbb32baa57dff6e12a56b81a9a9932d9ce624199",
+        "resultSha256": "2b7973bbae8fd5d066a1a754486b5a9aa6036ca18e33149d07a02efef45eaa52",
+        "performance": {
+          "inputReadSeconds": 0.2017,
+          "modelLoadSeconds": 15.8479,
+          "inferenceSeconds": 23.1808,
+          "elapsedSeconds": 42.2393,
+          "messagesScored": 384,
+          "pairsScored": 4608,
+          "messagesPerInferenceSecond": 16.5654,
+          "gpuHourlyRateUsd": 0.7992,
+          "estimatedGpuCostUsd": 0.009377,
+          "costEstimateBasis": "worker scoring-body duration \u00d7 supplied L4 hourly rate; excludes startup, platform overhead, and storage; not an invoice"
+        }
+      }
+    ]
+  },
+  "costLedger": {
+    "budgetUSD": 10,
+    "conservativeEstimatedCeilingUSD": 3.055,
+    "imageAndOtherOverheadReserveUSD": 0.2,
+    "basis": "Full app lifetime \u00d7 maximum simultaneous GPU/CPU/memory allocation \u00d7 published per-second rates; overestimates resources unused during startup and queueing. Not reconciled billing.",
+    "priceSource": "https://modal.com/pricing",
+    "cpuCoresPerGPU": 4,
+    "memoryGiBPerGPU": 16,
+    "allAppsStopped": true,
+    "runs": [
+      {
+        "appId": "ap-7XnQD8brIx9NfnvblMvK7x",
+        "url": "https://modal.com/apps/maujim/main/ap-7XnQD8brIx9NfnvblMvK7x",
+        "purpose": "Pilot: taxonomy path failure",
+        "gpu": "H100!",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:01:24-04:00",
+        "stoppedAt": "2026-09-30 06:01:37-04:00",
+        "appWallSeconds": 13.0,
+        "configuredResourceCeilingEstimateUSD": 0.015404
+      },
+      {
+        "appId": "ap-tSd0vFd2nHBf6crIpWkDnj",
+        "url": "https://modal.com/apps/maujim/main/ap-tSd0vFd2nHBf6crIpWkDnj",
+        "purpose": "Pilot: dependency metadata failure",
+        "gpu": "H100!",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:02:55-04:00",
+        "stoppedAt": "2026-09-30 06:03:12-04:00",
+        "appWallSeconds": 17.0,
+        "configuredResourceCeilingEstimateUSD": 0.020144
+      },
+      {
+        "appId": "ap-Vq6HNKbs2cehLrRWdVDF1c",
+        "url": "https://modal.com/apps/maujim/main/ap-Vq6HNKbs2cehLrRWdVDF1c",
+        "purpose": "H100 parity/speed pilot",
+        "gpu": "H100!",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:07:18-04:00",
+        "stoppedAt": "2026-09-30 06:07:38-04:00",
+        "appWallSeconds": 20.0,
+        "configuredResourceCeilingEstimateUSD": 0.023698
+      },
+      {
+        "appId": "ap-kesPLcwek1DO6Z5TJdfSws",
+        "url": "https://modal.com/apps/maujim/main/ap-kesPLcwek1DO6Z5TJdfSws",
+        "purpose": "L4 parity/speed pilot",
+        "gpu": "L4",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:08:09-04:00",
+        "stoppedAt": "2026-09-30 06:08:41-04:00",
+        "appWallSeconds": 32.0,
+        "configuredResourceCeilingEstimateUSD": 0.009917
+      },
+      {
+        "appId": "ap-L6BvQibRLfNciEJhj7onHd",
+        "url": "https://modal.com/apps/maujim/main/ap-L6BvQibRLfNciEJhj7onHd",
+        "purpose": "Smaller-batch L4 parity pilot",
+        "gpu": "L4",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:31:28-04:00",
+        "stoppedAt": "2026-09-30 06:31:59-04:00",
+        "appWallSeconds": 31.0,
+        "configuredResourceCeilingEstimateUSD": 0.009608
+      },
+      {
+        "appId": "ap-CkkQnrxKTjbAFL6Kp1JEUC",
+        "url": "https://modal.com/apps/maujim/main/ap-CkkQnrxKTjbAFL6Kp1JEUC",
+        "purpose": "Archive wave 1",
+        "gpu": "L4",
+        "maximumConcurrentGPUs": 8,
+        "createdAt": "2026-09-30 06:12:39-04:00",
+        "stoppedAt": "2026-09-30 06:23:07-04:00",
+        "appWallSeconds": 628.0,
+        "configuredResourceCeilingEstimateUSD": 1.557038
+      },
+      {
+        "appId": "ap-yvMOKAjA4jCzxvqS2YN4po",
+        "url": "https://modal.com/apps/maujim/main/ap-yvMOKAjA4jCzxvqS2YN4po",
+        "purpose": "Archive wave 2",
+        "gpu": "L4",
+        "maximumConcurrentGPUs": 8,
+        "createdAt": "2026-09-30 06:30:49-04:00",
+        "stoppedAt": "2026-09-30 06:38:46-04:00",
+        "appWallSeconds": 477.0,
+        "configuredResourceCeilingEstimateUSD": 1.182655
+      },
+      {
+        "appId": "ap-CKnA8PLjNsD36dBS80kv3P",
+        "url": "https://modal.com/apps/maujim/main/ap-CKnA8PLjNsD36dBS80kv3P",
+        "purpose": "Exploratory context experiment",
+        "gpu": "L4",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:46:09-04:00",
+        "stoppedAt": "2026-09-30 06:47:07-04:00",
+        "appWallSeconds": 58.0,
+        "configuredResourceCeilingEstimateUSD": 0.017975
+      },
+      {
+        "appId": "ap-ZHCfHI0L4SzslTaP0YwrYG",
+        "url": "https://modal.com/apps/maujim/main/ap-ZHCfHI0L4SzslTaP0YwrYG",
+        "purpose": "Matched-framing context control",
+        "gpu": "L4",
+        "maximumConcurrentGPUs": 1,
+        "createdAt": "2026-09-30 06:51:27-04:00",
+        "stoppedAt": "2026-09-30 06:52:26-04:00",
+        "appWallSeconds": 59.0,
+        "configuredResourceCeilingEstimateUSD": 0.018285
+      }
+    ]
+  },
   "parity": {
     "h100": {
       "sample": 68,
