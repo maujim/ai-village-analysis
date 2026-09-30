@@ -337,11 +337,26 @@ class Handler(BaseHTTPRequestHandler):
                         if not executable.exists(): raise ValueError('Local model environment is not installed')
                         env=os.environ.copy()
                         env.update(HF_HUB_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',TOKENIZERS_PARALLELISM='false')
+                        run = store.meta(conn,'active_run') or {}
+                        epochs = run.get('execution_epochs') or []
+                        latest_id = run.get('latest_execution_epoch_id')
+                        latest = next((item for item in reversed(epochs) if item.get('id') == latest_id),
+                                      epochs[-1] if epochs else {})
+                        runtime_settings = latest.get('runtime_settings') or run.get('runtime_settings') or {}
+                        backend = latest.get('backend') or run.get('backend') or 'torch'
+                        device = latest.get('device') or run.get('device') or 'auto'
+                        pair_batch = latest.get('pair_batch_size') or runtime_settings.get('pair_batch_size') or runtime_settings.get('batch_size') or 32
+                        command=[str(executable),str(ROOT/'message_signatures/run.py'),
+                                 '--engine','nli','--device',str(device),'--batch','128',
+                                 '--pair-batch',str(pair_batch),'--backend',str(backend)]
+                        if run.get('id'):
+                            command.extend(['--continue-run',str(run['id'])])
                         with (ROOT/'message_signatures/run.log').open('ab') as log:
-                            process=subprocess.Popen([str(executable),str(ROOT/'message_signatures/run.py'),
-                                '--engine','nli','--device','auto','--batch','8'],cwd=str(ROOT),env=env,
+                            process=subprocess.Popen(command,cwd=str(ROOT),env=env,
                                 stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)
                         store.meta(conn,'progress',{'state':'starting','pid':process.pid,
+                                   'run_id':run.get('id'),'requested_outer_batch_size':128,
+                                   'requested_pair_batch_size':pair_batch,'backend':backend,
                                    'updated_at':datetime.now(timezone.utc).isoformat()})
                         self.send_json({'state':'starting','pid':process.pid},202)
                     finally:

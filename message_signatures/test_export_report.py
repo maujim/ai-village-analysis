@@ -32,6 +32,12 @@ class ExportReportTests(unittest.TestCase):
             'device': 'cpu', 'score_semantics': 'independent_entailment',
             'model_sha256': 'weights-hash', 'taxonomy_sha256': 'taxonomy-hash',
             'runtime_sha256': 'runtime-hash', 'runner_sha256': 'runner-hash',
+            'backend': 'mlx', 'backend_source_sha256': 'mlx-source-hash',
+            'backend_version': '0.30.0', 'execution_settings': {'outer_batch_size': 128},
+            'execution_epochs': [{'id': 'epoch-one', 'backend': 'torch'},
+                                 {'id': 'epoch-two', 'backend': 'mlx',
+                                  'backend_source_sha256': 'mlx-source-hash'}],
+            'latest_execution_epoch_id': 'epoch-two',
             'probabilities_calibrated': False, 'started_at': '2026-01-01T00:00:00Z',
         })
         self._meta('progress', {'state': 'running', 'run_id': self.run_id,
@@ -95,6 +101,9 @@ class ExportReportTests(unittest.TestCase):
         self.assertTrue(all(item['scores'] and item['template'] for item in items))
         self.assertEqual(len({item['textHash'] for item in items}), len(items))
         self.assertIn('not validated against human annotations', report['notice'])
+        self.assertEqual(report['run']['backend'], 'mlx')
+        self.assertEqual(report['run']['execution_epochs'][-1]['backend_source_sha256'], 'mlx-source-hash')
+        self.assertEqual(report['run']['latest_execution_epoch_id'], 'epoch-two')
         self.assertNotIn('messages', report)
 
     def test_partial_state_is_not_promoted_to_complete_and_is_written(self):

@@ -153,12 +153,14 @@ def build_report(db_path: str | Path = DEFAULT_DB, run_id: str | None = None,
                 'remain unclassified; the report does not promote this run to complete.'
             )
         config_fields = (
-            'id', 'engine', 'model', 'device', 'score_semantics', 'method',
+            'id', 'engine', 'backend', 'backend_source_sha256', 'backend_version',
+            'device', 'score_semantics', 'method',
             'source_sha256', 'model_sha256', 'model_assets_sha256',
             'taxonomy_sha256', 'runtime_sha256', 'runner_sha256',
             'dependencies', 'runtime_settings', 'review_thresholds',
             'probabilities_calibrated', 'extraction_performed', 'context_used',
-            'started_at',
+            'started_at', 'execution_settings', 'execution_epochs',
+            'latest_execution_epoch_id', 'last_resumed_at',
         )
         run = ({key: active[key] for key in config_fields if key in active}
                if target_id and target_id == active_id else {})

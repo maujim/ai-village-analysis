@@ -24,14 +24,16 @@ message's true function. The top-scoring act is only a candidate; the runner's
 review flag is a provisional heuristic, not evidence that an unflagged result
 is correct. No task arguments are extracted and no action is verified.
 
-Current run state and limits
-----------------------------
-The full-corpus run started on 30 September 2026, resuming the base-model pilot
-under run ID d64365bb56121748c722. Check the live page for current completion
-and throughput; early short messages run much faster than long messages, so
-the remaining-time estimate changes. The original 64-unique-text pilot covered
-394 source records in 133.51 seconds. Its 104-hour extrapolation is retained
-as historical diagnostic evidence, not the live completion forecast.
+Run state and limits
+--------------------
+The active logical run uses ID d64365bb56121748c722. Check the live page for
+current progress; the persisted run metadata records backend, batch sizes,
+model/code provenance, and execution epochs. Changing backend or execution
+settings requires explicitly continuing the active run, which records a new
+epoch instead of silently changing the old settings. The original
+64-unique-text pilot covered 394 source records in 133.51 seconds. Its
+104-hour extrapolation is historical diagnostic evidence, not a completion
+forecast.
 
 The worker is independent of the web server and commits each batch. An idle-
 sleep guard stays active until the worker exits. Closing the laptop or shutting
@@ -59,28 +61,40 @@ Bounded and full runs (from repository root)
 Build or verify the source index first:
   python3 message_signatures/store.py
 
-Run a bounded 64-new-unique-text experiment:
+Run a bounded 64-new-unique-text experiment with the default Torch backend:
   .venv-signatures/bin/python message_signatures/run.py --engine nli --device mps --limit 64
 
-Explicitly start scoring every remaining unique text for the active model/config:
+Continue the active logical run with the optional MLX backend on Apple Silicon:
+  .venv-signatures/bin/python message_signatures/run.py --engine nli --backend mlx --device mps --batch 64 --pair-batch 16 --continue-run d64365bb56121748c722
+
+Explicitly start a new run scoring every remaining unique text:
   .venv-signatures/bin/python message_signatures/run.py --engine nli --device mps
 
 `--limit` bounds new unique texts in that invocation; `--day` can further bound
-which pending texts are selected. The full-run command is intentionally explicit.
-Predictions resume only when source snapshot, model assets, tokenizer/config,
-taxonomy, runner/runtime code, device, and dependency provenance match. A
-changed configuration has its own run ID. Progress and predictions are
-committed by batch; a process lock prevents concurrent scoring writers. Ctrl-C
-or the viewer's Pause control requests a stop after the current batch. The
-viewer Resume control starts the configured full run. Closing the viewer does
-not stop inference.
+which pending texts are selected. `--batch` sets messages per runner batch;
+`--pair-batch` sets message/hypothesis pairs per NLI model batch. The MLX
+backend is optional Apple-Silicon acceleration; Torch remains the default. It
+uses the same local model, tokenizer, source snapshot, taxonomy, and hypotheses.
+Backend identity/version and batching settings are recorded by execution epoch.
+Speed/parity checks are engineering diagnostics, not evidence of classification
+accuracy or calibrated scores. Predictions resume only when source snapshot,
+model assets, tokenizer/config, taxonomy, runner/runtime code, device, and
+dependency provenance match. A changed configuration requires an explicit
+continuation of the active run and is recorded in a new epoch. Progress and
+predictions are committed by batch; a process lock prevents concurrent scoring
+writers. Ctrl-C or the viewer's Pause control requests a stop after the current
+batch. The viewer Resume control starts the configured full run. Closing the
+viewer does not stop inference.
 
 Model use and method
 --------------------
 Both model and tokenizer are loaded from local files with
 `local_files_only=True` and `trust_remote_code=False`. The runtime makes no
 outbound model calls. Model downloads were inbound from Hugging Face; weights
-remain under `models/`.
+remain under `models/`. The optional MLX backend is intended for macOS on Apple
+Silicon. `requirements.lock` pins `mlx==0.30.6` and `mlx-metal==0.30.6` with
+Darwin/arm64 environment markers, so other platforms do not select them; Torch
+remains the available backend there.
 
 The twelve conversational acts and their reusable DSPy-style signature
 skeletons were authored before classification; they were not discovered from
@@ -114,7 +128,8 @@ first-answer-token scoring; nli_pilot.json records the DeBERTa xsmall comparison
 base-pilot.json records the stronger DeBERTa base comparison. Their synthetic
 examples are manually authored inspection diagnostics, not a gold set or a
 corpus accuracy measure. The current base pilot is persisted in the local
-signature database. No full-corpus classification has been run.
+signature database. See the live page and full-run-report.json for current run
+state; labels remain unvalidated regardless of whether the run completes.
 
 https://dspy.ai/3.1.3/learn/programming/signatures/
 https://huggingface.co/sdmlai/nano-jev

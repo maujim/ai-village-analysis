@@ -38,6 +38,11 @@ class ControlEndpointTests(unittest.TestCase):
         (self.root / 'message_signatures' / 'run.py').write_text('# dummy')
         self.conn = store.connect()
         store.meta(self.conn, 'source_sha256', 'snapshot-ok')
+        store.meta(self.conn, 'active_run', {
+            'id': 'legacy-run', 'backend': 'torch', 'device': 'mps',
+            'runtime_settings': {'pair_batch_size': 32},
+        })
+        store.meta(self.conn, 'progress', {'state': 'paused', 'run_id': 'legacy-run'})
         self.conn.close()
         self.snapshot = patch.object(viewer, 'matches_snapshot', return_value=True)
         self.snapshot.start()
@@ -93,7 +98,9 @@ class ControlEndpointTests(unittest.TestCase):
         args, kwargs = self.mock_popen.call_args
         self.assertEqual(args[0], [str(self.root / '.venv-signatures/bin/python'),
                                    str(self.root / 'message_signatures/run.py'),
-                                   '--engine', 'nli', '--device', 'auto', '--batch', '8'])
+                                   '--engine', 'nli', '--device', 'mps', '--batch', '128',
+                                   '--pair-batch', '32', '--backend', 'torch',
+                                   '--continue-run', 'legacy-run'])
         self.assertEqual(kwargs['cwd'], str(self.root))
         self.assertEqual(kwargs['stdin'], viewer.subprocess.DEVNULL)
         self.assertEqual(kwargs['env']['HF_HUB_OFFLINE'], '1')
