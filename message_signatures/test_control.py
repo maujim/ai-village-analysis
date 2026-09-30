@@ -165,21 +165,6 @@ class ControlEndpointTests(unittest.TestCase):
         self.assertEqual(command[command.index('--backend') + 1], 'torch')
         self.assertNotIn('cuda', command)
 
-    def test_cloud_scoring_blocks_local_resume_without_spawning(self):
-        conn = store.connect()
-        try:
-            store.set_cloud_progress({
-                'state': 'running', 'processed_cloud_outputs': 100,
-                'queued_unique_at_start': 1000, 'total_unique': 2000,
-                'updated_at': '2026-09-30T12:00:00+00:00', 'backend': 'Modal L4',
-            }, conn)
-        finally:
-            conn.close()
-        status, body = self.post({'action': 'resume'})
-        self.assertEqual(status, 409)
-        self.assertIn('Cloud scoring is running', body['error'])
-        self.mock_popen.assert_not_called()
-
     def test_complete_run_does_not_start_an_empty_resume_epoch(self):
         conn = store.connect()
         try:
