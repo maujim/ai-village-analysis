@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T08:51:38.588828+00:00",
+  "generatedAt": "2026-09-30T10:33:34.042377+00:00",
   "notice": "Exploratory classifier output only. The act categories and hypotheses are author-defined; scores and review thresholds are not validated against human annotations. A label is not task extraction, source verification, or evidence that a reported action succeeded.",
-  "state": "running",
+  "state": "partial",
   "stateExplanation": null,
   "runId": "d64365bb56121748c722",
   "activeRunIdAtExport": "d64365bb56121748c722",
@@ -33,34 +33,34 @@
     "runtime_sha256": "5be110289f61368feba50f51dbd1960b69eb6f8bab5afec4009662e6a73c59ff",
     "runner_sha256": "8c07ae39774a6983873cc990de4d5b7f2c383fd1f1333218e2a05bb086d1ab60",
     "dependencies": {
-      "torch": "2.14.0",
-      "transformers": "5.17.0",
-      "tokenizers": "0.23.2",
+      "dspy": "3.4.0",
       "safetensors": "0.8.0",
-      "dspy": "3.4.0"
+      "tokenizers": "0.23.2",
+      "torch": "2.14.0",
+      "transformers": "5.17.0"
     },
     "runtime_settings": {
-      "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
-      "model_type": "deberta-v2",
+      "batch_size": 32,
+      "calibrated": false,
       "device": "mps",
       "dtype": "torch.float16",
-      "batch_size": 32,
-      "max_length": 512,
+      "entailment_label": "entailment",
       "label_mapping": {
         "0": "entailment",
         "1": "not_entailment"
       },
-      "entailment_label": "entailment",
-      "score_semantics": "independent_entailment",
-      "calibrated": false,
-      "transformers_version": "5.17.0",
-      "torch_version": "2.14.0",
       "local_files_only": true,
+      "max_length": 512,
+      "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
+      "model_type": "deberta-v2",
+      "score_semantics": "independent_entailment",
+      "torch_version": "2.14.0",
+      "transformers_version": "5.17.0",
       "trust_remote_code": false
     },
     "review_thresholds": {
-      "top_score_below": 0.55,
-      "margin_below": 0.15
+      "margin_below": 0.15,
+      "top_score_below": 0.55
     },
     "probabilities_calibrated": false,
     "extraction_performed": false,
@@ -68,322 +68,531 @@
     "started_at": "2026-09-30T06:55:08.736667+00:00",
     "execution_epochs": [
       {
-        "id": "legacy-d64365bb56121748c722",
-        "run_id": "d64365bb56121748c722",
-        "epoch_number": 1,
-        "started_at": "2026-09-30T06:55:08.736667+00:00",
-        "runner_sha256": "8c07ae39774a6983873cc990de4d5b7f2c383fd1f1333218e2a05bb086d1ab60",
-        "runtime_sha256": "5be110289f61368feba50f51dbd1960b69eb6f8bab5afec4009662e6a73c59ff",
-        "dependencies": {
-          "torch": "2.14.0",
-          "transformers": "5.17.0",
-          "tokenizers": "0.23.2",
-          "safetensors": "0.8.0",
-          "dspy": "3.4.0"
-        },
-        "runtime_settings": {
-          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
-          "model_type": "deberta-v2",
-          "device": "mps",
-          "dtype": "torch.float16",
-          "batch_size": 32,
-          "max_length": 512,
-          "label_mapping": {
-            "0": "entailment",
-            "1": "not_entailment"
-          },
-          "entailment_label": "entailment",
-          "score_semantics": "independent_entailment",
-          "calibrated": false,
-          "transformers_version": "5.17.0",
-          "torch_version": "2.14.0",
-          "local_files_only": true,
-          "trust_remote_code": false
-        },
-        "device": "mps",
-        "dtype": "torch.float16",
         "backend": "torch",
         "backend_source_sha256": null,
         "backend_version": null,
+        "dependencies": {
+          "dspy": "3.4.0",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "torch": "2.14.0",
+          "transformers": "5.17.0"
+        },
+        "device": "mps",
+        "dtype": "torch.float16",
+        "epoch_number": 1,
+        "id": "legacy-d64365bb56121748c722",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
         "outer_batch_size": null,
         "pair_batch_size": 32,
-        "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
-        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
-        "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
         "predictions_before_epoch": 0,
-        "unique_remaining_before_epoch": 178052,
-        "resume_of_epoch_id": null,
         "predictions_missing_epoch_at_start": 7344,
-        "provenance_status": "legacy predictions have no per-row execution epoch ID"
+        "provenance_status": "legacy predictions have no per-row execution epoch ID",
+        "resume_of_epoch_id": null,
+        "run_id": "d64365bb56121748c722",
+        "runner_sha256": "8c07ae39774a6983873cc990de4d5b7f2c383fd1f1333218e2a05bb086d1ab60",
+        "runtime_settings": {
+          "batch_size": 32,
+          "calibrated": false,
+          "device": "mps",
+          "dtype": "torch.float16",
+          "entailment_label": "entailment",
+          "label_mapping": {
+            "0": "entailment",
+            "1": "not_entailment"
+          },
+          "local_files_only": true,
+          "max_length": 512,
+          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
+          "model_type": "deberta-v2",
+          "score_semantics": "independent_entailment",
+          "torch_version": "2.14.0",
+          "transformers_version": "5.17.0",
+          "trust_remote_code": false
+        },
+        "runtime_sha256": "5be110289f61368feba50f51dbd1960b69eb6f8bab5afec4009662e6a73c59ff",
+        "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "started_at": "2026-09-30T06:55:08.736667+00:00",
+        "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+        "unique_remaining_before_epoch": 178052
       },
       {
-        "id": "caab4b8d9a6f07449276",
-        "run_id": "d64365bb56121748c722",
+        "backend": "mlx",
+        "backend_source_sha256": "a2895ac4967be954d4e69969595238ddf8a5beff741b5338619fdfe8da778780",
+        "backend_version": "0.30.6",
+        "dependencies": {
+          "dspy": "3.4.0",
+          "mlx": "0.30.6",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "torch": "2.14.0",
+          "transformers": "5.17.0"
+        },
+        "device": "mps",
+        "dtype": "torch.float16",
         "epoch_number": 2,
-        "started_at": "2026-09-30T08:31:33.309260+00:00",
+        "id": "caab4b8d9a6f07449276",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "outer_batch_size": 64,
+        "pair_batch_size": 16,
+        "predictions_before_epoch": 7344,
+        "predictions_missing_epoch_at_start": 7344,
+        "resume_of_epoch_id": "legacy-d64365bb56121748c722",
+        "run_id": "d64365bb56121748c722",
         "runner_sha256": "78b72e909159e99b08debaa8f5e0c86fbd4ee67a91137d3bc3ec47fcf959fd8e",
-        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
-        "dependencies": {
-          "torch": "2.14.0",
-          "transformers": "5.17.0",
-          "tokenizers": "0.23.2",
-          "safetensors": "0.8.0",
-          "dspy": "3.4.0",
-          "mlx": "0.30.6"
-        },
         "runtime_settings": {
-          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
-          "model_type": "deberta-v2",
           "backend": "mlx",
           "backend_version": "0.30.6",
+          "batch_size": 16,
+          "calibrated": false,
           "device": "mps",
           "dtype": "torch.float16",
-          "batch_size": 16,
-          "pair_batch_size": 16,
-          "length_bucketing": true,
-          "max_length": 512,
+          "entailment_label": "entailment",
           "label_mapping": {
             "0": "entailment",
             "1": "not_entailment"
           },
-          "entailment_label": "entailment",
-          "score_semantics": "independent_entailment",
-          "calibrated": false,
-          "transformers_version": "5.17.0",
-          "torch_version": "2.14.0",
+          "length_bucketing": true,
           "local_files_only": true,
-          "trust_remote_code": false,
-          "tokenization_strategy": "cache distinct premise tokens and taxonomy hypothesis tokens; sort pairs by encoded length before padded batches"
+          "max_length": 512,
+          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
+          "model_type": "deberta-v2",
+          "pair_batch_size": 16,
+          "score_semantics": "independent_entailment",
+          "tokenization_strategy": "cache distinct premise tokens and taxonomy hypothesis tokens; sort pairs by encoded length before padded batches",
+          "torch_version": "2.14.0",
+          "transformers_version": "5.17.0",
+          "trust_remote_code": false
         },
-        "device": "mps",
-        "dtype": "torch.float16",
-        "backend": "mlx",
-        "backend_source_sha256": "a2895ac4967be954d4e69969595238ddf8a5beff741b5338619fdfe8da778780",
-        "backend_version": "0.30.6",
-        "outer_batch_size": 64,
-        "pair_batch_size": 16,
+        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
         "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
-        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "started_at": "2026-09-30T08:31:33.309260+00:00",
         "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
-        "predictions_before_epoch": 7344,
-        "unique_remaining_before_epoch": 170708,
-        "resume_of_epoch_id": "legacy-d64365bb56121748c722",
-        "predictions_missing_epoch_at_start": 7344
+        "unique_remaining_before_epoch": 170708
       },
       {
-        "id": "75a9e2157a3bd14d8501",
-        "run_id": "d64365bb56121748c722",
-        "epoch_number": 3,
-        "started_at": "2026-09-30T08:50:58.127993+00:00",
-        "runner_sha256": "78b72e909159e99b08debaa8f5e0c86fbd4ee67a91137d3bc3ec47fcf959fd8e",
-        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+        "backend": "mlx",
+        "backend_source_sha256": "a2895ac4967be954d4e69969595238ddf8a5beff741b5338619fdfe8da778780",
+        "backend_version": "0.30.6",
         "dependencies": {
-          "torch": "2.14.0",
-          "transformers": "5.17.0",
-          "tokenizers": "0.23.2",
-          "safetensors": "0.8.0",
           "dspy": "3.4.0",
-          "mlx": "0.30.6"
+          "mlx": "0.30.6",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "torch": "2.14.0",
+          "transformers": "5.17.0"
         },
+        "device": "mps",
+        "dtype": "torch.float16",
+        "epoch_number": 3,
+        "id": "75a9e2157a3bd14d8501",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "outer_batch_size": 64,
+        "pair_batch_size": 16,
+        "predictions_before_epoch": 10352,
+        "predictions_missing_epoch_at_start": 7344,
+        "resume_of_epoch_id": "caab4b8d9a6f07449276",
+        "run_id": "d64365bb56121748c722",
+        "runner_sha256": "78b72e909159e99b08debaa8f5e0c86fbd4ee67a91137d3bc3ec47fcf959fd8e",
         "runtime_settings": {
-          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
-          "model_type": "deberta-v2",
           "backend": "mlx",
           "backend_version": "0.30.6",
+          "batch_size": 16,
+          "calibrated": false,
           "device": "mps",
           "dtype": "torch.float16",
-          "batch_size": 16,
-          "pair_batch_size": 16,
-          "length_bucketing": true,
-          "max_length": 512,
+          "entailment_label": "entailment",
           "label_mapping": {
             "0": "entailment",
             "1": "not_entailment"
           },
-          "entailment_label": "entailment",
-          "score_semantics": "independent_entailment",
-          "calibrated": false,
-          "transformers_version": "5.17.0",
-          "torch_version": "2.14.0",
+          "length_bucketing": true,
           "local_files_only": true,
-          "trust_remote_code": false,
-          "tokenization_strategy": "cache distinct premise tokens and taxonomy hypothesis tokens; sort pairs by encoded length before padded batches"
+          "max_length": 512,
+          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
+          "model_type": "deberta-v2",
+          "pair_batch_size": 16,
+          "score_semantics": "independent_entailment",
+          "tokenization_strategy": "cache distinct premise tokens and taxonomy hypothesis tokens; sort pairs by encoded length before padded batches",
+          "torch_version": "2.14.0",
+          "transformers_version": "5.17.0",
+          "trust_remote_code": false
         },
-        "device": "mps",
-        "dtype": "torch.float16",
+        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+        "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "started_at": "2026-09-30T08:50:58.127993+00:00",
+        "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+        "unique_remaining_before_epoch": 167700
+      },
+      {
         "backend": "mlx",
         "backend_source_sha256": "a2895ac4967be954d4e69969595238ddf8a5beff741b5338619fdfe8da778780",
         "backend_version": "0.30.6",
+        "dependencies": {
+          "dspy": "3.4.0",
+          "mlx": "0.30.6",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "torch": "2.14.0",
+          "transformers": "5.17.0"
+        },
+        "device": "mps",
+        "dtype": "torch.float16",
+        "epoch_number": 4,
+        "id": "3919dd9cbfb36110833e",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
         "outer_batch_size": 64,
         "pair_batch_size": 16,
+        "predictions_before_epoch": 35888,
+        "predictions_missing_epoch_at_start": 7344,
+        "resume_of_epoch_id": "75a9e2157a3bd14d8501",
+        "run_id": "d64365bb56121748c722",
+        "runner_sha256": "78b72e909159e99b08debaa8f5e0c86fbd4ee67a91137d3bc3ec47fcf959fd8e",
+        "runtime_settings": {
+          "backend": "mlx",
+          "backend_version": "0.30.6",
+          "batch_size": 16,
+          "calibrated": false,
+          "device": "mps",
+          "dtype": "torch.float16",
+          "entailment_label": "entailment",
+          "label_mapping": {
+            "0": "entailment",
+            "1": "not_entailment"
+          },
+          "length_bucketing": true,
+          "local_files_only": true,
+          "max_length": 512,
+          "model_dir": "/Users/mukund/Documents/Codex/ai-village/models/deberta-base-zeroshot",
+          "model_type": "deberta-v2",
+          "pair_batch_size": 16,
+          "score_semantics": "independent_entailment",
+          "tokenization_strategy": "cache distinct premise tokens and taxonomy hypothesis tokens; sort pairs by encoded length before padded batches",
+          "torch_version": "2.14.0",
+          "transformers_version": "5.17.0",
+          "trust_remote_code": false
+        },
+        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
         "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
-        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "started_at": "2026-09-30T10:15:38.337927+00:00",
         "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
-        "predictions_before_epoch": 10352,
-        "unique_remaining_before_epoch": 167700,
-        "resume_of_epoch_id": "caab4b8d9a6f07449276",
-        "predictions_missing_epoch_at_start": 7344
+        "unique_remaining_before_epoch": 142164
+      },
+      {
+        "backend": "cuda",
+        "backend_source_sha256": "205f9cac6accde20b8814d625b6924a38424aad4161ff9814c9ac384a120ac57",
+        "backend_version": null,
+        "cloud_execution": {
+          "backend": "cuda",
+          "calibrated": false,
+          "codeSha256": "205f9cac6accde20b8814d625b6924a38424aad4161ff9814c9ac384a120ac57",
+          "dependencies": {
+            "cuda": "13.0",
+            "modal": "1.6.0",
+            "numpy": "2.5.3",
+            "safetensors": "0.8.0",
+            "tokenizers": "0.23.2",
+            "torch": "2.14.0+cu130",
+            "transformers": "5.17.0"
+          },
+          "device": "cuda:0 (NVIDIA L4)",
+          "dtype": "float16",
+          "executionId": "466bbe48d7104ea9b573e6df2ce9d954",
+          "localFilesOnly": true,
+          "maxLength": 512,
+          "messageBatchSize": 32,
+          "modelAssetsSha256": {
+            "added_tokens.json": "dc046d04c9b0ada7ae6f1dc89c465801799acdf0c9a6aab8c15a1b2d5ca4e91f",
+            "config.json": "a1c8011b852ae46d6ac26160d358fa595861d261352885f8f7bfcd2811030d9f",
+            "download-provenance.json": "b0d1da2a551bf25812d1fac888d2d956169445f05e604b9e4f560bd2cb679ae6",
+            "special_tokens_map.json": "9463f61e1b109a8eb4688b829260d7c6b1e6dff04c98ff7269bb89e2b92369b9",
+            "spm.model": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+            "tokenizer.json": "05402ffae6dd382a8491b1d29bfc139bec5d332662e86a026f433ce54c25c202",
+            "tokenizer_config.json": "f5a1a74a632c0e9225e09a21ddf60c2e70ef5d3bfc1f261a24fd8ddab27254d2"
+          },
+          "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+          "pairBatchSize": 256,
+          "parameterCount": 184423682,
+          "runtimeSha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+          "scoreSemantics": "independent_entailment",
+          "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+          "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+          "trustRemoteCode": false
+        },
+        "cloud_export_id": "363c7da835aaad0771ebe7b3",
+        "dependencies": {
+          "cuda": "13.0",
+          "modal": "1.6.0",
+          "numpy": "2.5.3",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "torch": "2.14.0+cu130",
+          "transformers": "5.17.0"
+        },
+        "device": "cuda:0 (NVIDIA L4)",
+        "dtype": "float16",
+        "epoch_number": 5,
+        "id": "8207fa8b5676e564f933",
+        "imported_prediction_count": 70160,
+        "imported_shards": [
+          "pending-00000",
+          "pending-00001",
+          "pending-00002",
+          "pending-00003",
+          "pending-00004",
+          "pending-00005",
+          "pending-00006",
+          "pending-00007",
+          "pending-00008",
+          "pending-00009",
+          "pending-00010",
+          "pending-00011",
+          "pending-00012",
+          "pending-00013",
+          "pending-00014",
+          "pending-00015",
+          "pending-00016",
+          "pending-00017",
+          "pending-00018",
+          "pending-00019",
+          "pending-00020",
+          "pending-00021",
+          "pending-00022",
+          "pending-00023",
+          "pending-00024",
+          "pending-00025",
+          "pending-00026",
+          "pending-00027",
+          "pending-00028",
+          "pending-00029",
+          "pending-00030",
+          "pending-00031",
+          "pending-00032",
+          "pending-00033",
+          "pending-00034",
+          "pending-00035",
+          "pending-00036",
+          "pending-00037",
+          "pending-00038",
+          "pending-00039",
+          "pending-00040",
+          "pending-00041",
+          "pending-00042",
+          "pending-00043",
+          "pending-00044",
+          "pending-00045",
+          "pending-00046",
+          "pending-00047",
+          "pending-00048",
+          "pending-00049",
+          "pending-00050",
+          "pending-00051",
+          "pending-00052",
+          "pending-00053",
+          "pending-00054",
+          "pending-00055",
+          "pending-00056",
+          "pending-00057",
+          "pending-00058",
+          "pending-00059",
+          "pending-00060",
+          "pending-00061",
+          "pending-00062",
+          "pending-00063",
+          "pending-00064",
+          "pending-00065",
+          "pending-00066",
+          "pending-00067",
+          "pending-00068",
+          "pending-00069",
+          "pending-00070",
+          "pending-00071",
+          "pending-00072",
+          "pending-00074"
+        ],
+        "last_imported_at": "2026-09-30T10:28:33.507185+00:00",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "outer_batch_size": null,
+        "pair_batch_size": 256,
+        "predictions_before_epoch": 39728,
+        "preserved_existing_count": 3840,
+        "resume_of_epoch_id": "3919dd9cbfb36110833e",
+        "run_id": "d64365bb56121748c722",
+        "runner_sha256": "205f9cac6accde20b8814d625b6924a38424aad4161ff9814c9ac384a120ac57",
+        "runtime_settings": {
+          "backend": "cuda",
+          "device": "cuda:0 (NVIDIA L4)",
+          "dtype": "float16",
+          "entailment_label": "entailment",
+          "label_mapping": {
+            "0": "entailment",
+            "1": "not_entailment"
+          },
+          "local_files_only": true,
+          "max_length": 512,
+          "model_type": "deberta-v2",
+          "score_semantics": "independent_entailment",
+          "trust_remote_code": false
+        },
+        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+        "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "started_at": "2026-09-30T10:28:17.244176+00:00",
+        "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522"
       }
     ],
-    "latest_execution_epoch_id": "75a9e2157a3bd14d8501",
-    "last_resumed_at": "2026-09-30T08:50:58.127993+00:00"
+    "latest_execution_epoch_id": "8207fa8b5676e564f933",
+    "last_resumed_at": "2026-09-30T10:28:33.507185+00:00"
   },
   "coverage": {
     "sourceRecords": {
-      "classified": 11610,
+      "classified": 115100,
       "total": 183485,
-      "remaining": 171875,
-      "fraction": 0.06327492710575797
+      "remaining": 68385,
+      "fraction": 0.6272992342698314
     },
     "uniqueTexts": {
-      "classified": 10480,
+      "classified": 109888,
       "total": 178052,
-      "remaining": 167572,
-      "fraction": 0.058859209669085436
+      "remaining": 68164,
+      "fraction": 0.6171680183317233
     },
     "labelsBySourceRecord": [
       {
-        "label": "qualification",
-        "sourceRecords": 2425,
-        "needsReview": 1249,
-        "truncated": 3
-      },
-      {
         "label": "assertion",
-        "sourceRecords": 2354,
-        "needsReview": 779,
-        "truncated": 5
+        "sourceRecords": 29642,
+        "needsReview": 12125,
+        "truncated": 336
       },
       {
         "label": "status_report",
-        "sourceRecords": 1296,
-        "needsReview": 601,
-        "truncated": 2
+        "sourceRecords": 26692,
+        "needsReview": 11799,
+        "truncated": 169
       },
       {
-        "label": "question",
-        "sourceRecords": 1248,
-        "needsReview": 663,
-        "truncated": 6
+        "label": "qualification",
+        "sourceRecords": 16504,
+        "needsReview": 7800,
+        "truncated": 169
       },
       {
         "label": "instruction_request",
-        "sourceRecords": 1113,
-        "needsReview": 476,
-        "truncated": 3
+        "sourceRecords": 8663,
+        "needsReview": 3635,
+        "truncated": 34
       },
       {
         "label": "endorsement",
-        "sourceRecords": 688,
-        "needsReview": 320,
-        "truncated": 7
-      },
-      {
-        "label": "acknowledgment",
-        "sourceRecords": 582,
-        "needsReview": 248,
-        "truncated": 1
+        "sourceRecords": 5661,
+        "needsReview": 2798,
+        "truncated": 67
       },
       {
         "label": "challenge_correction",
-        "sourceRecords": 479,
-        "needsReview": 293,
-        "truncated": 0
+        "sourceRecords": 5607,
+        "needsReview": 3463,
+        "truncated": 75
+      },
+      {
+        "label": "question",
+        "sourceRecords": 4788,
+        "needsReview": 2753,
+        "truncated": 34
       },
       {
         "label": "offer_help",
-        "sourceRecords": 475,
-        "needsReview": 260,
-        "truncated": 0
-      },
-      {
-        "label": "proposal_plan",
-        "sourceRecords": 412,
-        "needsReview": 211,
-        "truncated": 4
-      },
-      {
-        "label": "commitment_assignment",
-        "sourceRecords": 298,
-        "needsReview": 170,
-        "truncated": 0
+        "sourceRecords": 4405,
+        "needsReview": 2566,
+        "truncated": 51
       },
       {
         "label": "check_report",
-        "sourceRecords": 240,
-        "needsReview": 143,
-        "truncated": 0
+        "sourceRecords": 4053,
+        "needsReview": 2309,
+        "truncated": 26
+      },
+      {
+        "label": "acknowledgment",
+        "sourceRecords": 3738,
+        "needsReview": 1925,
+        "truncated": 8
+      },
+      {
+        "label": "commitment_assignment",
+        "sourceRecords": 3098,
+        "needsReview": 1726,
+        "truncated": 1
+      },
+      {
+        "label": "proposal_plan",
+        "sourceRecords": 2249,
+        "needsReview": 1435,
+        "truncated": 33
       }
     ],
     "labelsByUniqueText": [
       {
-        "label": "qualification",
-        "uniqueTexts": 1988
-      },
-      {
         "label": "assertion",
-        "uniqueTexts": 1948
+        "uniqueTexts": 27377
       },
       {
         "label": "status_report",
-        "uniqueTexts": 1284
+        "uniqueTexts": 26289
       },
       {
-        "label": "question",
-        "uniqueTexts": 1180
+        "label": "qualification",
+        "uniqueTexts": 15157
       },
       {
         "label": "instruction_request",
-        "uniqueTexts": 1078
+        "uniqueTexts": 8416
       },
       {
         "label": "endorsement",
-        "uniqueTexts": 683
-      },
-      {
-        "label": "acknowledgment",
-        "uniqueTexts": 531
-      },
-      {
-        "label": "offer_help",
-        "uniqueTexts": 472
+        "uniqueTexts": 5553
       },
       {
         "label": "challenge_correction",
-        "uniqueTexts": 414
+        "uniqueTexts": 5332
       },
       {
-        "label": "proposal_plan",
-        "uniqueTexts": 407
+        "label": "question",
+        "uniqueTexts": 4664
       },
       {
-        "label": "commitment_assignment",
-        "uniqueTexts": 296
+        "label": "offer_help",
+        "uniqueTexts": 4296
       },
       {
         "label": "check_report",
-        "uniqueTexts": 199
+        "uniqueTexts": 3954
+      },
+      {
+        "label": "acknowledgment",
+        "uniqueTexts": 3640
+      },
+      {
+        "label": "commitment_assignment",
+        "uniqueTexts": 3000
+      },
+      {
+        "label": "proposal_plan",
+        "uniqueTexts": 2210
       }
     ]
   },
   "progress": {
-    "state": "running",
-    "pid": 83800,
+    "backend": "cuda",
+    "cumulative_unique_predictions": 109888,
+    "device": "cuda:0 (NVIDIA L4)",
+    "execution_epoch_id": "8207fa8b5676e564f933",
+    "execution_epoch_number": 5,
+    "imported_shards_this_epoch": 74,
+    "imported_this_shard": 1000,
     "run_id": "d64365bb56121748c722",
-    "execution_epoch_id": "75a9e2157a3bd14d8501",
-    "execution_epoch_number": 3,
-    "completed_this_session": 128,
-    "completed_this_epoch": 128,
-    "cumulative_unique_predictions": 10480,
-    "predictions_before_epoch": 10352,
-    "unique_texts_per_second": 3.362,
-    "elapsed_seconds": 38.07,
-    "updated_at": "2026-09-30T08:51:36.250587+00:00",
-    "day_scope": null,
-    "limit": 0,
-    "error": null,
-    "outer_batch_size": 64,
-    "pair_batch_size": 16
+    "state": "partial",
+    "unique_remaining": 68164,
+    "updated_at": "2026-09-30T10:28:33.588278+00:00"
   },
   "sample": {
     "selection": "At most two earliest source records per predicted label, one per exact text hash; deterministic, descriptive only.",

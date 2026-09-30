@@ -1,0 +1,24 @@
+{
+  "model": "gpt-6-luna",
+  "reasoningEffort": "medium",
+  "sampleCount": 1,
+  "task": "No-tool GPU-shard orchestration review, approximately 400 words",
+  "elapsedSeconds": 40.263,
+  "measurement": "Root wall time from before spawn until final message observed; includes dispatch, reasoning, generation, and message-delivery overhead",
+  "estimatedVisibleTokensRange": [
+    500,
+    650
+  ],
+  "estimatedEndToEndVisibleTokensPerSecondRange": [
+    12.4,
+    16.1
+  ],
+  "rawGenerationTokensPerSecond": "unavailable; no stream timings or exact usage exposed",
+  "limitations": [
+    "One sample; output tokens are approximate",
+    "No hidden-reasoning token count",
+    "End-to-end rate is not the raw decoding rate"
+  ],
+  "observedReview": "Identified queue deadlines, delayed manifest durability, and watchdog cleanup coordination. These are design risks, not observed failures.",
+  "orchestrationChoice": "Use three substantial parallel tasks rather than long chains of tiny handoffs. Configure newly launched agents gpt-6-luna medium. Agents currently paused at user request."
+}

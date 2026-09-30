@@ -170,7 +170,7 @@ def load_inputs(bundle_dir: Path, results_dir: Path, parity_report_path: Path,
 
 
 def import_completed(bundle_dir: Path, results_dir: Path, approval_path: Path,
-                     db_path: Path | None = None) -> list[dict]:
+                     db_path: Path | None = None, preserve_existing: bool = False) -> list[dict]:
     # Recheck immutable artifacts and exact approval binding before every shard.
     export = cloud_transfer._validate_export_bundle(bundle_dir.resolve())
     result_path = results_dir / 'results-manifest.json'
@@ -183,7 +183,8 @@ def import_completed(bundle_dir: Path, results_dir: Path, approval_path: Path,
     imported = []
     for shard in sorted(results['shards'], key=lambda item: str(item['id'])):
         result = cloud_transfer.import_shard(bundle_dir, results_dir, str(shard['id']),
-                                             approval_path, db_path or cloud_transfer.DEFAULT_DB)
+                                             approval_path, db_path or cloud_transfer.DEFAULT_DB,
+                                             preserve_existing=preserve_existing)
         imported.append(result)
         print(json.dumps({'event': 'shard_imported', **result}), flush=True)
     return imported
@@ -201,6 +202,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--db', type=Path, default=cloud_transfer.DEFAULT_DB)
     parser.add_argument('--import-completed', action='store_true',
                         help='after writing approval, import all complete pending shards')
+    parser.add_argument('--preserve-existing', action='store_true',
+                        help='retain predictions completed locally after export; insert only missing hashes')
     args = parser.parse_args(argv)
     export, shards, approval, results_sha = load_inputs(
         args.bundle, args.results, args.reviewed_parity_report, args.approved_by)
@@ -213,7 +216,7 @@ def main(argv: list[str] | None = None) -> int:
                       'eligibleShards': len(shards), 'eligibleMessages': sum(int(s['count']) for s in shards),
                       'importStarted': bool(args.import_completed)}, indent=2), flush=True)
     if args.import_completed:
-        done = import_completed(args.bundle, args.results, args.approval_output, args.db)
+        done = import_completed(args.bundle, args.results, args.approval_output, args.db, args.preserve_existing)
         print(json.dumps({'event': 'import_finished', 'shardsImported': len(done),
                           'messagesImported': sum(int(item['imported']) for item in done),
                           'remainingUnique': done[-1]['remainingUnique'] if done else None,

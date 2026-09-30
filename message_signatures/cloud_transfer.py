@@ -560,7 +560,8 @@ def import_shard(bundle_dir: str | Path,
                  shard_id: str,
                  parity_approval_path: str | Path,
                  db_path: str | Path = DEFAULT_DB,
-                 lock_path: str | Path | None = None) -> dict:
+                 lock_path: str | Path | None = None,
+                 preserve_existing: bool = False) -> dict:
     """Validate a whole result shard, then transactionally import it into the active run."""
     bundle = Path(bundle_dir).resolve()
     result_root = Path(results_dir).resolve()
@@ -628,11 +629,14 @@ def import_shard(bundle_dir: str | Path,
                 raise ValueError('one or more exported texts do not match the indexed source snapshot')
             if len(source_texts) != len(rows):
                 raise ValueError('one or more exported text hashes are absent from the source index')
-            conflict = conn.execute('''SELECT count(*) FROM predictions
+            existing = conn.execute('''SELECT text_hash FROM predictions
                 WHERE run_id=? AND text_hash IN (%s)''' % placeholders,
-                [export_manifest['runId']] + text_hashes).fetchone()[0] if rows else 0
-            if conflict:
+                [export_manifest['runId']] + text_hashes).fetchall() if rows else []
+            existing_hashes = {record['text_hash'] for record in existing}
+            if existing_hashes and not preserve_existing:
                 raise ValueError('one or more cloud results were already classified locally; refusing to replace predictions')
+            preserved_count = len(existing_hashes)
+            rows = [row for row in rows if row[1] not in existing_hashes]
 
             epochs = list(active.get('execution_epochs') or [])
             execution_id = execution['executionId']
@@ -686,6 +690,7 @@ def import_shard(bundle_dir: str | Path,
                               json.dumps(record, ensure_ascii=False, sort_keys=True)))
             epoch['imported_shards'].append(shard_id)
             epoch['imported_prediction_count'] += len(rows)
+            epoch['preserved_existing_count'] = epoch.get('preserved_existing_count', 0) + preserved_count
             epoch['last_imported_at'] = _utc_now()
             active['execution_epochs'] = epochs
             active['latest_execution_epoch_id'] = epoch_id
@@ -711,7 +716,7 @@ def import_shard(bundle_dir: str | Path,
             _write_meta_uncommitted(conn, 'progress', new_progress)
             conn.commit()
             return {'runId': active['id'], 'shardId': shard_id,
-                    'imported': len(rows), 'remainingUnique': remaining,
+                    'imported': len(rows), 'preservedExisting': preserved_count, 'remainingUnique': remaining,
                     'state': new_progress['state'], 'executionEpochId': epoch_id,
                     'resultsManifestSha256': result_manifest_sha,
                     'outputShardSha256': output_shard['outputSha256']}

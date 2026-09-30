@@ -309,6 +309,23 @@ class CloudTransferTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'already classified locally'):
             self.import_first()
 
+    def test_preserve_existing_retains_later_local_prediction(self):
+        shard = self.manifest['pendingShards'][0]
+        rows = list(transfer._iter_jsonl_gzip(self.bundle / shard['file']))
+        text_hash = rows[0]['text_hash']
+        original = json.dumps({'local_result': 'preserve byte for byte'})
+        self.conn.execute('INSERT INTO predictions VALUES (?,?,?,?,?,?,?,?)',
+                          (self.run_id, text_hash, 'question', .8, .3, 0, 0, original))
+        self.conn.commit()
+        result = transfer.import_shard(self.bundle, self.results, shard['id'],
+                                       self.approval_path, self.db, self.lock_path,
+                                       preserve_existing=True)
+        self.assertEqual(result['preservedExisting'], 1)
+        self.assertEqual(result['imported'], shard['count'] - 1)
+        saved = self.conn.execute('SELECT result FROM predictions WHERE run_id=? AND text_hash=?',
+                                  (self.run_id, text_hash)).fetchone()[0]
+        self.assertEqual(saved, original)
+
     def test_database_failure_rolls_back_the_entire_shard(self):
         source_rows = list(transfer._iter_jsonl_gzip(
             self.bundle / self.manifest['pendingShards'][0]['file']))
