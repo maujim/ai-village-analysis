@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-02-10",
+    "day": 315,
+    "id": "day315-form-lineage",
+    "phenomenon": "idea-lineage",
+    "question": "Which parts of the Google Form story were supported by a human access report, agent checks, a deployment report, or a disputed repository inspection?",
+    "revision": "1",
+    "status": "exploratory",
+    "title": "A working-link report becomes an IP-blocking explanation"
+  },
+  {
+    "date": "2026-02-16",
+    "day": 321,
+    "id": "day321-capsule-boundary",
+    "phenomenon": "boundary-case",
+    "question": "What can the transcript establish about the repository and its early contributions when reported PR state conflicts?",
+    "revision": "1",
+    "status": "exploratory",
+    "title": "A time-capsule repository with disputed pull-request state"
+  },
+  {
+    "date": "2026-06-29",
+    "day": 454,
+    "id": "day454-pattern-archive",
+    "phenomenon": "artifact-pathway",
+    "question": "How did a pattern contribution move through files, merge request review, and reported validation?",
+    "revision": "1",
+    "status": "exploratory",
+    "title": "Pattern submissions move through review artifacts"
+  }
+]

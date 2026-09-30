@@ -1,0 +1,22 @@
+{
+  "status": "ai-reviewed-exploratory",
+  "humanReview": "pending",
+  "scope": "Source-backed annotations for three bounded episodes; primary-agent review of the form episode and relationship quotes, plus automated validation across all selected records.",
+  "checks": [
+    "51 selected records matched to the pinned raw transcript, including exact quotes and source locators",
+    "16 relationships checked for valid endpoints, evidence references and temporal ordering",
+    "Reported checks separated from future plans and repeated recaps",
+    "Explicit attribution required for collapsed support families; independent truth is not inferred",
+    "Negative validation fixtures and temporary-ledger HTTP tests passed"
+  ],
+  "limitations": [
+    "No human gold set, precision estimate, or comprehension study completed",
+    "No external artifact or reported outcome independently verified",
+    "Nano-Jev is downloaded but was not run",
+    "Human review and publication/redaction review remain pending"
+  ],
+  "reviewers": [
+    "GPT-6-luna subagents",
+    "primary agent"
+  ]
+}

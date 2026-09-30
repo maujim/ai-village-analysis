@@ -1,0 +1,929 @@
+{
+  "version": "fieldnotes-identities/1.0",
+  "sourceSHA256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+  "rawSpeakerLabels": {
+    "Claude 3.5 Sonnet": {
+      "agentAuthoredEventCount": 564,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 1,
+        "date": "2025-04-02",
+        "eventIndex": 6,
+        "dayByteStart": 219,
+        "dayByteEnd": 325009
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 22,
+        "date": "2025-04-23",
+        "eventIndex": 279,
+        "dayByteStart": 2384768,
+        "dayByteEnd": 2535730
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude 3.7 Sonnet": {
+      "agentAuthoredEventCount": 12325,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 1,
+        "date": "2025-04-02",
+        "eventIndex": 9,
+        "dayByteStart": 219,
+        "dayByteEnd": 325009
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 323,
+        "date": "2026-02-18",
+        "eventIndex": 1229,
+        "dayByteStart": 131766606,
+        "dayByteEnd": 133541220
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Fable 5": {
+      "agentAuthoredEventCount": 1139,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 434,
+        "date": "2026-06-09",
+        "eventIndex": 443,
+        "dayByteStart": 208949133,
+        "dayByteEnd": 212192834
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1864,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Fable 5.1": {
+      "agentAuthoredEventCount": 125,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 518,
+        "date": "2026-09-01",
+        "eventIndex": 1471,
+        "dayByteStart": 335968414,
+        "dayByteEnd": 337528394
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1589,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Haiku 4.5": {
+      "agentAuthoredEventCount": 10730,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 204,
+        "date": "2025-10-22",
+        "eventIndex": 2,
+        "dayByteStart": 33714385,
+        "dayByteEnd": 34522496
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1912,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 4": {
+      "agentAuthoredEventCount": 4899,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 52,
+        "date": "2025-05-23",
+        "eventIndex": 21,
+        "dayByteStart": 8872163,
+        "dayByteEnd": 9080076
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 157,
+        "date": "2025-09-05",
+        "eventIndex": 1038,
+        "dayByteStart": 23444021,
+        "dayByteEnd": 23841240
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 4.1": {
+      "agentAuthoredEventCount": 7331,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 139,
+        "date": "2025-08-18",
+        "eventIndex": 3,
+        "dayByteStart": 18661947,
+        "dayByteEnd": 18827989
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 241,
+        "date": "2025-11-28",
+        "eventIndex": 1511,
+        "dayByteStart": 52565026,
+        "dayByteEnd": 54078719
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 4.5": {
+      "agentAuthoredEventCount": 9024,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 238,
+        "date": "2025-11-25",
+        "eventIndex": 15,
+        "dayByteStart": 48127783,
+        "dayByteEnd": 49754885
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 531,
+        "date": "2026-09-14",
+        "eventIndex": 896,
+        "dayByteStart": 354059634,
+        "dayByteEnd": 356021077
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 4.6": {
+      "agentAuthoredEventCount": 2864,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 311,
+        "date": "2026-02-06",
+        "eventIndex": 16,
+        "dayByteStart": 118421944,
+        "dayByteEnd": 119501641
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 518,
+        "date": "2026-09-01",
+        "eventIndex": 411,
+        "dayByteStart": 335968414,
+        "dayByteEnd": 337528394
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 4.7": {
+      "agentAuthoredEventCount": 1036,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 381,
+        "date": "2026-04-17",
+        "eventIndex": 10,
+        "dayByteStart": 181191188,
+        "dayByteEnd": 181784599
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 532,
+        "date": "2026-09-15",
+        "eventIndex": 654,
+        "dayByteStart": 356021083,
+        "dayByteEnd": 357382063
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 4.8": {
+      "agentAuthoredEventCount": 5481,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 422,
+        "date": "2026-05-28",
+        "eventIndex": 283,
+        "dayByteStart": 200505447,
+        "dayByteEnd": 201791431
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1881,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Opus 5": {
+      "agentAuthoredEventCount": 988,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 479,
+        "date": "2026-07-24",
+        "eventIndex": 954,
+        "dayByteStart": 274673433,
+        "dayByteEnd": 277024288
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 729,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Sonnet 4.5": {
+      "agentAuthoredEventCount": 7044,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 182,
+        "date": "2025-09-30",
+        "eventIndex": 6,
+        "dayByteStart": 28645827,
+        "dayByteEnd": 28909065
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 527,
+        "date": "2026-09-10",
+        "eventIndex": 1118,
+        "dayByteStart": 350173084,
+        "dayByteEnd": 352077391
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Sonnet 4.6": {
+      "agentAuthoredEventCount": 2894,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 323,
+        "date": "2026-02-18",
+        "eventIndex": 21,
+        "dayByteStart": 131766606,
+        "dayByteEnd": 133541220
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1851,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Claude Sonnet 5": {
+      "agentAuthoredEventCount": 1259,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 455,
+        "date": "2026-06-30",
+        "eventIndex": 722,
+        "dayByteStart": 230654245,
+        "dayByteEnd": 232781283
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1677,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "DeepSeek-V3.2": {
+      "agentAuthoredEventCount": 19599,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 247,
+        "date": "2025-12-04",
+        "eventIndex": 26,
+        "dayByteStart": 58310727,
+        "dayByteEnd": 60269771
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1918,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "DeepSeek-V4-Pro": {
+      "agentAuthoredEventCount": 1542,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 457,
+        "date": "2026-07-02",
+        "eventIndex": 39,
+        "dayByteStart": 234345021,
+        "dayByteEnd": 236108690
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1873,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Fine-Tuned Leader": {
+      "agentAuthoredEventCount": 70,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 426,
+        "date": "2026-06-01",
+        "eventIndex": 21,
+        "dayByteStart": 203122841,
+        "dayByteEnd": 203910520
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 430,
+        "date": "2026-06-05",
+        "eventIndex": 756,
+        "dayByteStart": 206135354,
+        "dayByteEnd": 206919271
+      },
+      "idFieldEvidence": {}
+    },
+    "GLM-5.2": {
+      "agentAuthoredEventCount": 3127,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 458,
+        "date": "2026-07-03",
+        "eventIndex": 53,
+        "dayByteStart": 236108696,
+        "dayByteEnd": 238298250
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1890,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GLM-5.3 Flash": {
+      "agentAuthoredEventCount": 508,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 514,
+        "date": "2026-08-28",
+        "eventIndex": 964,
+        "dayByteStart": 332861666,
+        "dayByteEnd": 334361580
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1889,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-4.1": {
+      "agentAuthoredEventCount": 2948,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 14,
+        "date": "2025-04-15",
+        "eventIndex": 3,
+        "dayByteStart": 1885321,
+        "dayByteEnd": 1942743
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 50,
+        "date": "2025-05-21",
+        "eventIndex": 489,
+        "dayByteStart": 8411026,
+        "dayByteEnd": 8661616
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-4o": {
+      "agentAuthoredEventCount": 237,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 1,
+        "date": "2025-04-02",
+        "eventIndex": 13,
+        "dayByteStart": 219,
+        "dayByteEnd": 325009
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 13,
+        "date": "2025-04-14",
+        "eventIndex": 114,
+        "dayByteStart": 1820652,
+        "dayByteEnd": 1885315
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5": {
+      "agentAuthoredEventCount": 5268,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 139,
+        "date": "2025-08-18",
+        "eventIndex": 13,
+        "dayByteStart": 18661947,
+        "dayByteEnd": 18827989
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1892,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.1": {
+      "agentAuthoredEventCount": 4563,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 227,
+        "date": "2025-11-14",
+        "eventIndex": 6,
+        "dayByteStart": 43214710,
+        "dayByteEnd": 43733258
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1354,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.2": {
+      "agentAuthoredEventCount": 8489,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 255,
+        "date": "2025-12-12",
+        "eventIndex": 19,
+        "dayByteStart": 66456260,
+        "dayByteEnd": 68317752
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1823,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.4": {
+      "agentAuthoredEventCount": 6141,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 349,
+        "date": "2026-03-16",
+        "eventIndex": 18,
+        "dayByteStart": 161302001,
+        "dayByteEnd": 162574136
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 534,
+        "date": "2026-09-17",
+        "eventIndex": 383,
+        "dayByteStart": 358755282,
+        "dayByteEnd": 359634563
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.5": {
+      "agentAuthoredEventCount": 2397,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 391,
+        "date": "2026-04-27",
+        "eventIndex": 31,
+        "dayByteStart": 184104354,
+        "dayByteEnd": 184414061
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 764,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.6 Luna": {
+      "agentAuthoredEventCount": 357,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 464,
+        "date": "2026-07-09",
+        "eventIndex": 1119,
+        "dayByteStart": 247701941,
+        "dayByteEnd": 249580614
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 532,
+        "date": "2026-09-15",
+        "eventIndex": 1140,
+        "dayByteStart": 356021083,
+        "dayByteEnd": 357382063
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.6 Sol": {
+      "agentAuthoredEventCount": 213,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 464,
+        "date": "2026-07-09",
+        "eventIndex": 1248,
+        "dayByteStart": 247701941,
+        "dayByteEnd": 249580614
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1334,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-5.6 Terra": {
+      "agentAuthoredEventCount": 271,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 464,
+        "date": "2026-07-09",
+        "eventIndex": 1139,
+        "dayByteStart": 247701941,
+        "dayByteEnd": 249580614
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1760,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "GPT-6 Astra": {
+      "agentAuthoredEventCount": 145,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 521,
+        "date": "2026-09-04",
+        "eventIndex": 1306,
+        "dayByteStart": 341927597,
+        "dayByteEnd": 344555460
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 528,
+        "date": "2026-09-11",
+        "eventIndex": 814,
+        "dayByteStart": 352077397,
+        "dayByteEnd": 354059628
+      },
+      "idFieldEvidence": {}
+    },
+    "Gemini 2.5 Pro": {
+      "agentAuthoredEventCount": 24903,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 23,
+        "date": "2025-04-24",
+        "eventIndex": 4,
+        "dayByteStart": 2535736,
+        "dayByteEnd": 2671119
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1901,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Gemini 3 Pro": {
+      "agentAuthoredEventCount": 2113,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 232,
+        "date": "2025-11-19",
+        "eventIndex": 33,
+        "dayByteStart": 45253096,
+        "dayByteEnd": 45831616
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 339,
+        "date": "2026-03-06",
+        "eventIndex": 1344,
+        "dayByteStart": 152718925,
+        "dayByteEnd": 154191957
+      },
+      "idFieldEvidence": {}
+    },
+    "Gemini 3.1 Pro": {
+      "agentAuthoredEventCount": 3177,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 342,
+        "date": "2026-03-09",
+        "eventIndex": 10,
+        "dayByteStart": 154191963,
+        "dayByteEnd": 155885498
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 533,
+        "date": "2026-09-16",
+        "eventIndex": 846,
+        "dayByteStart": 357382069,
+        "dayByteEnd": 358755276
+      },
+      "idFieldEvidence": {}
+    },
+    "Gemini 3.5 Flash": {
+      "agentAuthoredEventCount": 1803,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 414,
+        "date": "2026-05-20",
+        "eventIndex": 9,
+        "dayByteStart": 194827111,
+        "dayByteEnd": 195360897
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1444,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Gemini 3.8 Flash": {
+      "agentAuthoredEventCount": 801,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 520,
+        "date": "2026-09-03",
+        "eventIndex": 900,
+        "dayByteStart": 339412447,
+        "dayByteEnd": 341927591
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1894,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Grok 4": {
+      "agentAuthoredEventCount": 3143,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 139,
+        "date": "2025-08-18",
+        "eventIndex": 81,
+        "dayByteStart": 18661947,
+        "dayByteEnd": 18827989
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 210,
+        "date": "2025-10-28",
+        "eventIndex": 1022,
+        "dayByteStart": 37011072,
+        "dayByteEnd": 37560428
+      },
+      "idFieldEvidence": {}
+    },
+    "Grok 4.5": {
+      "agentAuthoredEventCount": 2357,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 465,
+        "date": "2026-07-10",
+        "eventIndex": 744,
+        "dayByteStart": 249580620,
+        "dayByteEnd": 251594673
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1269,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Kimi K2.6": {
+      "agentAuthoredEventCount": 831,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 386,
+        "date": "2026-04-22",
+        "eventIndex": 16,
+        "dayByteStart": 182689623,
+        "dayByteEnd": 183153699
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 532,
+        "date": "2026-09-15",
+        "eventIndex": 148,
+        "dayByteStart": 356021083,
+        "dayByteEnd": 357382063
+      },
+      "idFieldEvidence": {}
+    },
+    "Kimi K3": {
+      "agentAuthoredEventCount": 176,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 472,
+        "date": "2026-07-17",
+        "eventIndex": 1184,
+        "dayByteStart": 259700475,
+        "dayByteEnd": 262867781
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1428,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Muse Spark 1.3": {
+      "agentAuthoredEventCount": 146,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 520,
+        "date": "2026-09-03",
+        "eventIndex": 881,
+        "dayByteStart": 339412447,
+        "dayByteEnd": 341927591
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 535,
+        "date": "2026-09-18",
+        "eventIndex": 1729,
+        "dayByteStart": 359634569,
+        "dayByteEnd": 362235437
+      },
+      "idFieldEvidence": {}
+    },
+    "Opus 4.5 (Claude Code)": {
+      "agentAuthoredEventCount": 2623,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 300,
+        "date": "2026-01-26",
+        "eventIndex": 190,
+        "dayByteStart": 105476793,
+        "dayByteEnd": 107073396
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 360,
+        "date": "2026-03-27",
+        "eventIndex": 441,
+        "dayByteStart": 171566325,
+        "dayByteEnd": 172280364
+      },
+      "idFieldEvidence": {}
+    },
+    "[Temporary] Fine-tuned Leader": {
+      "agentAuthoredEventCount": 27,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 422,
+        "date": "2026-05-28",
+        "eventIndex": 128,
+        "dayByteStart": 200505447,
+        "dayByteEnd": 201791431
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 423,
+        "date": "2026-05-29",
+        "eventIndex": 958,
+        "dayByteStart": 201791437,
+        "dayByteEnd": 203122835
+      },
+      "idFieldEvidence": {}
+    },
+    "o1": {
+      "agentAuthoredEventCount": 355,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 1,
+        "date": "2025-04-02",
+        "eventIndex": 10,
+        "dayByteStart": 219,
+        "dayByteEnd": 325009
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 14,
+        "date": "2025-04-15",
+        "eventIndex": 126,
+        "dayByteStart": 1885321,
+        "dayByteEnd": 1942743
+      },
+      "idFieldEvidence": {}
+    },
+    "o3": {
+      "agentAuthoredEventCount": 7357,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 15,
+        "date": "2025-04-16",
+        "eventIndex": 3,
+        "dayByteStart": 1942749,
+        "dayByteEnd": 2056083
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 241,
+        "date": "2025-11-28",
+        "eventIndex": 1488,
+        "dayByteStart": 52565026,
+        "dayByteEnd": 54078719
+      },
+      "idFieldEvidence": {}
+    },
+    "o4-mini": {
+      "agentAuthoredEventCount": 103,
+      "firstAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 51,
+        "date": "2025-05-22",
+        "eventIndex": 3,
+        "dayByteStart": 8661622,
+        "dayByteEnd": 8872157
+      },
+      "lastAgentAuthoredEvent": {
+        "file": "village-transcript.json",
+        "day": 51,
+        "date": "2025-05-22",
+        "eventIndex": 526,
+        "dayByteStart": 8661622,
+        "dayByteEnd": 8872157
+      },
+      "idFieldEvidence": {}
+    }
+  },
+  "resolvedAgentInstances": [],
+  "aliasMerges": [],
+  "policy": "speaker labels are observations, not resolved agent instances; aliases and continuity remain unresolved without explicit identity metadata"
+}

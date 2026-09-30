@@ -1,0 +1,68 @@
+{
+  "day315-form-lineage": {
+    "mechanism": "A secondhand human-access report and DeepSeek-V3.2's reported HTTP check supported a working-link claim. A conditional Google-side access explanation was later stated categorically. Separately, Claude Opus 4.6 reported correcting a mangled URL in a site commit; later main-code and live-page checks report CTA/link presence, not a successful submission.",
+    "labels": {
+      "357": "Gemini 2.5 Pro resumes form-building work",
+      "358": "Gemini 2.5 Pro reports a GUI bug in the earlier form",
+      "564": "DeepSeek relays human multi-computer access and its own HTTP check",
+      "567": "Sonnet flags conflicting reports about TEST_URL buttons",
+      "569": "Haiku cites the human-reported link in an integration plan",
+      "570": "Gemini 3 Pro reports the old link failed and qualifies IP blocking",
+      "571": "Opus 4.5 reports no visible CTA and relays the human link report",
+      "572": "Opus 4.5 asserts Google blocked agent IPs",
+      "580": "Sonnet 3.7 repeats DeepSeek's human-access attribution",
+      "583": "Opus 4.6 reports URL correction, HTTP response, and site commit",
+      "585": "Opus 4.5 attributes integration to commit 22c07da",
+      "587": "Haiku reports deployment based on chat history",
+      "599": "DeepSeek reports checking the URL in main-branch HTML",
+      "604": "Sonnet reports a main-branch search found no TEST_URL strings",
+      "615": "GPT-5.2 reports the live page showed the CTA and link",
+      "617": "Sonnet recaps its earlier TEST_URL inspection"
+    }
+  },
+  "day321-capsule-boundary": {
+    "mechanism": "A repository and contribution workflow were reported through chat, while checks of PR visibility conflicted. The transcript supports a boundary case about remote-state visibility and check timing; it does not establish which agent's PR report was correct.",
+    "labels": {
+      "58": "Sonnet 4.5 reports creating the time-capsule repository",
+      "59": "Opus 4.5 offers a tribute contribution",
+      "64": "Sonnet 3.7 recaps cleanup results and farewell planning",
+      "67": "Opus 4.5 reports creating PR #1",
+      "69": "Opus 4.5 proposes a searchable knowledge archive",
+      "72": "Sonnet 3.7 agrees to make a complementary reference",
+      "76": "Sonnet 4.5 plans to review and merge PR #1",
+      "95": "Sonnet 4.5 reports PR #1 absent during review",
+      "97": "Haiku shifts to a separate volunteer thank-you task",
+      "101": "Opus 4.5 reports creating PR #2",
+      "107": "Sonnet 4.5 reports both PRs live",
+      "120": "Opus 4.5 drafts a third contribution for review",
+      "128": "Opus 4.5 reports submitting PR #4",
+      "132": "Opus 4.5 reports a gh pr list check found three PRs",
+      "135": "Sonnet 3.7 reports repository and PR review findings",
+      "153": "Sonnet 4.5 reports GraphQL and web checks found PRs absent"
+    }
+  },
+  "day454-pattern-archive": {
+    "mechanism": "Pattern contributions were reported as files and catalog edits on merge-request branches, with separate mergeability, pipeline, merge, and checker reports. The transcript also records count drift and a checker that did not enforce every Markdown/JSON companion, so each reported validation has a limited scope.",
+    "labels": {
+      "665": "GPT-5.2 reports opening the pattern contribution MR",
+      "669": "GPT-5.2 reports a JSON metadata update on the MR branch",
+      "672": "GPT-5.2 reports adding the pattern to the README catalog",
+      "673": "DeepSeek counts the submission toward its adoption metric",
+      "674": "GPT-5.2 reports the MR's three-file contents",
+      "728": "GPT-5.2 reports MR #6 open and mergeable",
+      "739": "GPT-5.2 reports checking GPT-5.1's separate MR #5",
+      "740": "GPT-5.2 distinguishes an analysis MR from a pattern entry",
+      "743": "GPT-5.2 reports a mismatch between pattern files and README counts",
+      "1145": "GPT-5.2 reports opening a Pages-drift pattern MR",
+      "1161": "GPT-5.2 reports MR #18 open with a passing pipeline",
+      "1162": "GPT-5.2 reports merging MR #18",
+      "1205": "DeepSeek counts the Pages-drift contribution as another application",
+      "1206": "GPT-5.2 cites merge and checker details, with mirror drift noted",
+      "1274": "GPT-5.2 reports MR #19 mergeable and ready",
+      "1280": "GPT-5.2 reports merging MR #19",
+      "1281": "GPT-5.2 reports a post-merge pattern-count check",
+      "1289": "GPT-5.2 reports checker success and missing JSON companions",
+      "1294": "GPT-5.2 reports opening MR #20 for JSON companions"
+    }
+  }
+}
