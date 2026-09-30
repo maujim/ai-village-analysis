@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T10:33:34.042377+00:00",
+  "generatedAt": "2026-09-30T10:42:00.253956+00:00",
   "notice": "Exploratory classifier output only. The act categories and hypotheses are author-defined; scores and review thresholds are not validated against human annotations. A label is not task extraction, source verification, or evidence that a reported action succeeded.",
-  "state": "partial",
+  "state": "complete",
   "stateExplanation": null,
   "runId": "d64365bb56121748c722",
   "activeRunIdAtExport": "d64365bb56121748c722",
@@ -438,161 +438,385 @@
         "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
         "started_at": "2026-09-30T10:28:17.244176+00:00",
         "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522"
+      },
+      {
+        "backend": "cuda",
+        "backend_source_sha256": "205f9cac6accde20b8814d625b6924a38424aad4161ff9814c9ac384a120ac57",
+        "backend_version": null,
+        "cloud_execution": {
+          "backend": "cuda",
+          "calibrated": false,
+          "codeSha256": "205f9cac6accde20b8814d625b6924a38424aad4161ff9814c9ac384a120ac57",
+          "dependencies": {
+            "cuda": "13.0",
+            "modal": "1.6.0",
+            "numpy": "2.5.3",
+            "safetensors": "0.8.0",
+            "tokenizers": "0.23.2",
+            "torch": "2.14.0+cu130",
+            "transformers": "5.17.0"
+          },
+          "device": "cuda:0 (NVIDIA L4)",
+          "dtype": "float16",
+          "executionId": "048771ecfa9147d8b13df94874c13231",
+          "localFilesOnly": true,
+          "maxLength": 512,
+          "messageBatchSize": 32,
+          "modelAssetsSha256": {
+            "added_tokens.json": "dc046d04c9b0ada7ae6f1dc89c465801799acdf0c9a6aab8c15a1b2d5ca4e91f",
+            "config.json": "a1c8011b852ae46d6ac26160d358fa595861d261352885f8f7bfcd2811030d9f",
+            "download-provenance.json": "b0d1da2a551bf25812d1fac888d2d956169445f05e604b9e4f560bd2cb679ae6",
+            "special_tokens_map.json": "9463f61e1b109a8eb4688b829260d7c6b1e6dff04c98ff7269bb89e2b92369b9",
+            "spm.model": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+            "tokenizer.json": "05402ffae6dd382a8491b1d29bfc139bec5d332662e86a026f433ce54c25c202",
+            "tokenizer_config.json": "f5a1a74a632c0e9225e09a21ddf60c2e70ef5d3bfc1f261a24fd8ddab27254d2"
+          },
+          "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+          "pairBatchSize": 128,
+          "parameterCount": 184423682,
+          "runtimeSha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+          "scoreSemantics": "independent_entailment",
+          "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+          "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+          "trustRemoteCode": false
+        },
+        "cloud_export_id": "72a8c2c02ca0c426d3059ad5",
+        "dependencies": {
+          "cuda": "13.0",
+          "modal": "1.6.0",
+          "numpy": "2.5.3",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "torch": "2.14.0+cu130",
+          "transformers": "5.17.0"
+        },
+        "device": "cuda:0 (NVIDIA L4)",
+        "dtype": "float16",
+        "epoch_number": 6,
+        "id": "3fbbcf3207667db97a85",
+        "imported_prediction_count": 68164,
+        "imported_shards": [
+          "pending-00000",
+          "pending-00001",
+          "pending-00002",
+          "pending-00003",
+          "pending-00004",
+          "pending-00005",
+          "pending-00006",
+          "pending-00007",
+          "pending-00008",
+          "pending-00009",
+          "pending-00010",
+          "pending-00011",
+          "pending-00012",
+          "pending-00013",
+          "pending-00014",
+          "pending-00015",
+          "pending-00016",
+          "pending-00017",
+          "pending-00018",
+          "pending-00019",
+          "pending-00020",
+          "pending-00021",
+          "pending-00022",
+          "pending-00023",
+          "pending-00024",
+          "pending-00025",
+          "pending-00026",
+          "pending-00027",
+          "pending-00028",
+          "pending-00029",
+          "pending-00030",
+          "pending-00031",
+          "pending-00032",
+          "pending-00033",
+          "pending-00034",
+          "pending-00035",
+          "pending-00036",
+          "pending-00037",
+          "pending-00038",
+          "pending-00039",
+          "pending-00040",
+          "pending-00041",
+          "pending-00042",
+          "pending-00043",
+          "pending-00044",
+          "pending-00045",
+          "pending-00046",
+          "pending-00047",
+          "pending-00048",
+          "pending-00049",
+          "pending-00050",
+          "pending-00051",
+          "pending-00052",
+          "pending-00053",
+          "pending-00054",
+          "pending-00055",
+          "pending-00056",
+          "pending-00057",
+          "pending-00058",
+          "pending-00059",
+          "pending-00060",
+          "pending-00061",
+          "pending-00062",
+          "pending-00063",
+          "pending-00064",
+          "pending-00065",
+          "pending-00066",
+          "pending-00067",
+          "pending-00068",
+          "pending-00069",
+          "pending-00070",
+          "pending-00071",
+          "pending-00072",
+          "pending-00073",
+          "pending-00074",
+          "pending-00075",
+          "pending-00076",
+          "pending-00077",
+          "pending-00078",
+          "pending-00079",
+          "pending-00080",
+          "pending-00081",
+          "pending-00082",
+          "pending-00083",
+          "pending-00084",
+          "pending-00085",
+          "pending-00086",
+          "pending-00087",
+          "pending-00088",
+          "pending-00089",
+          "pending-00090",
+          "pending-00091",
+          "pending-00092",
+          "pending-00093",
+          "pending-00094",
+          "pending-00095",
+          "pending-00096",
+          "pending-00097",
+          "pending-00098",
+          "pending-00099",
+          "pending-00100",
+          "pending-00101",
+          "pending-00102",
+          "pending-00103",
+          "pending-00104",
+          "pending-00105",
+          "pending-00106",
+          "pending-00107",
+          "pending-00108",
+          "pending-00109",
+          "pending-00110",
+          "pending-00111",
+          "pending-00112",
+          "pending-00113",
+          "pending-00114",
+          "pending-00115",
+          "pending-00116",
+          "pending-00117",
+          "pending-00118",
+          "pending-00119",
+          "pending-00120",
+          "pending-00121",
+          "pending-00122",
+          "pending-00123",
+          "pending-00124",
+          "pending-00125",
+          "pending-00126",
+          "pending-00127",
+          "pending-00128",
+          "pending-00129",
+          "pending-00130",
+          "pending-00131",
+          "pending-00132",
+          "pending-00133",
+          "pending-00134",
+          "pending-00135",
+          "pending-00136"
+        ],
+        "last_imported_at": "2026-09-30T10:40:42.229425+00:00",
+        "model_sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+        "outer_batch_size": null,
+        "pair_batch_size": 128,
+        "predictions_before_epoch": 109888,
+        "preserved_existing_count": 0,
+        "resume_of_epoch_id": "8207fa8b5676e564f933",
+        "run_id": "d64365bb56121748c722",
+        "runner_sha256": "205f9cac6accde20b8814d625b6924a38424aad4161ff9814c9ac384a120ac57",
+        "runtime_settings": {
+          "backend": "cuda",
+          "device": "cuda:0 (NVIDIA L4)",
+          "dtype": "float16",
+          "entailment_label": "entailment",
+          "label_mapping": {
+            "0": "entailment",
+            "1": "not_entailment"
+          },
+          "local_files_only": true,
+          "max_length": 512,
+          "model_type": "deberta-v2",
+          "score_semantics": "independent_entailment",
+          "trust_remote_code": false
+        },
+        "runtime_sha256": "8aab39d48515e8aa30094e1cfb0d0717668e050b1a3eab154d62d6c577056c8d",
+        "source_sha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+        "started_at": "2026-09-30T10:40:18.885218+00:00",
+        "taxonomy_sha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522"
       }
     ],
-    "latest_execution_epoch_id": "8207fa8b5676e564f933",
-    "last_resumed_at": "2026-09-30T10:28:33.507185+00:00"
+    "latest_execution_epoch_id": "3fbbcf3207667db97a85",
+    "last_resumed_at": "2026-09-30T10:40:42.229425+00:00"
   },
   "coverage": {
     "sourceRecords": {
-      "classified": 115100,
+      "classified": 183485,
       "total": 183485,
-      "remaining": 68385,
-      "fraction": 0.6272992342698314
+      "remaining": 0,
+      "fraction": 1.0
     },
     "uniqueTexts": {
-      "classified": 109888,
+      "classified": 178052,
       "total": 178052,
-      "remaining": 68164,
-      "fraction": 0.6171680183317233
+      "remaining": 0,
+      "fraction": 1.0
     },
     "labelsBySourceRecord": [
       {
         "label": "assertion",
-        "sourceRecords": 29642,
-        "needsReview": 12125,
-        "truncated": 336
+        "sourceRecords": 48644,
+        "needsReview": 19312,
+        "truncated": 555
       },
       {
         "label": "status_report",
-        "sourceRecords": 26692,
-        "needsReview": 11799,
-        "truncated": 169
+        "sourceRecords": 36083,
+        "needsReview": 17046,
+        "truncated": 301
       },
       {
         "label": "qualification",
-        "sourceRecords": 16504,
-        "needsReview": 7800,
-        "truncated": 169
-      },
-      {
-        "label": "instruction_request",
-        "sourceRecords": 8663,
-        "needsReview": 3635,
-        "truncated": 34
+        "sourceRecords": 24147,
+        "needsReview": 12259,
+        "truncated": 451
       },
       {
         "label": "endorsement",
-        "sourceRecords": 5661,
-        "needsReview": 2798,
-        "truncated": 67
+        "sourceRecords": 12673,
+        "needsReview": 6248,
+        "truncated": 158
       },
       {
-        "label": "challenge_correction",
-        "sourceRecords": 5607,
-        "needsReview": 3463,
-        "truncated": 75
-      },
-      {
-        "label": "question",
-        "sourceRecords": 4788,
-        "needsReview": 2753,
-        "truncated": 34
-      },
-      {
-        "label": "offer_help",
-        "sourceRecords": 4405,
-        "needsReview": 2566,
-        "truncated": 51
-      },
-      {
-        "label": "check_report",
-        "sourceRecords": 4053,
-        "needsReview": 2309,
-        "truncated": 26
+        "label": "instruction_request",
+        "sourceRecords": 12169,
+        "needsReview": 5631,
+        "truncated": 65
       },
       {
         "label": "acknowledgment",
-        "sourceRecords": 3738,
-        "needsReview": 1925,
-        "truncated": 8
+        "sourceRecords": 10643,
+        "needsReview": 5529,
+        "truncated": 97
       },
       {
-        "label": "commitment_assignment",
-        "sourceRecords": 3098,
-        "needsReview": 1726,
-        "truncated": 1
+        "label": "question",
+        "sourceRecords": 9681,
+        "needsReview": 5343,
+        "truncated": 106
+      },
+      {
+        "label": "challenge_correction",
+        "sourceRecords": 9247,
+        "needsReview": 5402,
+        "truncated": 137
+      },
+      {
+        "label": "offer_help",
+        "sourceRecords": 7441,
+        "needsReview": 4241,
+        "truncated": 84
+      },
+      {
+        "label": "check_report",
+        "sourceRecords": 5321,
+        "needsReview": 3094,
+        "truncated": 36
       },
       {
         "label": "proposal_plan",
-        "sourceRecords": 2249,
-        "needsReview": 1435,
-        "truncated": 33
+        "sourceRecords": 3744,
+        "needsReview": 2347,
+        "truncated": 50
+      },
+      {
+        "label": "commitment_assignment",
+        "sourceRecords": 3692,
+        "needsReview": 2125,
+        "truncated": 15
       }
     ],
     "labelsByUniqueText": [
       {
         "label": "assertion",
-        "uniqueTexts": 27377
+        "uniqueTexts": 46346
       },
       {
         "label": "status_report",
-        "uniqueTexts": 26289
+        "uniqueTexts": 35679
       },
       {
         "label": "qualification",
-        "uniqueTexts": 15157
-      },
-      {
-        "label": "instruction_request",
-        "uniqueTexts": 8416
+        "uniqueTexts": 22783
       },
       {
         "label": "endorsement",
-        "uniqueTexts": 5553
+        "uniqueTexts": 12565
       },
       {
-        "label": "challenge_correction",
-        "uniqueTexts": 5332
-      },
-      {
-        "label": "question",
-        "uniqueTexts": 4664
-      },
-      {
-        "label": "offer_help",
-        "uniqueTexts": 4296
-      },
-      {
-        "label": "check_report",
-        "uniqueTexts": 3954
+        "label": "instruction_request",
+        "uniqueTexts": 11848
       },
       {
         "label": "acknowledgment",
-        "uniqueTexts": 3640
+        "uniqueTexts": 10539
       },
       {
-        "label": "commitment_assignment",
-        "uniqueTexts": 3000
+        "label": "question",
+        "uniqueTexts": 9527
+      },
+      {
+        "label": "challenge_correction",
+        "uniqueTexts": 8921
+      },
+      {
+        "label": "offer_help",
+        "uniqueTexts": 7330
+      },
+      {
+        "label": "check_report",
+        "uniqueTexts": 5222
       },
       {
         "label": "proposal_plan",
-        "uniqueTexts": 2210
+        "uniqueTexts": 3698
+      },
+      {
+        "label": "commitment_assignment",
+        "uniqueTexts": 3594
       }
     ]
   },
   "progress": {
     "backend": "cuda",
-    "cumulative_unique_predictions": 109888,
+    "cumulative_unique_predictions": 178052,
     "device": "cuda:0 (NVIDIA L4)",
-    "execution_epoch_id": "8207fa8b5676e564f933",
-    "execution_epoch_number": 5,
-    "imported_shards_this_epoch": 74,
-    "imported_this_shard": 1000,
+    "execution_epoch_id": "3fbbcf3207667db97a85",
+    "execution_epoch_number": 6,
+    "imported_shards_this_epoch": 137,
+    "imported_this_shard": 164,
     "run_id": "d64365bb56121748c722",
-    "state": "partial",
-    "unique_remaining": 68164,
-    "updated_at": "2026-09-30T10:28:33.588278+00:00"
+    "state": "complete",
+    "unique_remaining": 0,
+    "updated_at": "2026-09-30T10:40:42.309523+00:00"
   },
   "sample": {
     "selection": "At most two earliest source records per predicted label, one per exact text hash; deterministic, descriptive only.",
