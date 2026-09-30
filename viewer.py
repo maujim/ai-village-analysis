@@ -220,6 +220,7 @@ class Handler(BaseHTTPRequestHandler):
         pages = {'/': 'home.html', '/index.html': 'home.html',
                  '/village': 'index.html', '/village/': 'index.html',
                  '/analysis.html': 'analysis.html',
+                 '/run.html': 'run.html',
                  '/signatures': 'message_signatures/index.html', '/signatures/': 'message_signatures/index.html',
                  '/fieldnotes': 'fieldnotes/index.html', '/fieldnotes/': 'fieldnotes/index.html'}
         if parsed.path in pages:

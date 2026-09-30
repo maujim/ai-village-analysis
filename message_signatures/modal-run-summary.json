@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-09-30T10:38:48.820666+00:00",
+  "runId": "d64365bb56121748c722",
+  "state": "partial",
+  "sourceMessages": 183485,
+  "uniqueTexts": 178052,
+  "annotatedSourceMessages": 115100,
+  "uniquePredictions": 109888,
+  "remainingUnique": 68164,
+  "reviewUnique": 52009,
+  "truncatedUnique": 996,
+  "sourceSha256": "d29760ff9f15603d0dd64570884e5cb2126d1d1bb033b2c621134a65b58a6ee0",
+  "modelSha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+  "taxonomySha256": "96cc1d106bd3695c51afe064f7d3ffe35e848e8ba107ce3534f2075d9347b522",
+  "labels": [
+    {
+      "act": "assertion",
+      "count": 27377,
+      "review": 11438
+    },
+    {
+      "act": "status_report",
+      "count": 26289,
+      "review": 11538
+    },
+    {
+      "act": "qualification",
+      "count": 15157,
+      "review": 7090
+    },
+    {
+      "act": "instruction_request",
+      "count": 8416,
+      "review": 3550
+    },
+    {
+      "act": "endorsement",
+      "count": 5553,
+      "review": 2725
+    },
+    {
+      "act": "challenge_correction",
+      "count": 5332,
+      "review": 3283
+    },
+    {
+      "act": "question",
+      "count": 4664,
+      "review": 2670
+    },
+    {
+      "act": "offer_help",
+      "count": 4296,
+      "review": 2468
+    },
+    {
+      "act": "check_report",
+      "count": 3954,
+      "review": 2247
+    },
+    {
+      "act": "acknowledgment",
+      "count": 3640,
+      "review": 1903
+    },
+    {
+      "act": "commitment_assignment",
+      "count": 3000,
+      "review": 1681
+    },
+    {
+      "act": "proposal_plan",
+      "count": 2210,
+      "review": 1416
+    }
+  ],
+  "waves": [
+    {
+      "id": "363c7da835aaad0771ebe7b3",
+      "gpu": "L4",
+      "pairBatch": 256,
+      "finishedShards": 74,
+      "selectedShards": 143,
+      "finishedUnique": 74000,
+      "partialUnique": 4576,
+      "elapsedSeconds": 621.742,
+      "inferenceSeconds": 4365.5092,
+      "errors": 69,
+      "complete": false,
+      "computeCeilingEstimateUSD": 1.591,
+      "resultsManifestSha256": "99b8cbfd2dd39406d3e83870134e0ce2f6f1ab668395be594f37a047aed656c4"
+    }
+  ],
+  "parity": {
+    "h100": {
+      "sample": 68,
+      "maxDelta": 0.0029063820838928223,
+      "topAgreement": 68,
+      "reviewAgreement": 68,
+      "truncationAgreement": 68,
+      "recommendation": "pass"
+    },
+    "l4": {
+      "sample": 68,
+      "maxDelta": 0.0034325718879699707,
+      "topAgreement": 68,
+      "reviewAgreement": 68,
+      "truncationAgreement": 68,
+      "recommendation": "pass"
+    },
+    "l4-128": {
+      "sample": 68,
+      "maxDelta": 0.0034325718879699707,
+      "topAgreement": 68,
+      "reviewAgreement": 68,
+      "truncationAgreement": 68,
+      "recommendation": "pass"
+    }
+  },
+  "budgetUSD": 10,
+  "costStatus": "Conservative configured-resource estimates; not reconciled Modal billing",
+  "pilotReserveUSD": 0.2,
+  "completedWaveCeilingEstimateUSD": 1.591
+}
