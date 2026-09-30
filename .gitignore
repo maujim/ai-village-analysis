@@ -1,0 +1,17 @@
+.venv-signatures/
+__pycache__/
+*.pyc
+message_signatures/*.sqlite*
+message_signatures/*.log
+message_signatures/run.lock
+models/**/*.safetensors
+models/**/*.model
+models/**/.cache/
+.DS_Store
+
+# Downloaded upstream data stays local; derived analysis JSON is versioned.
+/village-transcript.json
+/*.jsonl.gz
+/images/
+/manifest.json
+/CHANGELOG.md
