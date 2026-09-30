@@ -345,9 +345,10 @@ class Handler(BaseHTTPRequestHandler):
                         runtime_settings = latest.get('runtime_settings') or run.get('runtime_settings') or {}
                         backend = latest.get('backend') or run.get('backend') or 'torch'
                         device = latest.get('device') or run.get('device') or 'auto'
+                        outer_batch = latest.get('outer_batch_size') or 128
                         pair_batch = latest.get('pair_batch_size') or runtime_settings.get('pair_batch_size') or runtime_settings.get('batch_size') or 32
                         command=[str(executable),str(ROOT/'message_signatures/run.py'),
-                                 '--engine','nli','--device',str(device),'--batch','128',
+                                 '--engine','nli','--device',str(device),'--batch',str(outer_batch),
                                  '--pair-batch',str(pair_batch),'--backend',str(backend)]
                         if run.get('id'):
                             command.extend(['--continue-run',str(run['id'])])
@@ -355,7 +356,7 @@ class Handler(BaseHTTPRequestHandler):
                             process=subprocess.Popen(command,cwd=str(ROOT),env=env,
                                 stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)
                         store.meta(conn,'progress',{'state':'starting','pid':process.pid,
-                                   'run_id':run.get('id'),'requested_outer_batch_size':128,
+                                   'run_id':run.get('id'),'requested_outer_batch_size':outer_batch,
                                    'requested_pair_batch_size':pair_batch,'backend':backend,
                                    'updated_at':datetime.now(timezone.utc).isoformat()})
                         self.send_json({'state':'starting','pid':process.pid},202)

@@ -39,8 +39,12 @@ class ControlEndpointTests(unittest.TestCase):
         self.conn = store.connect()
         store.meta(self.conn, 'source_sha256', 'snapshot-ok')
         store.meta(self.conn, 'active_run', {
-            'id': 'legacy-run', 'backend': 'torch', 'device': 'mps',
-            'runtime_settings': {'pair_batch_size': 32},
+            'id': 'legacy-run', 'backend': 'torch', 'device': 'cpu',
+            'latest_execution_epoch_id': 'epoch-mlX',
+            'execution_epochs': [{
+                'id': 'epoch-mlX', 'backend': 'mlx', 'device': 'mps',
+                'outer_batch_size': 64, 'pair_batch_size': 16,
+            }],
         })
         store.meta(self.conn, 'progress', {'state': 'paused', 'run_id': 'legacy-run'})
         self.conn.close()
@@ -98,8 +102,8 @@ class ControlEndpointTests(unittest.TestCase):
         args, kwargs = self.mock_popen.call_args
         self.assertEqual(args[0], [str(self.root / '.venv-signatures/bin/python'),
                                    str(self.root / 'message_signatures/run.py'),
-                                   '--engine', 'nli', '--device', 'mps', '--batch', '128',
-                                   '--pair-batch', '32', '--backend', 'torch',
+                                   '--engine', 'nli', '--device', 'mps', '--batch', '64',
+                                   '--pair-batch', '16', '--backend', 'mlx',
                                    '--continue-run', 'legacy-run'])
         self.assertEqual(kwargs['cwd'], str(self.root))
         self.assertEqual(kwargs['stdin'], viewer.subprocess.DEVNULL)
