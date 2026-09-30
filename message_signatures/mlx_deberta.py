@@ -157,23 +157,21 @@ class MLXDeberta:
         key = heads(self._linear(hidden, prefix + ".key_proj"))
         value = heads(self._linear(hidden, prefix + ".value_proj"))
         scale = (self.head_size * 3.0) ** 0.5  # content + c2p + p2c
-        scores = mx.matmul(query, mx.transpose(key, (0, 1, 3, 2))) / scale
-
         c2p_logits = mx.matmul(query, mx.transpose(self._relative_key[index], (0, 2, 1)))
         c2p_idx = mx.broadcast_to(c2p_index[None, None, :, :], (batch, self.num_heads, length, length))
         c2p_scores = mx.take_along_axis(c2p_logits, c2p_idx, axis=-1)
-        scores = scores + c2p_scores / scale
+        bias = c2p_scores / scale
 
         p2c_logits = mx.matmul(key, mx.transpose(self._relative_query[index], (0, 2, 1)))
         p2c_idx = mx.broadcast_to(p2c_index[None, None, :, :], (batch, self.num_heads, length, length))
         p2c_scores = mx.take_along_axis(p2c_logits, p2c_idx, axis=-1)
-        scores = scores + mx.transpose(p2c_scores, (0, 1, 3, 2)) / scale
+        bias = bias + mx.transpose(p2c_scores, (0, 1, 3, 2)) / scale
 
         pair_mask = mx.expand_dims(mask, 1) & mx.expand_dims(mask, 2)
         pair_mask = mx.expand_dims(pair_mask, 1)
-        scores = mx.where(pair_mask, scores, -65504.0)
-        probabilities = mx.softmax(scores, axis=-1)
-        context = mx.matmul(probabilities, value)
+        bias = mx.where(pair_mask, bias, -65504.0)
+        context = mx.fast.scaled_dot_product_attention(
+            query, key, value, scale=1.0 / scale, mask=bias)
         context = mx.transpose(context, (0, 2, 1, 3)).reshape((batch, length, self.hidden_size))
 
         output_prefix = f"deberta.encoder.layer.{index}.attention.output"
